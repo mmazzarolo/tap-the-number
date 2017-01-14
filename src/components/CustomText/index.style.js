@@ -1,3 +1,4 @@
+/* @flow */
 import { Platform, StyleSheet } from 'react-native'
 
 // const IS_ANDROID = Platform.OS === 'android'

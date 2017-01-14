@@ -1,3 +1,4 @@
+/* @flow */
 import { StyleSheet } from 'react-native'
 import metrics from 'src/config/metrics'
 

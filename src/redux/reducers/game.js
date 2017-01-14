@@ -44,10 +44,8 @@ export default (state: State = initialState, action: Action): State => {
     }
 
     case 'PRESS_TILE_FAILURE': {
-      const tappedTileId = action.payload.tappedTile.id
-      const nextBoard = state.board.slice().filter((t) => t.id !== tappedTileId)
       const score = state.score - 10
-      return { ...state, board: nextBoard, score }
+      return { ...state, board: [], score }
     }
 
     default:

@@ -19,20 +19,19 @@ type Props = {
   board: Array<Tile>,
   isRunning: boolean,
   level: number,
-  buildBoard: (difficulty: number) => any,
   pressTile: (board: Array<Tile>, tileId: number) => any,
-  goToNextLevel: () => any
+  goToNextLevel: (difficulty: number) => any
 }
 
 @connect(mapStateToProps, actions)
 export default class Playground extends Component<void, Props, void> {
   componentDidMount () {
-    this.props.buildBoard(6)
+    this.props.goToNextLevel(6)
   }
 
   componentDidUpdate (prevProps: Props) {
     if (this.props.board.length === 0) {
-      this.props.goToNextLevel()
+      this.props.goToNextLevel(6)
     }
   }
 
@@ -45,7 +44,7 @@ export default class Playground extends Component<void, Props, void> {
       <View style={styles.container}>
         <Board
           tiles={this.props.board}
-          pressTile={this._handleTilePress}
+          onTilePress={this._handleTilePress}
         />
       </View>
     )
