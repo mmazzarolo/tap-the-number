@@ -7,7 +7,8 @@ const getRandomTileColor = (): string => {
   return `#${(Math.random() * 0xFFFFFF << 0).toString(16)}`
 }
 
-// More suggestions: http://stackoverflow.com/questions/6224571/positioning-multiple-random-sized-absolutely-positioned-elements-so-they-dont
+// More suggestions:
+// http://stackoverflow.com/questions/6224571/positioning-multiple-random-sized-absolutely-positioned-elements-so-they-dont
 const getRandomTilePosition = (board: Array<Tile>): { x: number, y: number } => {
   const position = {}
   const boardWidth = metrics.DEVICE_WIDTH - metrics.BOARD_MARGIN

@@ -9,7 +9,7 @@ import styles from './index.style'
 
 type Props = {
   tiles: Array<Tile>,
-  onTileTap: (tileId: number) => any
+  onTilePress: (tileId: number) => any
 }
 
 export default class TilesCarousel extends Component<void, Props, void> {
@@ -23,7 +23,7 @@ export default class TilesCarousel extends Component<void, Props, void> {
             bottom={tile.y}
             backgroundColor={tile.color}
             text={tile.number}
-            onTileTap={() => this.props.onTileTap(tile.id)}
+            onTilePress={() => this.props.onTilePress(tile.id)}
           />
         ))}
       </View>

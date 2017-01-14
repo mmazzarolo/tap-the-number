@@ -3,6 +3,7 @@
 import React, { Component } from 'react'
 import { View, Text } from 'react-native-animatable'
 import TouchableView from 'src/components/TouchableView'
+import colorUtils from 'src/utils/colorUtils'
 
 import styles from './index.style'
 
@@ -11,7 +12,7 @@ type Props = {
   bottom: number,
   backgroundColor: string,
   text: string | number,
-  onTileTap: Function,
+  onTilePress: Function,
   style?: any
 }
 
@@ -23,11 +24,11 @@ export default class BoardTile extends Component<void, Props, void> {
       bottom,
       backgroundColor
     }
-    const textColor = getContrastYIQ(backgroundColor)
+    const textColor = colorUtils.getContrastYIQ(backgroundColor)
     return (
       <TouchableView
         style={[computedStyle, styles.containerDefault, style]}
-        onPress={this.props.onTileTap}
+        onPress={this.props.onTilePress}
       >
         <Text style={[styles.text, { color: textColor }]}>{text}</Text>
       </TouchableView>
@@ -35,7 +36,3 @@ export default class BoardTile extends Component<void, Props, void> {
   }
 }
 
-const getContrastYIQ = (hc) => {
-  const [r, g, b] = [1, 3, 5].map(p => parseInt(hc.substr(p, 2), 16))
-  return ((r * 299) + (g * 587) + (b * 114)) / 1000 >= 128 ? 'black' : 'white'
-}

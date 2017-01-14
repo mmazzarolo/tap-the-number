@@ -12,15 +12,16 @@ import styles from './index.style'
 const mapStateToProps = (state) => ({
   board: state.game.board,
   isRunning: state.game.isRunning,
-  difficulty: state.game.difficulty
+  level: state.game.level
 })
 
 type Props = {
   board: Array<Tile>,
   isRunning: boolean,
-  difficulty: number,
+  level: number,
   buildBoard: (difficulty: number) => any,
-  tapTile: (board: Array<Tile>, tileId: number) => any
+  pressTile: (board: Array<Tile>, tileId: number) => any,
+  goToNextLevel: () => any
 }
 
 @connect(mapStateToProps, actions)
@@ -29,8 +30,14 @@ export default class Playground extends Component<void, Props, void> {
     this.props.buildBoard(6)
   }
 
-  _handleTileTap = (tileId: number) => {
-    this.props.tapTile(this.props.board, tileId)
+  componentDidUpdate (prevProps: Props) {
+    if (this.props.board.length === 0) {
+      this.props.goToNextLevel()
+    }
+  }
+
+  _handleTilePress = (tileId: number) => {
+    this.props.pressTile(this.props.board, tileId)
   }
 
   render () {
@@ -38,7 +45,7 @@ export default class Playground extends Component<void, Props, void> {
       <View style={styles.container}>
         <Board
           tiles={this.props.board}
-          onTileTap={this._handleTileTap}
+          pressTile={this._handleTilePress}
         />
       </View>
     )

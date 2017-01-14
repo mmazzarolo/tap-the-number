@@ -8,7 +8,8 @@ import type { Tile } from 'src/types'
 export type State = {
   board: Array<Tile>,
   isRunning: boolean,
-  difficulty: number
+  score: number,
+  level: number
 }
 
 // ===========================
@@ -17,7 +18,8 @@ export type State = {
 export const initialState: State = {
   board: [],
   isRunning: false,
-  difficulty: 1
+  level: 0,
+  score: 0
 }
 
 // ===========================
@@ -25,18 +27,27 @@ export const initialState: State = {
 // ===========================
 export default (state: State = initialState, action: Action): State => {
   switch (action.type) {
-    case 'BUILD_BOARD':
+    case 'GO_TO_NEXT_LEVEL': {
       return {
         ...state,
         board: action.payload.board,
-        difficulty: action.payload.difficulty,
+        level: state.level + 1,
         isRunning: true
       }
+    }
 
-    case 'TAP_TILE_SUCCESS': {
+    case 'PRESS_TILE_SUCCESS': {
       const tappedTileId = action.payload.tappedTile.id
       const nextBoard = state.board.slice().filter((t) => t.id !== tappedTileId)
-      return { ...state, board: nextBoard }
+      const score = state.score + 1
+      return { ...state, board: nextBoard, score }
+    }
+
+    case 'PRESS_TILE_FAILURE': {
+      const tappedTileId = action.payload.tappedTile.id
+      const nextBoard = state.board.slice().filter((t) => t.id !== tappedTileId)
+      const score = state.score - 10
+      return { ...state, board: nextBoard, score }
     }
 
     default:

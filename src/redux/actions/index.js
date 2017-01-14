@@ -4,10 +4,10 @@ import type { Action } from 'src/redux/types'
 import type { Tile } from 'src/types'
 import boardUtils from 'src/utils/boardUtils'
 
-const buildBoard = (difficulty: number): Action => {
+const goToNextLevel = (level: number): Action => {
   const board = []
 
-  times(difficulty, (n) => {
+  times(level, (n) => {
     const id = n
     const { x, y } = boardUtils.getRandomTilePosition(board)
     const number = random(-100, 100)
@@ -16,22 +16,22 @@ const buildBoard = (difficulty: number): Action => {
   })
 
   return {
-    type: 'BUILD_BOARD',
-    payload: { board, difficulty }
+    type: 'GO_TO_NEXT_LEVEL',
+    payload: { board, level }
   }
 }
 
-const tapTile = (board: Array<Tile>, tileId: number): Action => {
+const pressTile = (board: Array<Tile>, tileId: number): Action => {
   const tappedTile = find(board, { id: tileId })
   const sortedBoard = orderBy(board, 'number')
   if (tappedTile.number === sortedBoard[0].number) {
-    return { type: 'TAP_TILE_SUCCESS', payload: { tappedTile } }
+    return { type: 'PRESS_TILE_SUCCESS', payload: { tappedTile } }
   } else {
-    return { type: 'TAP_TILE_FAILURE', payload: { tappedTile } }
+    return { type: 'PRESS_TILE_FAILURE', payload: { tappedTile } }
   }
 }
 
 export default {
-  buildBoard,
-  tapTile
+  goToNextLevel,
+  pressTile
 }
