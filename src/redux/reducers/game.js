@@ -1,5 +1,4 @@
 /* @flow */
-import { pullAt, takeRight } from 'lodash'
 import type { Action } from 'src/redux/types'
 import type { Tile } from 'src/types'
 
@@ -27,7 +26,18 @@ export const initialState: State = {
 export default (state: State = initialState, action: Action): State => {
   switch (action.type) {
     case 'BUILD_BOARD':
-      return { ...state, board: action.payload.board, difficulty: action.payload.difficulty, isRunning: true }
+      return {
+        ...state,
+        board: action.payload.board,
+        difficulty: action.payload.difficulty,
+        isRunning: true
+      }
+
+    case 'TAP_TILE_SUCCESS': {
+      const tappedTileId = action.payload.tappedTile.id
+      const nextBoard = state.board.slice().filter((t) => t.id !== tappedTileId)
+      return { ...state, board: nextBoard }
+    }
 
     default:
       return state

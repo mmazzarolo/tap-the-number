@@ -2,6 +2,7 @@
 /* eslint-disable react/prop-types */
 import React, { Component } from 'react'
 import { View, Text } from 'react-native-animatable'
+import TouchableView from 'src/components/TouchableView'
 
 import styles from './index.style'
 
@@ -10,6 +11,7 @@ type Props = {
   bottom: number,
   backgroundColor: string,
   text: string | number,
+  onTileTap: Function,
   style?: any
 }
 
@@ -23,9 +25,12 @@ export default class BoardTile extends Component<void, Props, void> {
     }
     const textColor = getContrastYIQ(backgroundColor)
     return (
-      <View style={[computedStyle, styles.containerDefault, style]}>
+      <TouchableView
+        style={[computedStyle, styles.containerDefault, style]}
+        onPress={this.props.onTileTap}
+      >
         <Text style={[styles.text, { color: textColor }]}>{text}</Text>
-      </View>
+      </TouchableView>
     )
   }
 }

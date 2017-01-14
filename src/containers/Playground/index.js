@@ -19,7 +19,8 @@ type Props = {
   board: Array<Tile>,
   isRunning: boolean,
   difficulty: number,
-  buildBoard: (difficulty: number) => any
+  buildBoard: (difficulty: number) => any,
+  tapTile: (board: Array<Tile>, tileId: number) => any
 }
 
 @connect(mapStateToProps, actions)
@@ -28,10 +29,17 @@ export default class Playground extends Component<void, Props, void> {
     this.props.buildBoard(6)
   }
 
+  _handleTileTap = (tileId: number) => {
+    this.props.tapTile(this.props.board, tileId)
+  }
+
   render () {
     return (
       <View style={styles.container}>
-        <Board tiles={this.props.board} />
+        <Board
+          tiles={this.props.board}
+          onTileTap={this._handleTileTap}
+        />
       </View>
     )
   }
