@@ -25,7 +25,7 @@ type Props = {
 @connect(mapStateToProps, actions)
 export default class Playground extends Component<void, Props, void> {
   componentDidMount () {
-    this.props.buildBoard(10)
+    this.props.buildBoard(6)
   }
 
   render () {

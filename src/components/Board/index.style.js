@@ -3,11 +3,8 @@ import metrics from 'src/config/metrics'
 
 export default StyleSheet.create({
   container: {
-    flex: 1
-  },
-  content: {
-    position: 'absolute',
-    left: metrics.DEVICE_WIDTH * 0.3,
-    height: metrics.DEVICE_HEIGHT * 0.7
+    flex: 1,
+    width: metrics.DEVICE_WIDTH - metrics.BOARD_MARGIN,
+    height: metrics.DEVICE_HEIGHT - metrics.BOARD_MARGIN
   }
 })

@@ -17,7 +17,6 @@ type Props = {
 
 export default class BoardTile extends Component<void, Props, void> {
   render () {
-    console.log('tileprops', this.props)
     const { left, bottom, backgroundColor, text, style } = this.props
     const computedStyle = {
       width: metrics.TILE_SIZE,
