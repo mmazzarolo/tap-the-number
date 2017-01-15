@@ -4,7 +4,7 @@ import React, { Component } from 'react'
 import { View, Text } from 'react-native-animatable'
 import TouchableView from 'src/components/TouchableView'
 import colorUtils from 'src/utils/colorUtils'
-
+import ExplodingAnimation from 'src/components/ExplodingAnimation'
 import styles from './index.style'
 
 type Props = {
@@ -30,6 +30,8 @@ export default class BoardTile extends Component<void, Props, void> {
         style={[computedStyle, styles.containerDefault, style]}
         onPress={this.props.onTilePress}
       >
+
+        <ExplodingAnimation />
         <Text style={[styles.text, { color: textColor }]}>{text}</Text>
       </TouchableView>
     )
