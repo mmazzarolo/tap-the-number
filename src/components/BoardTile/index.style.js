@@ -15,9 +15,9 @@ export default StyleSheet.create({
     //   width: 4
     // }
     justifyContent: 'center',
-    alignItems: 'center',
-    borderRadius: metrics.TILE_SIZE / 2,
-    width: metrics.TILE_SIZE,
-    height: metrics.TILE_SIZE
+    alignItems: 'center'
+  },
+  explosionDefault: {
+    position: 'absolute'
   }
 })

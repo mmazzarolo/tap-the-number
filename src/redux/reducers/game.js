@@ -1,4 +1,5 @@
 /* @flow */
+import { findIndex } from 'lodash'
 import type { Action } from 'src/redux/types'
 import type { Tile } from 'src/types'
 
@@ -38,7 +39,9 @@ export default (state: State = initialState, action: Action): State => {
 
     case 'PRESS_TILE_SUCCESS': {
       const tappedTileId = action.payload.tappedTile.id
-      const nextBoard = state.board.slice().filter((t) => t.id !== tappedTileId)
+      const nextBoard = state.board.slice()
+      const tileIndex = findIndex(nextBoard, { id: tappedTileId })
+      nextBoard[tileIndex].isVisible = false
       const score = state.score + 1
       return { ...state, board: nextBoard, score }
     }

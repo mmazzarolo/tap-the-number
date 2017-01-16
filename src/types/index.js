@@ -4,5 +4,6 @@ export type Tile = {
   x: number,
   y: number,
   color: string,
-  number: number
+  number: number,
+  isVisible: boolean
 }

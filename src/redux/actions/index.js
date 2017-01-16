@@ -12,7 +12,8 @@ const goToNextLevel = (level: number): Action => {
     const { x, y } = boardUtils.getRandomTilePosition(board)
     const number = random(-100, 100)
     const color = boardUtils.getRandomTileColor()
-    board.push({ id, x, y, number, color })
+    const isVisible = true
+    board.push({ id, x, y, number, color, isVisible })
   })
 
   return {
@@ -24,11 +25,11 @@ const goToNextLevel = (level: number): Action => {
 const pressTile = (board: Array<Tile>, tileId: number): Action => {
   const tappedTile = find(board, { id: tileId })
   const sortedBoard = orderBy(board, 'number')
-  if (tappedTile.number === sortedBoard[0].number) {
-    return { type: 'PRESS_TILE_SUCCESS', payload: { tappedTile } }
-  } else {
-    return { type: 'PRESS_TILE_FAILURE', payload: { tappedTile } }
-  }
+  // if (tappedTile.number === sortedBoard[0].number) {
+  return { type: 'PRESS_TILE_SUCCESS', payload: { tappedTile } }
+  // } else {
+  //   return { type: 'PRESS_TILE_FAILURE', payload: { tappedTile } }
+  // }
 }
 
 export default {
