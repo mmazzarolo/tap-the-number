@@ -3,6 +3,7 @@
 import React, { Component } from 'react'
 import { View } from 'react-native-animatable'
 import type { Tile } from 'src/types'
+import { inject, observer } from 'mobx-react/native'
 import BoardTile from 'src/components/BoardTile'
 
 import styles from './index.style'
@@ -12,6 +13,7 @@ type Props = {
   onTilePress: (tileId: number) => any
 }
 
+@observer
 export default class TilesCarousel extends Component<void, Props, void> {
   render () {
     return (

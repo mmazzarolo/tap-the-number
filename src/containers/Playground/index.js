@@ -2,31 +2,44 @@
 /* eslint-disable react/prop-types */
 import React, { Component } from 'react'
 import { View } from 'react-native'
+import { inject, observer } from 'mobx-react/native'
 import { connect } from 'react-redux'
 import actions from 'src/redux/actions'
 import Board from 'src/components/Board'
 import type { Tile } from 'src/types'
+import GameState from 'src/state/game'
 
 import styles from './index.style'
 
-const mapStateToProps = (state) => ({
-  board: state.game.board,
-  isRunning: state.game.isRunning,
-  level: state.game.level
-})
+// const mapStateToProps = (state) => ({
+//   board: state.game.board,
+//   isRunning: state.game.isRunning,
+//   level: state.game.level
+// })
 
-type Props = {
-  board: Array<Tile>,
-  isRunning: boolean,
-  level: number,
-  pressTile: (board: Array<Tile>, tileId: number) => any,
-  goToNextLevel: (difficulty: number) => any
-}
+// type Props = {
+//   gameState: GameState,
+//   board: Array<Tile>,
+//   isRunning: boolean,
+//   level: number,
+//   pressTile: (board: Array<Tile>, tileId: number) => any,
+//   goToNextLevel: (difficulty: number) => any
+// }
 
-@connect(mapStateToProps, actions)
+// @connect(mapStateToProps, actions)
+
+@inject((allStores) => ({
+  board: allStores.gameState.board,
+  isRunning: allStores.gameState.isRunning,
+  level: allStores.gameState.level,
+  startGame: allStores.gameState.startGame,
+  handleTilePress: allStores.gameState.handleTilePress
+}))
+@observer
 export default class Playground extends Component<void, Props, void> {
   componentDidMount () {
-    this.props.goToNextLevel(6)
+    // this.props.goToNextLevel(6)
+    this.props.startGame()
   }
 
   componentDidUpdate (prevProps: Props) {
@@ -36,7 +49,7 @@ export default class Playground extends Component<void, Props, void> {
   }
 
   _handleTilePress = (tileId: number) => {
-    this.props.pressTile(this.props.board, tileId)
+    this.props.handleTilePress(tileId)
   }
 
   render () {

@@ -2,21 +2,21 @@
 /* eslint-disable react/prefer-stateless-function */
 import React, { Component } from 'react'
 import { StyleSheet, View } from 'react-native'
-import { Provider } from 'react-redux'
+import { Provider } from 'mobx-react/native'
 
-import configureStore from 'src/redux/configureStore'
 import Playground from 'src/containers/Playground'
+import GameState from 'src/state/game'
 
-const store = configureStore()
+const gameState = new GameState()
 
 export class Numberz extends Component {
   render () {
     return (
-      <Provider store={store}>
-        <View style={styles.container}>
-          <Playground />
-        </View>
-      </Provider>
+      <View style={styles.container}>
+        <Provider gameState={gameState}>
+          <Playground gameState={gameState} />
+        </Provider>
+      </View>
     )
   }
 }

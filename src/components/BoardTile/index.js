@@ -3,6 +3,7 @@
 import React, { Component } from 'react'
 import { TouchableWithoutFeedback } from 'react-native'
 import { View, Text } from 'react-native-animatable'
+import { inject, observer } from 'mobx-react/native'
 import TouchableView from 'src/components/TouchableView'
 import colorUtils from 'src/utils/colorUtils'
 import ExplodingAnimation from 'src/components/ExplodingAnimation'
@@ -23,6 +24,7 @@ type State = {
   isVisible: boolean
 }
 
+@observer
 export default class BoardTile extends Component<void, Props, State> {
   state = {
     isVisible: true
@@ -44,7 +46,7 @@ export default class BoardTile extends Component<void, Props, State> {
       left: left + EXPLOSION_PADDING,
       bottom: bottom + EXPLOSION_PADDING,
       backgroundColor,
-      borderRadius: CIRCLE_SIZE / 2,
+      borderRadius: CIRCLE_SIZE * 0.1,
       width: CIRCLE_SIZE,
       height: CIRCLE_SIZE
     }
