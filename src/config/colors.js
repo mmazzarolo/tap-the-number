@@ -1,3 +1,4 @@
+/* @flow */
 export default {
   PRIMARY: 'blue',
   GREY_LIGHTEST: 'grey',

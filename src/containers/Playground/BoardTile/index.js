@@ -1,14 +1,12 @@
 /* @flow */
 /* eslint-disable react/prop-types */
 import React, { Component } from 'react'
-import { TouchableWithoutFeedback } from 'react-native'
 import { View, Text } from 'react-native-animatable'
-import { inject, observer } from 'mobx-react/native'
-import TouchableView from 'src/components/TouchableView'
+import { observer } from 'mobx-react/native'
 import colorUtils from 'src/utils/colorUtils'
 import ExplodingAnimation from 'src/components/ExplodingAnimation'
-import styles from './index.style'
 import metrics from 'src/config/metrics'
+import styles from './index.style'
 
 type Props = {
   isVisible: boolean,
@@ -30,13 +28,13 @@ export default class BoardTile extends Component<void, Props, State> {
     isVisible: true
   }
 
-  componentDidUpdate (prevProps: Props) {
-    const previouslyVisible = prevProps.isVisible
-    const currentlyVisible = this.props.isVisible
-    if (previouslyVisible && !currentlyVisible) {
+  // componentDidUpdate (prevProps: Props) {
+  //   const previouslyVisible = prevProps.isVisible
+  //   const currentlyVisible = this.props.isVisible
+  //   if (previouslyVisible && !currentlyVisible) {
 
-    }
-  }
+  //   }
+  // }
 
   render () {
     const { left, bottom, backgroundColor, text, style, isVisible } = this.props

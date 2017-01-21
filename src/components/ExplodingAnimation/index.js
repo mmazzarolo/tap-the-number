@@ -1,7 +1,7 @@
 /* @flow */
-/* eslint-disable react/prop-types */
+/* eslint-disable react/prop-types, import/no-extraneous-dependencies, import/no-unresolved*/
 import React, { Component } from 'react'
-import { StyleSheet, View, Animated } from 'react-native'
+import { View, Animated } from 'react-native'
 import Art from 'ReactNativeART'
 import AnimatedCircle from './AnimatedCircle'
 

@@ -3,8 +3,8 @@
 import React, { Component } from 'react'
 import { View } from 'react-native-animatable'
 import type { Tile } from 'src/types'
-import { inject, observer } from 'mobx-react/native'
-import BoardTile from 'src/components/BoardTile'
+import { observer } from 'mobx-react/native'
+import BoardTile from 'src/containers/Playground/BoardTile'
 
 import styles from './index.style'
 

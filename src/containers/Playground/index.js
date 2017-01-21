@@ -3,7 +3,7 @@
 import React, { Component } from 'react'
 import { View } from 'react-native'
 import { inject, observer } from 'mobx-react/native'
-import Board from 'src/components/Board'
+import Board from 'src/containers/Playground/Board'
 import type { Tile } from 'src/types'
 
 import styles from './index.style'
