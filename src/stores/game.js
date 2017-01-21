@@ -4,7 +4,7 @@ import { filter, find, orderBy, random, times } from 'lodash'
 import boardUtils from 'src/utils/boardUtils'
 import type { Tile } from 'src/types'
 
-export default class GameState {
+export default class GameStore {
   @observable tiles: Array<Tile> = []
   @observable isRunning: boolean = false
   @observable level: number = 0

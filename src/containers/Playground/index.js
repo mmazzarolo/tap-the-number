@@ -7,7 +7,6 @@ import { connect } from 'react-redux'
 import actions from 'src/redux/actions'
 import Board from 'src/components/Board'
 import type { Tile } from 'src/types'
-import GameState from 'src/state/game'
 
 import styles from './index.style'
 
@@ -29,11 +28,11 @@ import styles from './index.style'
 // @connect(mapStateToProps, actions)
 
 @inject((allStores) => ({
-  board: allStores.gameState.board,
-  isRunning: allStores.gameState.isRunning,
-  level: allStores.gameState.level,
-  startGame: allStores.gameState.startGame,
-  handleTilePress: allStores.gameState.handleTilePress
+  board: allStores.game.board,
+  isRunning: allStores.game.isRunning,
+  level: allStores.game.level,
+  startGame: allStores.game.startGame,
+  handleTilePress: allStores.game.handleTilePress
 }))
 @observer
 export default class Playground extends Component<void, Props, void> {
