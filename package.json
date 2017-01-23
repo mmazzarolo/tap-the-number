@@ -10,6 +10,11 @@
     "reset": "watchman watch-del-all && rm -rf node_modules/ && npm cache clean && npm prune",
     "test": "jest"
   },
+  "rnpm": {
+    "assets": [
+      "src/assets/fonts"
+    ]
+  },
   "dependencies": {
     "art": "0.10.1",
     "babel-preset-react-native-stage-0": "1.0.1",

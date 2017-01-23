@@ -46,7 +46,8 @@ export default class BoardTile extends Component<void, Props, State> {
       backgroundColor,
       borderRadius: CIRCLE_SIZE * 0.1,
       width: CIRCLE_SIZE,
-      height: CIRCLE_SIZE
+      height: CIRCLE_SIZE,
+      shadowColor: colorUtils.getDifferentLuminance(backgroundColor, -0.2)
     }
     const computedExplosionStyle = {
       left,
@@ -58,6 +59,7 @@ export default class BoardTile extends Component<void, Props, State> {
     if (isVisible) {
       return (
         <View
+          animation={'bounceIn'}
           style={[computedCircleStyle, styles.containerDefault, style]}
           onStartShouldSetResponder={this.props.onTilePress}
         >

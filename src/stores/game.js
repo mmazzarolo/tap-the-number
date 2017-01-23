@@ -2,6 +2,7 @@
 import { action, computed, observable } from 'mobx'
 import { filter, find, orderBy, random, times } from 'lodash'
 import boardUtils from 'src/utils/boardUtils'
+import timeUtils from 'src/utils/timeUtils'
 import type { Tile } from 'src/types'
 
 export default class GameStore {
@@ -9,6 +10,8 @@ export default class GameStore {
   @observable isRunning: boolean = false
   @observable level: number = 0
   @observable score: number = 0
+  @observable timeLeft: number = 60
+  @observable mistakes: number = 0
 
   @action
   buildBoard = () => {
@@ -25,8 +28,24 @@ export default class GameStore {
 
   @action
   startGame = () => {
-    this.level = 4
+    this.level = 1
+    this.isRunning = true
     this.buildBoard()
+    this.startTimer()
+  }
+
+  @action
+  goToNextLevel = () => {
+    this.level++
+    this.buildBoard()
+  }
+
+  @action
+  startTimer = async () => {
+    while (this.isRunning && this.timeLeft > 0) {
+      await timeUtils.delay(1000)
+      this.timeLeft--
+    }
   }
 
   @action
@@ -36,13 +55,20 @@ export default class GameStore {
     const sortedActiveTiles = orderBy(activeTiles, 'number')
     if (pressedTile.number === sortedActiveTiles[0].number) {
       pressedTile.isVisible = false
+      this.score++
     } else {
-      this.startGame()
+      this.buildBoard()
+      this.mistakes++
     }
   }
 
   @computed
   get board (): Array<Tile> {
     return this.tiles.slice()
+  }
+
+  @computed
+  get isBoardEmpty (): boolean {
+    return this.tiles.slice().filter((t) => t.isVisible === true).length === 0
   }
 }

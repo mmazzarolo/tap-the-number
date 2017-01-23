@@ -4,7 +4,12 @@ import type { Tile } from 'src/types'
 import metrics from 'src/config/metrics'
 
 const getRandomTileColor = (): string => {
-  return `#${(Math.random() * 0xFFFFFF << 0).toString(16)}`
+  // return `#${(Math.random() * 0xFFFFFF << 0).toString(16)}`
+  const COLORS = [
+    '#BC0437', '#420BDF', '#1840CE', '#7D103F', '#137F7B'
+  ]
+  const randomIndex = random(0, COLORS.length - 1)
+  return COLORS[randomIndex]
 }
 
 // More suggestions:
