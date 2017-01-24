@@ -2,6 +2,7 @@
 /* eslint-disable react/prop-types */
 import React, { Component } from 'react'
 import { View, Text } from 'react-native-animatable'
+import { noop } from 'lodash'
 import { observer } from 'mobx-react/native'
 import colorUtils from 'src/utils/colorUtils'
 import metrics from 'src/config/metrics'
@@ -18,13 +19,15 @@ type Props = {
 }
 
 type State = {
-  isTouched: boolean
+  isTouched: boolean,
+  isAnimatingFailure: boolean
 }
 
 @observer
 export default class BoardTile extends Component<void, Props, State> {
   state = {
-    isTouched: false
+    isTouched: false,
+    isAnimatingFailure: false
   }
 
   _tileRef = null
@@ -38,9 +41,20 @@ export default class BoardTile extends Component<void, Props, State> {
     this.props.onTilePress()
   }
 
+  animateFailure = async () => {
+    this.setState({ isAnimatingFailure: true })
+    if (this._tileRef) {
+      await this._tileRef.swing(400)
+    }
+    if (this._tileRef) {
+      await this._tileRef.bounceOut(450)
+    }
+    this.setState({ isAnimatingFailure: false })
+  }
+
   render () {
     const { left, bottom, backgroundColor, text, isVisible, style } = this.props
-    const { isTouched } = this.state
+    const { isAnimatingFailure, isTouched } = this.state
     const DEPTH = 6
     const computedStyle = {
       left,
@@ -59,8 +73,8 @@ export default class BoardTile extends Component<void, Props, State> {
         ref={(ref) => { this._tileRef = ref }}
         animation={'bounceIn'}
         style={[styles.containerDefault, computedStyle, style]}
-        onStartShouldSetResponder={this._handlePress}
-        onResponderRelease={this._handleRelease}
+        onStartShouldSetResponder={isAnimatingFailure ? noop : this._handlePress}
+        onResponderRelease={isAnimatingFailure ? noop : this._handleRelease}
       >
         <Text style={[styles.text, { color: textColor }]}>{text}</Text>
       </View>

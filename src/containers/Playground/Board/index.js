@@ -15,11 +15,23 @@ type Props = {
 
 @observer
 export default class TilesCarousel extends Component<void, Props, void> {
+  _tileRefs = []
+
+  animateFailure = () => {
+    this._tileRefs.forEach((ref) => {
+      if (ref) {
+        ref.animateFailure()
+      }
+    })
+  }
+
   render () {
+    this._tileRefs = []
     return (
       <View style={styles.container}>
-        {this.props.tiles.map((tile) => (
+        {this.props.tiles.map((tile, index) => (
           <BoardTile
+            ref={(ref) => this._tileRefs[index] = ref}
             key={`board_tile_${tile.id}`}
             left={tile.x}
             bottom={tile.y}

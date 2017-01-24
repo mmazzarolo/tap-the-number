@@ -60,9 +60,9 @@ export default class GameStore {
       this.score++
       audioService.playSuccessSound()
     } else {
-      this.buildBoard()
       this.mistakes++
       audioService.playFailureSound()
+      setTimeout(this.buildBoard, 1000)
     }
   }
 

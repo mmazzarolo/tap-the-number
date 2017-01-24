@@ -16,6 +16,7 @@ type Props = {
   score: number,
   timeLeft: number,
   isBoardEmpty: boolean,
+  mistakes: number,
   startGame: () => any,
   goToNextLevel: () => any,
   handleTilePress: (tileId: number) => any,
@@ -29,10 +30,13 @@ type Props = {
   isBoardEmpty: allStores.game.board.length === 0,
   startGame: allStores.game.startGame,
   goToNextLevel: allStores.game.goToNextLevel,
-  handleTilePress: allStores.game.handleTilePress
+  handleTilePress: allStores.game.handleTilePress,
+  mistakes: allStores.game.mistakes
 }))
 @observer
 export default class Playground extends Component<void, Props, void> {
+  _boardRef = null
+
   componentDidMount () {
     this.props.startGame()
   }
@@ -40,6 +44,10 @@ export default class Playground extends Component<void, Props, void> {
   componentDidUpdate (prevProps: Props) {
     if (this.props.isBoardEmpty) {
       this.props.goToNextLevel()
+    } else if (prevProps.mistakes < this.props.mistakes) {
+      if (this._boardRef) {
+        this._boardRef.animateFailure()
+      }
     }
   }
 
@@ -56,6 +64,7 @@ export default class Playground extends Component<void, Props, void> {
             timeLeft={this.props.timeLeft}
           />
           <Board
+            ref={(ref) => { this._boardRef = ref }}
             tiles={this.props.board}
             onTilePress={this._handleTilePress}
           />
