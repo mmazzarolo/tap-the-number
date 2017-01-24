@@ -1,5 +1,7 @@
 /* @flow */
-import { Platform } from 'react-native'
+import { Platform, UIManager } from 'react-native'
+
+UIManager.setLayoutAnimationEnabledExperimental && UIManager.setLayoutAnimationEnabledExperimental(true)
 
 export default {
   IS_ENV_DEVELOPMENT: __DEV__ || false,

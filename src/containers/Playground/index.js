@@ -26,7 +26,7 @@ type Props = {
   isRunning: allStores.game.isRunning,
   score: allStores.game.score,
   timeLeft: allStores.game.timeLeft,
-  isBoardEmpty: allStores.game.isBoardEmpty,
+  isBoardEmpty: allStores.game.board.length === 0,
   startGame: allStores.game.startGame,
   goToNextLevel: allStores.game.goToNextLevel,
   handleTilePress: allStores.game.handleTilePress

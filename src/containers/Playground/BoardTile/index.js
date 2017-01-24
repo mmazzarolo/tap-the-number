@@ -4,7 +4,6 @@ import React, { Component } from 'react'
 import { View, Text } from 'react-native-animatable'
 import { observer } from 'mobx-react/native'
 import colorUtils from 'src/utils/colorUtils'
-import ExplodingAnimation from 'src/components/ExplodingAnimation'
 import metrics from 'src/config/metrics'
 import styles from './index.style'
 
@@ -19,62 +18,53 @@ type Props = {
 }
 
 type State = {
-  isVisible: boolean
+  isTouched: boolean
 }
 
 @observer
 export default class BoardTile extends Component<void, Props, State> {
   state = {
-    isVisible: true
+    isTouched: false
   }
 
-  // componentDidUpdate (prevProps: Props) {
-  //   const previouslyVisible = prevProps.isVisible
-  //   const currentlyVisible = this.props.isVisible
-  //   if (previouslyVisible && !currentlyVisible) {
+  _tileRef = null
 
-  //   }
-  // }
+  _handlePress = () => {
+    this.setState({ isTouched: true })
+    return true
+  }
+
+  _handleRelease = () => {
+    this.props.onTilePress()
+  }
 
   render () {
-    const { left, bottom, backgroundColor, text, style, isVisible } = this.props
-    const EXPLOSION_PADDING = metrics.TILE_SIZE * 0.1
-    const CIRCLE_SIZE = metrics.TILE_SIZE - (EXPLOSION_PADDING * 2)
-    const computedCircleStyle = {
-      left: left + EXPLOSION_PADDING,
-      bottom: bottom + EXPLOSION_PADDING,
+    const { left, bottom, backgroundColor, text, isVisible, style } = this.props
+    const { isTouched } = this.state
+    const DEPTH = 6
+    const computedStyle = {
+      left,
+      bottom: isTouched ? bottom - DEPTH : bottom,
       backgroundColor,
-      borderRadius: CIRCLE_SIZE * 0.1,
-      width: CIRCLE_SIZE,
-      height: CIRCLE_SIZE,
+      borderRadius: metrics.TILE_SIZE * 0.1,
+      width: metrics.TILE_SIZE,
+      height: metrics.TILE_SIZE,
+      shadowOffset: { height: isTouched ? 0 : DEPTH },
       shadowColor: colorUtils.getDifferentLuminance(backgroundColor, -0.2)
     }
-    const computedExplosionStyle = {
-      left,
-      bottom,
-      width: metrics.TILE_SIZE,
-      height: metrics.TILE_SIZE
-    }
     const textColor = colorUtils.getContrastYIQ(backgroundColor)
-    if (isVisible) {
-      return (
-        <View
-          animation={'bounceIn'}
-          style={[computedCircleStyle, styles.containerDefault, style]}
-          onStartShouldSetResponder={this.props.onTilePress}
-        >
-          <Text style={[styles.text, { color: textColor }]}>{text}</Text>
-        </View>
-      )
-    } else {
-      return (
-        <ExplodingAnimation
-          style={[computedExplosionStyle, styles.explosionDefault]}
-          size={metrics.TILE_SIZE}
-          circleSize={CIRCLE_SIZE}
-        />
-      )
-    }
+    if (!isVisible) return null
+    return (
+      <View
+        ref={(ref) => { this._tileRef = ref }}
+        animation={'bounceIn'}
+        style={[styles.containerDefault, computedStyle, style]}
+        onStartShouldSetResponder={this._handlePress}
+        onResponderRelease={this._handleRelease}
+      >
+        <Text style={[styles.text, { color: textColor }]}>{text}</Text>
+      </View>
+    )
   }
 }
 

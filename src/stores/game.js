@@ -3,8 +3,9 @@ import { action, computed, observable } from 'mobx'
 import { filter, find, orderBy, random, times } from 'lodash'
 import boardUtils from 'src/utils/boardUtils'
 import timeUtils from 'src/utils/timeUtils'
-import soundUtils from 'src/utils/soundUtils'
+import audioService from 'src/services/audio'
 import type { Tile } from 'src/types'
+import uuid from 'uuid'
 
 export default class GameStore {
   @observable tiles: Array<Tile> = []
@@ -18,7 +19,7 @@ export default class GameStore {
   buildBoard = () => {
     this.tiles = []
     times(this.level, (n) => {
-      const id = n
+      const id = uuid.v4()
       const { x, y } = boardUtils.getRandomTilePosition(this.tiles)
       const number = random(-100, 100)
       const color = boardUtils.getRandomTileColor()
@@ -57,20 +58,16 @@ export default class GameStore {
     if (pressedTile.number === sortedActiveTiles[0].number) {
       pressedTile.isVisible = false
       this.score++
-      soundUtils.playTapSound()
+      audioService.playSuccessSound()
     } else {
       this.buildBoard()
       this.mistakes++
+      audioService.playFailureSound()
     }
   }
 
   @computed
   get board (): Array<Tile> {
-    return this.tiles.slice()
-  }
-
-  @computed
-  get isBoardEmpty (): boolean {
-    return this.tiles.slice().filter((t) => t.isVisible === true).length === 0
+    return this.tiles.slice().filter((t) => t.isVisible === true)
   }
 }

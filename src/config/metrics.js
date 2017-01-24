@@ -9,6 +9,6 @@ export default {
   NAVBAR_HEIGHT: IS_ANDROID ? 54 : 64,
   DEVICE_HEIGHT: IS_ANDROID ? height - 24 : height,
   DEVICE_WIDTH: width,
-  TILE_SIZE: width * 0.24,
+  TILE_SIZE: width * 0.20,
   BOARD_MARGIN: 20
 }

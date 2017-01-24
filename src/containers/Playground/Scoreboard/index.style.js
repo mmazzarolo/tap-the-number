@@ -11,7 +11,8 @@ export default StyleSheet.create({
     flex: 1
   },
   text: {
-    color: 'rgba(255, 255, 255, 0.9)',
+    // color: 'rgba(255, 255, 255, 0.9)',
+    color: '#1840CE',
     fontWeight: 'bold',
     fontFamily: 'Permanent Marker',
     fontSize: 36,
