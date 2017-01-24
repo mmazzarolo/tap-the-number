@@ -23,7 +23,8 @@
     "mobx-react": "4.1.0",
     "react": "~15.4.0-rc.4",
     "react-native": "0.40.0",
-    "react-native-animatable": "1.1.0"
+    "react-native-animatable": "1.1.0",
+    "react-native-sound": "git+https://github.com/zmxv/react-native-sound.git#e0c4061cfdde275479e63e86c8d1373afa13d0dd"
   },
   "devDependencies": {
     "babel-eslint": "7.1.1",

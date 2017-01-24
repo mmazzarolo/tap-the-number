@@ -3,6 +3,7 @@ import { action, computed, observable } from 'mobx'
 import { filter, find, orderBy, random, times } from 'lodash'
 import boardUtils from 'src/utils/boardUtils'
 import timeUtils from 'src/utils/timeUtils'
+import soundUtils from 'src/utils/soundUtils'
 import type { Tile } from 'src/types'
 
 export default class GameStore {
@@ -56,6 +57,7 @@ export default class GameStore {
     if (pressedTile.number === sortedActiveTiles[0].number) {
       pressedTile.isVisible = false
       this.score++
+      soundUtils.playTapSound()
     } else {
       this.buildBoard()
       this.mistakes++
