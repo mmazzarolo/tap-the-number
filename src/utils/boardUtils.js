@@ -47,7 +47,33 @@ const _doPositionsOverlap = (x1: number, y1: number, x2: number, y2: number): bo
   return xOverlap && yOverlap
 }
 
+const getRandomNumber = (level: number, blacklist: Array<number>): number => {
+  let randomNumber
+  if (level === 1) {
+    randomNumber = random(0, 9)
+  } else if (level <= 3) {
+    randomNumber = random(0, 29)
+  } else if (level <= 5) {
+    randomNumber = random(-9, 39)
+  } else if (level <= 7) {
+    randomNumber = random(-29, 69)
+  } else {
+    randomNumber = random(-99, 99)
+  }
+  return (Array.isArray(blacklist) && blacklist.includes(randomNumber))
+    ? getRandomNumber(level, blacklist)
+    : randomNumber
+}
+
+const getNumberOfTiles = (level: number): number => {
+  const minimNumberOfTiles = 3
+  const incrementFactor = (level * 0.2)
+  return Math.floor(minimNumberOfTiles + incrementFactor)
+}
+
 export default {
   getRandomTileColor,
-  getRandomTilePosition
+  getRandomTilePosition,
+  getRandomNumber,
+  getNumberOfTiles
 }

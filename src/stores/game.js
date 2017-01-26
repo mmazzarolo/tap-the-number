@@ -18,12 +18,15 @@ export default class GameStore {
   @action
   buildBoard = () => {
     this.tiles = []
-    times(this.level, (n) => {
+    const numberOfTiles = boardUtils.getNumberOfTiles(this.level)
+    const alreadyPickedNumbers = []
+    times(numberOfTiles, (n) => {
       const id = uuid.v4()
       const { x, y } = boardUtils.getRandomTilePosition(this.tiles)
-      const number = random(-100, 100)
+      const number = boardUtils.getRandomNumber(this.level, alreadyPickedNumbers)
       const color = boardUtils.getRandomTileColor()
       const isVisible = true
+      alreadyPickedNumbers.push(number)
       this.tiles.push({ id, x, y, number, color, isVisible })
     })
   }
@@ -51,7 +54,7 @@ export default class GameStore {
   }
 
   @action
-  handleTilePress = (tileId: string) => {
+  handleTilePress = async (tileId: string) => {
     const pressedTile = find(this.tiles, { id: tileId })
     const activeTiles = filter(this.tiles, 'isVisible')
     const sortedActiveTiles = orderBy(activeTiles, 'number')
@@ -62,7 +65,8 @@ export default class GameStore {
     } else {
       this.mistakes++
       audioService.playFailureSound()
-      setTimeout(this.buildBoard, 1000)
+      await timeUtils.delay(1000) // Wait for the "failure" animation
+      this.buildBoard()
     }
   }
 
