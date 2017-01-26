@@ -1,6 +1,5 @@
 /* @flow */
 import { StyleSheet } from 'react-native'
-import metrics from 'src/config/metrics'
 
 export default StyleSheet.create({
   containerDefault: {
@@ -9,14 +8,11 @@ export default StyleSheet.create({
     borderColor: 'rgba(255, 255, 255, 0.2)',
     shadowOpacity: 1,
     shadowRadius: 0,
-    shadowOffset: {
-      height: 4
-      // width: 4
-    },
     justifyContent: 'center',
     alignItems: 'center'
   },
   text: {
+    color: 'white',
     fontWeight: 'bold',
     fontFamily: 'Permanent Marker',
     fontSize: 39,

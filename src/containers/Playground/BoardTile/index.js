@@ -55,18 +55,22 @@ export default class BoardTile extends Component<void, Props, State> {
   render () {
     const { left, bottom, backgroundColor, text, isVisible, style } = this.props
     const { isAnimatingFailure, isTouched } = this.state
-    const DEPTH = 6
+    const shadowHeight = (isTouched)
+      ? metrics.TILE_SHADOW_DEPTH / 2
+      : metrics.TILE_SHADOW_DEPTH
+    const tileBottom = (isTouched)
+      ? bottom + (metrics.TILE_SHADOW_DEPTH / 2)
+      : bottom + metrics.TILE_SHADOW_DEPTH
     const computedStyle = {
       left,
-      bottom: isTouched ? bottom - DEPTH : bottom,
+      bottom: tileBottom,
       backgroundColor,
       borderRadius: metrics.TILE_SIZE * 0.1,
-      width: metrics.TILE_SIZE,
-      height: metrics.TILE_SIZE,
-      shadowOffset: { height: isTouched ? 0 : DEPTH },
+      width: metrics.TILE_SIZE - metrics.TILE_SHADOW_DEPTH,
+      height: metrics.TILE_SIZE - metrics.TILE_SHADOW_DEPTH,
+      shadowOffset: { height: shadowHeight },
       shadowColor: colorUtils.getDifferentLuminance(backgroundColor, -0.2)
     }
-    const textColor = colorUtils.getContrastYIQ(backgroundColor)
     if (!isVisible) return null
     return (
       <View
@@ -76,7 +80,7 @@ export default class BoardTile extends Component<void, Props, State> {
         onStartShouldSetResponder={isAnimatingFailure ? noop : this._handlePress}
         onResponderRelease={isAnimatingFailure ? noop : this._handleRelease}
       >
-        <Text style={[styles.text, { color: textColor }]}>{text}</Text>
+        <Text style={styles.text}>{text}</Text>
       </View>
     )
   }

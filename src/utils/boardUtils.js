@@ -2,25 +2,24 @@
 import { inRange, random } from 'lodash'
 import type { Tile } from 'src/types'
 import metrics from 'src/config/metrics'
+import colors from 'src/config/colors'
 
 const getRandomTileColor = (): string => {
-  // return `#${(Math.random() * 0xFFFFFF << 0).toString(16)}`
-  const COLORS = [
-    '#BC0437', '#420BDF', '#1840CE', '#7D103F', '#137F7B'
-  ]
-  const randomIndex = random(0, COLORS.length - 1)
-  return COLORS[randomIndex]
+  const randomIndex = random(0, colors.TILES.length - 1)
+  return colors.TILES[randomIndex]
 }
 
 // More suggestions:
 // http://stackoverflow.com/questions/6224571/positioning-multiple-random-sized-absolutely-positioned-elements-so-they-dont
 const getRandomTilePosition = (board: Array<Tile>): { x: number, y: number } => {
   const position = {}
-  const boardWidth = metrics.DEVICE_WIDTH - metrics.BOARD_MARGIN
-  const boardHeight = metrics.DEVICE_HEIGHT - metrics.BOARD_MARGIN
+  const boardOriginX = metrics.BOARD_MARGIN
+  const boardOriginY = metrics.BOARD_MARGIN
+  const boardWidth = metrics.BOARD_WIDTH - metrics.BOARD_MARGIN
+  const boardHeight = metrics.BOARD_HEIGHT - metrics.BOARD_MARGIN
   while (true) {
-    const randomX = random(0, boardWidth - metrics.TILE_SIZE)
-    const randomY = random(0, boardHeight - metrics.TILE_SIZE)
+    const randomX = random(boardOriginX, boardWidth - metrics.TILE_SIZE)
+    const randomY = random(boardOriginY, boardHeight - metrics.TILE_SIZE)
     if (_isPositionAvailable(randomX, randomY, board)) {
       position.x = randomX
       position.y = randomY

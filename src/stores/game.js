@@ -1,6 +1,7 @@
 /* @flow */
 import { action, computed, observable } from 'mobx'
 import { filter, find, orderBy, random, times } from 'lodash'
+import timings from 'src/config/timings'
 import boardUtils from 'src/utils/boardUtils'
 import timeUtils from 'src/utils/timeUtils'
 import audioService from 'src/services/audio'
@@ -12,7 +13,7 @@ export default class GameStore {
   @observable isRunning: boolean = false
   @observable level: number = 0
   @observable score: number = 0
-  @observable timeLeft: number = 60
+  @observable timeLeft: number = timings.TIME_LIMIT
   @observable mistakes: number = 0
 
   @action
