@@ -14,8 +14,7 @@ type Props = {
   bottom: number,
   backgroundColor: string,
   text: string | number,
-  onTilePress: Function,
-  style?: any
+  onTilePress: Function
 }
 
 type State = {
@@ -53,34 +52,43 @@ export default class BoardTile extends Component<void, Props, State> {
   }
 
   render () {
-    const { left, bottom, backgroundColor, text, isVisible, style } = this.props
+    const { left, bottom, backgroundColor, text, isVisible } = this.props
     const { isAnimatingFailure, isTouched } = this.state
-    const shadowHeight = (isTouched)
-      ? metrics.TILE_SHADOW_DEPTH / 2
-      : metrics.TILE_SHADOW_DEPTH
-    const tileBottom = (isTouched)
-      ? bottom + (metrics.TILE_SHADOW_DEPTH / 2)
-      : bottom + metrics.TILE_SHADOW_DEPTH
-    const computedStyle = {
+    const containerStyle = {
       left,
-      bottom: tileBottom,
-      backgroundColor,
-      borderRadius: metrics.TILE_SIZE * 0.1,
+      bottom,
+      width: metrics.TILE_SIZE,
+      height: metrics.TILE_SIZE
+    }
+    const depthStyle = {
+      left: 0,
+      bottom: 0,
       width: metrics.TILE_SIZE - metrics.TILE_SHADOW_DEPTH,
       height: metrics.TILE_SIZE - metrics.TILE_SHADOW_DEPTH,
-      shadowOffset: { height: shadowHeight },
-      shadowColor: colorUtils.getDifferentLuminance(backgroundColor, -0.2)
+      backgroundColor: colorUtils.getDifferentLuminance(backgroundColor, -0.2),
+      borderRadius: metrics.TILE_SIZE * 0.1
+    }
+    const tileStyle = {
+      left: 0,
+      bottom: (isTouched) ? (metrics.TILE_SHADOW_DEPTH / 2) : metrics.TILE_SHADOW_DEPTH,
+      width: metrics.TILE_SIZE - metrics.TILE_SHADOW_DEPTH,
+      height: metrics.TILE_SIZE - metrics.TILE_SHADOW_DEPTH,
+      backgroundColor,
+      borderRadius: metrics.TILE_SIZE * 0.1
     }
     if (!isVisible) return null
     return (
       <View
         ref={(ref) => { this._tileRef = ref }}
         animation={'bounceIn'}
-        style={[styles.containerDefault, computedStyle, style]}
+        style={[styles.container, containerStyle]}
         onStartShouldSetResponder={isAnimatingFailure ? noop : this._handlePress}
         onResponderRelease={isAnimatingFailure ? noop : this._handleRelease}
       >
-        <Text style={styles.text}>{text}</Text>
+        <View style={[styles.depth, depthStyle]} />
+        <View style={[styles.tile, tileStyle]}>
+          <Text style={styles.text}>{text}</Text>
+        </View>
       </View>
     )
   }

@@ -2,14 +2,16 @@
 import { StyleSheet } from 'react-native'
 
 export default StyleSheet.create({
-  containerDefault: {
+  container: {
+    position: 'absolute'
+  },
+  tile: {
     position: 'absolute',
-    borderWidth: 1,
-    borderColor: 'rgba(255, 255, 255, 0.2)',
-    shadowOpacity: 1,
-    shadowRadius: 0,
     justifyContent: 'center',
     alignItems: 'center'
+  },
+  depth: {
+    position: 'absolute'
   },
   text: {
     color: 'white',
