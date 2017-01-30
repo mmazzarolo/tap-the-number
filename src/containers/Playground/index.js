@@ -58,10 +58,7 @@ export default class Playground extends Component<void, Props, void> {
   render () {
     return (
       <View style={styles.container}>
-        <Scoreboard
-          score={this.props.score}
-          timeLeft={this.props.timeLeft}
-        />
+        <View />
         <Board
           ref={(ref) => { this._boardRef = ref }}
           tiles={this.props.board}

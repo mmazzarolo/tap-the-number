@@ -3,7 +3,6 @@ import { StyleSheet } from 'react-native'
 
 export default StyleSheet.create({
   container: {
-    position: 'absolute'
   },
   tile: {
     position: 'absolute',
@@ -24,8 +23,5 @@ export default StyleSheet.create({
       height: 4,
       width: 4
     }
-  },
-  explosionDefault: {
-    position: 'absolute'
   }
 })

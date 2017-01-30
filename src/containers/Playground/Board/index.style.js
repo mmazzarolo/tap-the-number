@@ -8,9 +8,6 @@ export default StyleSheet.create({
     width: metrics.BOARD_WIDTH,
     height: metrics.BOARD_HEIGHT,
     left: 0,
-    bottom: 0,
-    // margin: metrics.BOARD_MARGIN,
-    borderColor: 'black',
-    borderWidth: 1
+    bottom: 0
   }
 })
