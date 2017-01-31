@@ -23,6 +23,7 @@ type Props = {
 }
 
 @inject((allStores) => ({
+  goToEndgame: allStores.router.goToEndgame,
   board: allStores.game.board,
   isRunning: allStores.game.isRunning,
   score: allStores.game.score,
@@ -37,8 +38,14 @@ type Props = {
 export default class Playground extends Component<void, Props, void> {
   _boardRef = null
 
+  componentDidMount () {
+    this.props.startGame()
+  }
+
   componentDidUpdate (prevProps: Props) {
-    if (this.props.isBoardEmpty) {
+    if (this.props.isRunning && this.props.timeLeft === 0) {
+      this.props.goToEndgame()
+    } else if (this.props.isBoardEmpty) {
       this.props.goToNextLevel()
     } else if (prevProps.mistakes < this.props.mistakes) {
       if (this._boardRef) {

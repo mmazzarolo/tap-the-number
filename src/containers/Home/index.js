@@ -12,15 +12,12 @@ import Playground from 'src/containers/Playground'
 import styles from './index.style'
 
 type Props = {
-  isRunning: boolean,
-  mistakes: number,
-  startGame: () => void
+  goToPlayground: () => void
 }
 
 @inject((allStores) => ({
-  isRunning: allStores.game.isRunning,
-  mistakes: allStores.game.mistakes,
-  startGame: allStores.game.startGame
+  goToPlayground: allStores.router.goToPlayground,
+  goToEndgame: allStores.router.goToEndgame
 }))
 @observer
 export default class App extends Component<void, Props, void> {
@@ -34,7 +31,7 @@ export default class App extends Component<void, Props, void> {
           backgroundColor={'#BC0437'}
           borderRadius={metrics.TILE_SIZE * 0.1}
           text={'START'}
-          onRelease={this.props.startGame}
+          onRelease={this.props.goToEndgame}
           style={styles.button}
         />
       </View>

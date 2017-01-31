@@ -1,48 +1,29 @@
 /* @flow */
 /* eslint-disable react/prop-types */
 import React, { Component } from 'react'
-import { LayoutAnimation } from 'react-native'
 import { View } from 'react-native-animatable'
 import { inject, observer } from 'mobx-react/native'
-import metrics from 'src/config/metrics'
 
-import CircleAnimation from 'src/components/CircleAnimation'
 import Playground from 'src/containers/Playground'
 import Home from 'src/containers/Home'
+import Endgame from 'src/containers/Endgame'
 import styles from './index.style'
 
 type Props = {
-  isRunning: boolean,
-  mistakes: number,
-  startGame: () => void
+  currentScreen: string,
 }
 
 @inject((allStores) => ({
-  isRunning: allStores.game.isRunning,
-  mistakes: allStores.game.mistakes,
-  startGame: allStores.game.startGame
+  currentScreen: allStores.router.currentScreen
 }))
 @observer
 export default class App extends Component<void, Props, void> {
-  componentDidMount () {
-    // this.props.startGame()
-  }
-
-  componentDidUpdate (prevProps: Props) {
-    if (prevProps.mistakes < this.props.mistakes) {
-      // LayoutAnimation.linear()
-    }
-  }
-
   render () {
-        // <CircleAnimation
-        //   isVisible={!this.props.isRunning}
-        //   backgroundColor={'black'}
-        // />
-    return (
-      <View style={styles.container}>
-        {(this.props.isRunning) ? <Playground /> : <Home />}
-      </View>
-    )
+    switch (this.props.currentScreen) {
+      case 'HOME': return <Home />
+      case 'PLAYGROUND': return <Playground />
+      case 'ENDGAME': return <Endgame />
+      default: return <View />
+    }
   }
 }

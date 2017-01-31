@@ -1,6 +1,6 @@
 /* @flow */
 /* eslint-disable react/prop-types */
-import React, { Component } from 'react'
+import React, { Component, Element } from 'react'
 import { View } from 'react-native-animatable'
 import { observer } from 'mobx-react/native'
 import metrics from 'src/config/metrics'
@@ -8,7 +8,8 @@ import metrics from 'src/config/metrics'
 type Props = {
   isVisible: boolean,
   backgroundColor: string,
-  animationTiming?: boolean
+  animationTiming?: boolean,
+  children?: Element<any>
 }
 
 @observer

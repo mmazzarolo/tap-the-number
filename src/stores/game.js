@@ -11,6 +11,7 @@ import uuid from 'uuid'
 export default class GameStore {
   @observable tiles: Array<Tile> = []
   @observable isRunning: boolean = false
+  @observable isEndgame: boolean = false
   @observable level: number = 0
   @observable score: number = 0
   @observable timeLeft: number = timings.TIME_LIMIT
