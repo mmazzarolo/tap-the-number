@@ -1,7 +1,7 @@
 /* @flow */
 /* eslint-disable react/prop-types */
 import React, { Component } from 'react'
-import { Image, View } from 'react-native'
+import { Image, View } from 'react-native-animatable'
 import { inject, observer } from 'mobx-react/native'
 import Board from 'src/containers/Playground/Board'
 import Scoreboard from 'src/containers/Playground/Scoreboard'
@@ -37,10 +37,6 @@ type Props = {
 export default class Playground extends Component<void, Props, void> {
   _boardRef = null
 
-  componentDidMount () {
-    this.props.startGame()
-  }
-
   componentDidUpdate (prevProps: Props) {
     if (this.props.isBoardEmpty) {
       this.props.goToNextLevel()
@@ -57,8 +53,11 @@ export default class Playground extends Component<void, Props, void> {
 
   render () {
     return (
-      <View style={styles.container}>
-        <View />
+      <View style={styles.container} animation={'fadeIn'}>
+        <Scoreboard
+          score={this.props.score}
+          timeLeft={this.props.timeLeft}
+        />
         <Board
           ref={(ref) => { this._boardRef = ref }}
           tiles={this.props.board}

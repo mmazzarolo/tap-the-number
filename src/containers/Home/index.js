@@ -7,8 +7,8 @@ import { inject, observer } from 'mobx-react/native'
 import metrics from 'src/config/metrics'
 
 import CircleAnimation from 'src/components/CircleAnimation'
+import Tile from 'src/components/Tile'
 import Playground from 'src/containers/Playground'
-import Home from 'src/containers/Home'
 import styles from './index.style'
 
 type Props = {
@@ -24,24 +24,19 @@ type Props = {
 }))
 @observer
 export default class App extends Component<void, Props, void> {
-  componentDidMount () {
-    // this.props.startGame()
-  }
-
-  componentDidUpdate (prevProps: Props) {
-    if (prevProps.mistakes < this.props.mistakes) {
-      // LayoutAnimation.linear()
-    }
-  }
-
   render () {
-        // <CircleAnimation
-        //   isVisible={!this.props.isRunning}
-        //   backgroundColor={'black'}
-        // />
     return (
       <View style={styles.container}>
-        {(this.props.isRunning) ? <Playground /> : <Home />}
+        <Tile
+          width={metrics.DEVICE_WIDTH / 2}
+          height={90}
+          depth={metrics.TILE_SHADOW_DEPTH}
+          backgroundColor={'#BC0437'}
+          borderRadius={metrics.TILE_SIZE * 0.1}
+          text={'START'}
+          onRelease={this.props.startGame}
+          style={styles.button}
+        />
       </View>
     )
   }
