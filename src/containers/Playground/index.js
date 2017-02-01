@@ -11,6 +11,7 @@ import bgImg from 'src/images/bg.jpg'
 import styles from './index.style'
 
 type Props = {
+  navigateToEndgame: Function,
   board: Array<Tile>,
   isRunning: boolean,
   score: number,
@@ -23,7 +24,7 @@ type Props = {
 }
 
 @inject((allStores) => ({
-  goToEndgame: allStores.router.goToEndgame,
+  navigateToEndgame: allStores.router.navigateToEndgame,
   board: allStores.game.board,
   isRunning: allStores.game.isRunning,
   score: allStores.game.score,
@@ -44,7 +45,7 @@ export default class Playground extends Component<void, Props, void> {
 
   componentDidUpdate (prevProps: Props) {
     if (this.props.isRunning && this.props.timeLeft === 0) {
-      this.props.goToEndgame()
+      this.props.navigateToEndgame()
     } else if (this.props.isBoardEmpty) {
       this.props.goToNextLevel()
     } else if (prevProps.mistakes < this.props.mistakes) {

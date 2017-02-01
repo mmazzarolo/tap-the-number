@@ -14,6 +14,7 @@ type Props = {
   backgroundColor: string,
   borderRadius: number,
   text?: string | number,
+  textStyle?: any,
   onPress?: () => void,
   onRelease?: () => void,
   style?: any
@@ -49,7 +50,8 @@ export default class BoardTile extends Component<void, Props, State> {
   }
 
   render () {
-    const { width, height, depth, borderRadius, backgroundColor, text, style } = this.props
+    const { width, height, depth, borderRadius, backgroundColor, text,
+      textStyle, style } = this.props
     const { isTouched } = this.state
     const containerStyle = {
       width,
@@ -81,7 +83,9 @@ export default class BoardTile extends Component<void, Props, State> {
       >
         <View style={[styles.depth, depthStyle]} />
         <View style={[styles.tile, tileStyle]}>
-          <Text style={styles.text}>{text}</Text>
+          <Text style={[styles.text, textStyle]}>
+            {text}
+          </Text>
         </View>
       </View>
     )

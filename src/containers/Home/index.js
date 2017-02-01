@@ -1,23 +1,20 @@
 /* @flow */
 /* eslint-disable react/prop-types */
 import React, { Component } from 'react'
-import { LayoutAnimation } from 'react-native'
 import { View } from 'react-native-animatable'
 import { inject, observer } from 'mobx-react/native'
 import metrics from 'src/config/metrics'
 
-import CircleAnimation from 'src/components/CircleAnimation'
 import Tile from 'src/components/Tile'
-import Playground from 'src/containers/Playground'
 import styles from './index.style'
 
 type Props = {
-  goToPlayground: () => void
+  navigateToEndgame: () => void
 }
 
 @inject((allStores) => ({
-  goToPlayground: allStores.router.goToPlayground,
-  goToEndgame: allStores.router.goToEndgame
+  navigateToPlayground: allStores.router.navigateToPlayground,
+  navigateToEndgame: allStores.router.navigateToEndgame
 }))
 @observer
 export default class App extends Component<void, Props, void> {
@@ -31,8 +28,9 @@ export default class App extends Component<void, Props, void> {
           backgroundColor={'#BC0437'}
           borderRadius={metrics.TILE_SIZE * 0.1}
           text={'START'}
-          onRelease={this.props.goToEndgame}
+          onRelease={this.props.navigateToEndgame}
           style={styles.button}
+          textStyle={styles.buttonText}
         />
       </View>
     )

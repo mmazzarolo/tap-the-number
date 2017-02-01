@@ -6,15 +6,15 @@ type Screen = 'HOME' | 'PLAYGROUND' | 'ENDGAME'
 export default class RouterStore {
   @observable currentScreen: Screen = 'HOME'
 
-  goToHome = () => {
+  navigateToHome = () => {
     this.currentScreen = 'HOME'
   }
 
-  goToPlayground = () => {
+  navigateToPlayground = () => {
     this.currentScreen = 'PLAYGROUND'
   }
 
-  goToEndgame = () => {
+  navigateToEndgame = () => {
     this.currentScreen = 'ENDGAME'
   }
 }

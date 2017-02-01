@@ -4,5 +4,6 @@ const TILES = [
 ]
 
 export default {
-  TILES
+  TILES,
+  TRANSPARENT_DARK: 'rgba(0,0,0,0.1)'
 }

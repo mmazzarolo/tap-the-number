@@ -14,7 +14,7 @@ export default class GameStore {
   @observable isEndgame: boolean = false
   @observable level: number = 0
   @observable score: number = 0
-  @observable timeLeft: number = timings.TIME_LIMIT
+  @observable timeLeft: number = 0
   @observable mistakes: number = 0
 
   @action
@@ -35,6 +35,7 @@ export default class GameStore {
 
   @action
   startGame = () => {
+    this.timeLeft = timings.TIME_LIMIT
     this.level = 1
     this.isRunning = true
     this.buildBoard()
