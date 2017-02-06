@@ -5,5 +5,5 @@ export type Tile = {
   y: number,
   color: string,
   number: number,
-  isVisible: boolean
-}
+  isVisible: boolean,
+};

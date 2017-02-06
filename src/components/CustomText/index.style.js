@@ -1,9 +1,7 @@
-import { Platform, StyleSheet } from 'react-native'
-
-// const IS_ANDROID = Platform.OS === 'android'
+import { StyleSheet } from 'react-native';
 
 export default StyleSheet.create({
   text: {
-    fontFamily: 'Permanent Marker'
-  }
-})
+    fontFamily: 'Permanent Marker',
+  },
+});

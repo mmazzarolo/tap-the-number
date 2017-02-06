@@ -1,15 +1,21 @@
 {
   "extends": [
-    "eslint-config-mostaza-react",
-    "plugin:flowtype/recommended"
-  ],
-  "plugins": [
-    "flowtype"
+    "react-app"
   ],
   "parser": "babel-eslint",
+  "plugins": [
+    "prettier"
+  ],
   "settings": {
     "import/resolver": {
       "babel-module": {}
     }
+  },
+  "rules": {
+    "prettier/prettier": ["error", {
+      "printWidth": 100,
+      "trailingComma": true, 
+      "singleQuote": true
+    }]
   }
 }

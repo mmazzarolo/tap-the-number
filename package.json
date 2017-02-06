@@ -35,13 +35,17 @@
     "babel-preset-react-native": "1.9.1",
     "eslint": "3.12.2",
     "eslint-config-mostaza-react": "1.14.0",
+    "eslint-config-react": "^1.1.7",
+    "eslint-config-react-app": "^0.5.0",
     "eslint-import-resolver-babel-module": "2.2.1",
     "eslint-plugin-flowtype": "2.29.2",
     "eslint-plugin-import": "2.2.0",
     "eslint-plugin-jsx-a11y": "2.2.3",
+    "eslint-plugin-prettier": "^2.0.0",
     "eslint-plugin-react": "6.8.0",
     "flow-bin": "0.37.4",
     "jest": "18.1.0",
+    "prettier": "^0.16.0",
     "react-test-renderer": "~15.4.0-rc.4"
   },
   "jest": {

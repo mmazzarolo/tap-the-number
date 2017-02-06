@@ -1,29 +1,29 @@
 /* @flow */
-import ReactNativeSound from 'react-native-sound'
+import ReactNativeSound from 'react-native-sound';
 
 const initializeSound = (name: string) => {
-  return new ReactNativeSound(name, ReactNativeSound.MAIN_BUNDLE, (err) => {
+  return new ReactNativeSound(name, ReactNativeSound.MAIN_BUNDLE, err => {
     if (err) {
-      console.warn('failed to load the sound', err)
+      console.warn('failed to load the sound', err);
     }
-  })
-}
+  });
+};
 
-const playSound = (sound) => {
-  sound.getCurrentTime((currentTime) => {
+const playSound = sound => {
+  sound.getCurrentTime(currentTime => {
     if (currentTime === 0) {
-      sound.play()
+      sound.play();
     } else {
-      sound.stop()
-      sound.play()
+      sound.stop();
+      sound.play();
     }
-  })
-}
+  });
+};
 
-const successSound = initializeSound('success.wav')
-const failureSound = initializeSound('failure.wav')
+const successSound = initializeSound('success.wav');
+const failureSound = initializeSound('failure.wav');
 
 export default {
   playSuccessSound: () => playSound(successSound),
-  playFailureSound: () => playSound(failureSound)
-}
+  playFailureSound: () => playSound(failureSound),
+};

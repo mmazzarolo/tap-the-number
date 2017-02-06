@@ -1,14 +1,14 @@
 /* @flow */
-import { StyleSheet } from 'react-native'
+import { StyleSheet } from 'react-native';
 
 export default StyleSheet.create({
   tile: {
     justifyContent: 'center',
     alignItems: 'center',
-    zIndex: 2
+    zIndex: 2,
   },
   depth: {
-    zIndex: 1
+    zIndex: 1,
   },
   text: {
     color: 'white',
@@ -19,7 +19,7 @@ export default StyleSheet.create({
     textShadowRadius: 0,
     textShadowOffset: {
       height: 4,
-      width: 4
-    }
-  }
-})
+      width: 4,
+    },
+  },
+});

@@ -1,53 +1,66 @@
 /* @flow */
-/* eslint-disable react/prop-types */
-import React, { Component } from 'react'
-import { View } from 'react-native-animatable'
-import { inject, observer } from 'mobx-react/native'
-import metrics from 'src/config/metrics'
-import Tile from 'src/components/Tile'
-import styles from './index.style'
+import React, { Component } from 'react';
+import { View } from 'react-native-animatable';
+import { inject, observer } from 'mobx-react/native';
+import metrics from 'src/config/metrics';
+import Tile from 'src/components/Tile';
+import styles from './index.style';
+
+type DefaultProps = {
+  navigateToPlayground: () => any,
+  score: number,
+};
 
 type Props = {
   navigateToPlayground: () => any,
   score: number,
-}
+};
 
-@inject((allStores) => ({
+@inject(allStores => ({
   navigateToPlayground: allStores.router.navigateToPlayground,
-  score: allStores.game.score
+  score: allStores.game.score,
 }))
 @observer
-export default class Endgame extends Component<void, Props, void> {
-  _containerRef: any
-  _contentRef: any
+export default class Endgame extends Component<DefaultProps, Props, void> {
+  static defaultProps = {
+    navigateToPlayground: () => null,
+    score: 0,
+  };
+
+  _containerRef: any;
+  _contentRef: any;
 
   _handleRestartPress = async () => {
-    await this._contentRef.bounceOutDown()
-    await this._containerRef.zoomOut()
-    this.props.navigateToPlayground()
-  }
+    await this._contentRef.bounceOutDown();
+    await this._containerRef.zoomOut();
+    this.props.navigateToPlayground();
+  };
 
-  render () {
-    const size = metrics.DEVICE_HEIGHT * 1.3
+  render() {
+    const size = metrics.DEVICE_HEIGHT * 1.3;
     const containerStyle = {
       position: 'absolute',
-      bottom: (metrics.DEVICE_HEIGHT / 2) - (size / 2),
-      left: (metrics.DEVICE_WIDTH / 2) - (size / 2),
+      bottom: metrics.DEVICE_HEIGHT / 2 - size / 2,
+      left: metrics.DEVICE_WIDTH / 2 - size / 2,
       height: size,
       width: size,
       backgroundColor: '#57B7CE',
-      borderRadius: size / 2
-    }
+      borderRadius: size / 2,
+    };
     return (
       <View
-        ref={(ref) => { this._containerRef = ref }}
+        ref={ref => {
+          this._containerRef = ref;
+        }}
         style={containerStyle}
         pointerEvents={'box-none'}
         animation={'zoomIn'}
       >
         <View style={styles.container}>
           <View
-            ref={(ref) => { this._contentRef = ref }}
+            ref={ref => {
+              this._contentRef = ref;
+            }}
             style={styles.content}
             animation={'bounceInUp'}
             delay={500}
@@ -67,6 +80,6 @@ export default class Endgame extends Component<void, Props, void> {
           </View>
         </View>
       </View>
-    )
+    );
   }
 }

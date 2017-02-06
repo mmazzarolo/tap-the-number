@@ -1,14 +1,12 @@
 /* @flow */
-/* eslint-disable react/prop-types */
-import React, { Component } from 'react'
-import { Image, View } from 'react-native-animatable'
-import { inject, observer } from 'mobx-react/native'
-import Board from 'src/containers/Playground/Board'
-import Scoreboard from 'src/containers/Playground/Scoreboard'
-import type { Tile } from 'src/types'
-import bgImg from 'src/images/bg.jpg'
+import React, { Component } from 'react';
+import { View } from 'react-native-animatable';
+import { inject, observer } from 'mobx-react/native';
+import Board from 'src/containers/Playground/Board';
+import Scoreboard from 'src/containers/Playground/Scoreboard';
+import type { Tile } from 'src/types';
 
-import styles from './index.style'
+import styles from './index.style';
 
 type Props = {
   navigateToEndgame: Function,
@@ -21,9 +19,9 @@ type Props = {
   startGame: () => any,
   goToNextLevel: () => any,
   handleTilePress: (tileId: number) => any,
-}
+};
 
-@inject((allStores) => ({
+@inject(allStores => ({
   navigateToEndgame: allStores.router.navigateToEndgame,
   board: allStores.game.board,
   isRunning: allStores.game.isRunning,
@@ -33,45 +31,44 @@ type Props = {
   startGame: allStores.game.startGame,
   goToNextLevel: allStores.game.goToNextLevel,
   handleTilePress: allStores.game.handleTilePress,
-  mistakes: allStores.game.mistakes
+  mistakes: allStores.game.mistakes,
 }))
 @observer
 export default class Playground extends Component<void, Props, void> {
-  _boardRef = null
+  _boardRef = null;
 
-  componentDidMount () {
-    this.props.startGame()
+  componentDidMount() {
+    this.props.startGame();
   }
 
-  componentDidUpdate (prevProps: Props) {
+  componentDidUpdate(prevProps: Props) {
     if (this.props.isRunning && this.props.timeLeft === 0) {
-      this.props.navigateToEndgame()
+      this.props.navigateToEndgame();
     } else if (this.props.isBoardEmpty) {
-      this.props.goToNextLevel()
+      this.props.goToNextLevel();
     } else if (prevProps.mistakes < this.props.mistakes) {
       if (this._boardRef) {
-        this._boardRef.animateFailure()
+        this._boardRef.animateFailure();
       }
     }
   }
 
   _handleTilePress = (tileId: number) => {
-    this.props.handleTilePress(tileId)
-  }
+    this.props.handleTilePress(tileId);
+  };
 
-  render () {
+  render() {
     return (
       <View style={styles.container} animation={'fadeIn'}>
-        <Scoreboard
-          score={this.props.score}
-          timeLeft={this.props.timeLeft}
-        />
+        <Scoreboard score={this.props.score} timeLeft={this.props.timeLeft} />
         <Board
-          ref={(ref) => { this._boardRef = ref }}
+          ref={ref => {
+            this._boardRef = ref;
+          }}
           tiles={this.props.board}
           onTilePress={this._handleTilePress}
         />
       </View>
-    )
+    );
   }
 }

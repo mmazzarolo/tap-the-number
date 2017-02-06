@@ -1,13 +1,13 @@
 /* @flow */
-import { StyleSheet } from 'react-native'
-import metrics from 'src/config/metrics'
-import colors from 'src/config/colors'
+import { StyleSheet } from 'react-native';
+import metrics from 'src/config/metrics';
+import colors from 'src/config/colors';
 
 export default StyleSheet.create({
   container: {
     flex: 1,
     justifyContent: 'center',
-    alignItems: 'center'
+    alignItems: 'center',
   },
   content: {
     backgroundColor: '#F7F7F7',
@@ -20,13 +20,13 @@ export default StyleSheet.create({
     shadowOpacity: 1,
     shadowOffset: {
       width: 0,
-      height: 2
+      height: 2,
     },
     elevation: 2,
     flexDirection: 'column',
     justifyContent: 'space-between',
     alignItems: 'center',
-    padding: 20
+    padding: 20,
   },
   buttonText: {
     fontSize: 24,
@@ -36,7 +36,7 @@ export default StyleSheet.create({
     textShadowRadius: 0,
     textShadowOffset: {
       height: 0,
-      width: 0
-    }
-  }
-})
+      width: 0,
+    },
+  },
+});

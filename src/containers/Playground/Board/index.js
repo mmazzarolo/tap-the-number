@@ -1,37 +1,37 @@
 /* @flow */
 /* eslint-disable react/prop-types */
-import React, { Component } from 'react'
-import { View } from 'react-native-animatable'
-import type { Tile } from 'src/types'
-import { observer } from 'mobx-react/native'
-import BoardTile from 'src/containers/Playground/BoardTile'
+import React, { Component } from 'react';
+import { View } from 'react-native-animatable';
+import type { Tile } from 'src/types';
+import { observer } from 'mobx-react/native';
+import BoardTile from 'src/containers/Playground/BoardTile';
 
-import styles from './index.style'
+import styles from './index.style';
 
 type Props = {
   tiles: Array<Tile>,
-  onTilePress: (tileId: number) => any
-}
+  onTilePress: (tileId: number) => any,
+};
 
 @observer
 export default class TilesCarousel extends Component<void, Props, void> {
-  _tileRefs = []
+  _tileRefs = [];
 
   animateFailure = () => {
-    this._tileRefs.forEach((ref) => {
+    this._tileRefs.forEach(ref => {
       if (ref) {
-        ref.animateFailure()
+        ref.animateFailure();
       }
-    })
-  }
+    });
+  };
 
-  render () {
-    this._tileRefs = []
+  render() {
+    this._tileRefs = [];
     return (
       <View style={styles.container}>
         {this.props.tiles.map((tile, index) => (
           <BoardTile
-            ref={(ref) => this._tileRefs[index] = ref}
+            ref={ref => this._tileRefs[index] = ref}
             key={`board_tile_${tile.id}`}
             left={tile.x}
             bottom={tile.y}
@@ -41,6 +41,6 @@ export default class TilesCarousel extends Component<void, Props, void> {
           />
         ))}
       </View>
-    )
+    );
   }
 }

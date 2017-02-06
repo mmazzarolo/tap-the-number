@@ -1,16 +1,16 @@
 /* @flow */
-/* eslint-disable react/prop-types */
-import React, { Component } from 'react'
-import { View, Text } from 'react-native-animatable'
-import { observer } from 'mobx-react/native'
-import colorUtils from 'src/utils/colorUtils'
-import metrics from 'src/config/metrics'
-import styles from './index.style'
+import React, { Component } from 'react';
+import { View } from 'react-native-animatable';
+import { observer } from 'mobx-react/native';
+import CustomText from 'src/components/CustomText';
+import colorUtils from 'src/utils/colorUtils';
+import metrics from 'src/config/metrics';
+import styles from './index.style';
 
 type DefaultProps = {
   depth: number,
   borderRadius: number,
-}
+};
 
 type Props = {
   depth?: number,
@@ -18,77 +18,78 @@ type Props = {
   borderRadius?: number,
   text: string | number,
   textStyle?: any,
-  onPress?: () => void,
-  onRelease?: () => void,
+  onPress?: () => any,
+  onRelease?: () => any,
   animation?: string,
-  style?: any
-}
+  style?: any,
+};
 
 type State = {
-  isTouched: boolean
-}
+  isTouched: boolean,
+};
 
 @observer
 export default class BoardTile extends Component<DefaultProps, Props, State> {
   static defaultProps = {
     depth: metrics.TILE_SHADOW_DEPTH,
-    borderRadius: metrics.TILE_BORDER_RADIUS
-  }
+    borderRadius: metrics.TILE_BORDER_RADIUS,
+  };
 
   state = {
-    isTouched: false
-  }
+    isTouched: false,
+  };
 
-  _containerRef = null
+  _containerRef = null;
 
-  getContainerRef = () => this._containerRef
+  getContainerRef = () => this._containerRef;
 
   _handlePress = () => {
     if (this.props.onPress) {
-      this.props.onPress()
+      this.props.onPress();
     }
-    this.setState({ isTouched: true })
-    return true
-  }
+    this.setState({ isTouched: true });
+    return true;
+  };
 
   _handleRelease = () => {
     if (this.props.onRelease) {
-      this.props.onRelease()
+      this.props.onRelease();
     }
-    this.setState({ isTouched: false })
-  }
+    this.setState({ isTouched: false });
+  };
 
-  render () {
-    const { animation, depth, borderRadius, backgroundColor, text, textStyle, style } = this.props
-    const { isTouched } = this.state
-    const halfDepth = depth / 2
+  render() {
+    const { animation, depth, borderRadius, backgroundColor, text, textStyle, style } = this.props;
+    const { isTouched } = this.state;
+    const halfDepth = depth / 2;
     const tileStyle = {
-      marginTop: (isTouched) ? depth : halfDepth,
+      marginTop: isTouched ? depth : halfDepth,
       backgroundColor,
-      borderRadius
-    }
+      borderRadius,
+    };
     const depthStyle = {
       marginTop: -borderRadius,
-      height: (isTouched) ? (halfDepth + borderRadius) : depth + borderRadius,
+      height: isTouched ? halfDepth + borderRadius : depth + borderRadius,
       backgroundColor: colorUtils.getDifferentLuminance(backgroundColor, -0.2),
       borderBottomLeftRadius: borderRadius,
-      borderBottomRightRadius: borderRadius
-    }
+      borderBottomRightRadius: borderRadius,
+    };
     return (
       <View
-        ref={(ref) => { this._containerRef = ref }}
+        ref={ref => {
+          this._containerRef = ref;
+        }}
         animation={animation}
         onStartShouldSetResponder={this._handlePress}
         onResponderRelease={this._handleRelease}
       >
         <View style={[styles.tile, tileStyle, style]}>
-          <Text style={[styles.text, textStyle]}>
+          <CustomText style={[styles.text, textStyle]}>
             {text}
-          </Text>
+          </CustomText>
         </View>
         <View style={[styles.depth, depthStyle]} />
       </View>
-    )
+    );
   }
 }
-

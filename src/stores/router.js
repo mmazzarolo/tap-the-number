@@ -1,20 +1,20 @@
 /* @flow */
-import { observable } from 'mobx'
+import { observable } from 'mobx';
 
-type Screen = 'HOME' | 'PLAYGROUND' | 'ENDGAME'
+export type Screen = 'HOME' | 'PLAYGROUND' | 'ENDGAME';
 
 export default class RouterStore {
-  @observable currentScreen: Screen = 'HOME'
+  @observable currentScreen: Screen = 'HOME';
 
   navigateToHome = () => {
-    this.currentScreen = 'HOME'
-  }
+    this.currentScreen = 'HOME';
+  };
 
   navigateToPlayground = () => {
-    this.currentScreen = 'PLAYGROUND'
-  }
+    this.currentScreen = 'PLAYGROUND';
+  };
 
   navigateToEndgame = () => {
-    this.currentScreen = 'ENDGAME'
-  }
+    this.currentScreen = 'ENDGAME';
+  };
 }

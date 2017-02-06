@@ -1,63 +1,76 @@
 /* @flow */
-/* eslint-disable react/prop-types */
-import React, { Component } from 'react'
-import { LayoutAnimation } from 'react-native'
-import { Image, View } from 'react-native-animatable'
-import { inject, observer } from 'mobx-react/native'
-import metrics from 'src/config/metrics'
-import Tile from 'src/components/Tile'
-import Button from 'src/components/Button'
-import LogoImage from 'src/images/logo.png'
-import boardUtils from 'src/utils/boardUtils'
-import styles from './index.style'
+import React, { Component } from 'react';
+import { LayoutAnimation } from 'react-native';
+import { Image, View } from 'react-native-animatable';
+import { inject, observer } from 'mobx-react/native';
+import Tile from 'src/components/Tile';
+import LogoImage from 'src/images/logo.png';
+import boardUtils from 'src/utils/boardUtils';
+import styles from './index.style';
+
+type DefaultProps = {
+  navigateToPlayground: () => any,
+  navigateToEndgame: () => any,
+};
 
 type Props = {
-  navigateToEndgame: () => void
-}
+  navigateToPlayground: () => any,
+  navigateToEndgame: () => any,
+};
 
 type State = {
   tileNumber: number,
   tileColor: string,
-  hasHeaderAppeared: boolean
-}
+  hasHeaderAppeared: boolean,
+};
 
-@inject((allStores) => ({
+@inject(allStores => ({
   navigateToPlayground: allStores.router.navigateToPlayground,
-  navigateToEndgame: allStores.router.navigateToEndgame
+  navigateToEndgame: allStores.router.navigateToEndgame,
 }))
 @observer
-export default class App extends Component<void, Props, State> {
-  _headerRef: any
-  _bodyRef: any
+export default class App extends Component<DefaultProps, Props, State> {
+  static defaultProps = {
+    navigateToPlayground: () => null,
+    navigateToEndgame: () => null,
+  };
+
+  _headerRef: any;
+  _bodyRef: any;
 
   state = {
     tileNumber: 3,
     tileColor: boardUtils.getRandomTileColor(),
-    hasHeaderAppeared: false
-  }
+    hasHeaderAppeared: false,
+  };
 
-  componentDidMount () {
+  componentDidMount() {
     if (this._headerRef) {
       this._headerRef.fadeIn(2000).then(() => {
-        LayoutAnimation.spring()
-        this.setState({ hasHeaderAppeared: true })
-      })
+        LayoutAnimation.spring();
+        this.setState({ hasHeaderAppeared: true });
+      });
     }
   }
 
   _handleTilePress = () => {
-    LayoutAnimation.spring()
+    LayoutAnimation.spring();
     this.setState({
       tileNumber: this.state.tileNumber + 1,
-      tileColor: boardUtils.getRandomTileColor()
-    })
-  }
+      tileColor: boardUtils.getRandomTileColor(),
+    });
+  };
 
-  render () {
-    const { tileNumber, tileColor, hasHeaderAppeared } = this.state
+  render() {
+    const { tileNumber, tileColor, hasHeaderAppeared } = this.state;
     return (
       <View style={styles.container}>
-        <View style={styles.header} ref={(ref) => { this._headerRef = ref }}>
+        <View
+          style={styles.header}
+          ref={ref => {
+            this._headerRef = ref;
+          }}
+        >
           <View style={styles.headerLeft}>
             <Tile
               backgroundColor={tileColor}
@@ -68,14 +81,10 @@ export default class App extends Component<void, Props, State> {
             />
           </View>
           <View style={styles.headerRight}>
-            <Image
-              resizeMode={'contain'}
-              source={LogoImage}
-              style={styles.logo}
-            />
+            <Image resizeMode={'contain'} source={LogoImage} style={styles.logo} />
           </View>
         </View>
-        {(hasHeaderAppeared) &&
+        {hasHeaderAppeared &&
           <View style={styles.body}>
             <Tile
               backgroundColor={tileColor}
@@ -84,9 +93,8 @@ export default class App extends Component<void, Props, State> {
               textStyle={styles.buttonText}
               onRelease={this.props.navigateToPlayground}
             />
-          </View>
-        }
+          </View>}
       </View>
-    )
+    );
   }
 }
