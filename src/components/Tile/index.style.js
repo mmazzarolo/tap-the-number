@@ -15,6 +15,5 @@ export default StyleSheet.create({
     fontWeight: 'bold',
     fontFamily: 'Permanent Marker',
     fontSize: 39,
-    padding: 4, // Fixes cutted off text
   },
 });
