@@ -1,6 +1,7 @@
 /* @flow */
 /* eslint-disable react/prop-types */
 import React, { Component } from 'react'
+import { View } from 'react-native'
 import Tile from 'src/components/Tile'
 import { noop } from 'lodash'
 import { observer } from 'mobx-react/native'
@@ -45,23 +46,26 @@ export default class BoardTile extends Component<void, Props, State> {
   render () {
     const { left, bottom, backgroundColor, text } = this.props
     const { isAnimatingFailure } = this.state
-    const style = {
+    const containerStyle = {
       position: 'absolute',
       left,
       bottom
     }
+    const tileSize = {
+      width: metrics.TILE_SIZE,
+      height: metrics.TILE_SIZE
+    }
     return (
-      <Tile
-        ref={(ref) => { this._tileRef = ref }}
-        width={metrics.TILE_SIZE - metrics.TILE_SHADOW_DEPTH}
-        height={metrics.TILE_SIZE}
-        depth={metrics.TILE_SHADOW_DEPTH}
-        backgroundColor={backgroundColor}
-        borderRadius={metrics.TILE_SIZE * 0.1}
-        text={text}
-        onRelease={isAnimatingFailure ? noop : this._handleRelease}
-        style={style}
-      />
+      <View style={containerStyle}>
+        <Tile
+          animation={'bounceIn'}
+          style={tileSize}
+          ref={(ref) => { this._tileRef = ref }}
+          backgroundColor={backgroundColor}
+          text={text}
+          onRelease={isAnimatingFailure ? noop : this._handleRelease}
+        />
+      </View>
     )
   }
 }

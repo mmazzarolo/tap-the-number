@@ -55,18 +55,12 @@ export default class App extends Component<void, Props, State> {
 
   render () {
     const { tileNumber, tileColor, hasHeaderAppeared } = this.state
-    const tileSize = metrics.DEVICE_WIDTH * 0.26
-    const tileBorderRadius = tileSize * 0.1
     return (
       <View style={styles.container}>
         <View style={styles.header} ref={(ref) => { this._headerRef = ref }}>
           <View style={styles.headerLeft}>
             <Tile
-              width={tileSize}
-              height={tileSize}
-              depth={metrics.TILE_SHADOW_DEPTH}
               backgroundColor={tileColor}
-              borderRadius={tileBorderRadius}
               text={tileNumber}
               onRelease={this._handleTilePress}
               style={styles.tile}
@@ -83,10 +77,12 @@ export default class App extends Component<void, Props, State> {
         </View>
         {(hasHeaderAppeared) &&
           <View style={styles.body}>
-            <Button
+            <Tile
+              backgroundColor={tileColor}
               text={'Start Game'}
-              style={[styles.button, { backgroundColor: tileColor }]}
+              style={styles.button}
               textStyle={styles.buttonText}
+              onRelease={this.props.navigateToPlayground}
             />
           </View>
         }

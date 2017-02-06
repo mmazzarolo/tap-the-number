@@ -7,16 +7,20 @@ import colorUtils from 'src/utils/colorUtils'
 import metrics from 'src/config/metrics'
 import styles from './index.style'
 
-type Props = {
-  width: number,
-  height: number,
+type DefaultProps = {
   depth: number,
-  backgroundColor: string,
   borderRadius: number,
-  text?: string | number,
+}
+
+type Props = {
+  depth?: number,
+  backgroundColor: string,
+  borderRadius?: number,
+  text: string | number,
   textStyle?: any,
   onPress?: () => void,
   onRelease?: () => void,
+  animation?: string,
   style?: any
 }
 
@@ -25,7 +29,12 @@ type State = {
 }
 
 @observer
-export default class BoardTile extends Component<void, Props, State> {
+export default class BoardTile extends Component<DefaultProps, Props, State> {
+  static defaultProps = {
+    depth: metrics.TILE_SHADOW_DEPTH,
+    borderRadius: metrics.TILE_BORDER_RADIUS
+  }
+
   state = {
     isTouched: false
   }
@@ -50,43 +59,34 @@ export default class BoardTile extends Component<void, Props, State> {
   }
 
   render () {
-    const { width, height, depth, borderRadius, backgroundColor, text,
-      textStyle, style } = this.props
+    const { animation, depth, borderRadius, backgroundColor, text, textStyle, style } = this.props
     const { isTouched } = this.state
-    const containerStyle = {
-      width,
-      height: metrics.TILE_SIZE
-    }
-    const depthStyle = {
-      left: 0,
-      bottom: 0,
-      width,
-      height: height - depth,
-      backgroundColor: colorUtils.getDifferentLuminance(backgroundColor, -0.2),
+    const halfDepth = depth / 2
+    const tileStyle = {
+      marginTop: (isTouched) ? depth : halfDepth,
+      backgroundColor,
       borderRadius
     }
-    const tileStyle = {
-      left: 0,
-      bottom: (isTouched) ? (depth / 2) : depth,
-      width,
-      height: height - depth,
-      backgroundColor,
-      borderRadius: metrics.TILE_SIZE * 0.1
+    const depthStyle = {
+      marginTop: -borderRadius,
+      height: (isTouched) ? (halfDepth + borderRadius) : depth + borderRadius,
+      backgroundColor: colorUtils.getDifferentLuminance(backgroundColor, -0.2),
+      borderBottomLeftRadius: borderRadius,
+      borderBottomRightRadius: borderRadius
     }
     return (
       <View
         ref={(ref) => { this._containerRef = ref }}
-        animation={'bounceIn'}
-        style={[styles.container, containerStyle, style]}
+        animation={animation}
         onStartShouldSetResponder={this._handlePress}
         onResponderRelease={this._handleRelease}
       >
-        <View style={[styles.depth, depthStyle]} />
-        <View style={[styles.tile, tileStyle]}>
+        <View style={[styles.tile, tileStyle, style]}>
           <Text style={[styles.text, textStyle]}>
             {text}
           </Text>
         </View>
+        <View style={[styles.depth, depthStyle]} />
       </View>
     )
   }
