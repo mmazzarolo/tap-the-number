@@ -39,10 +39,9 @@ const _isPositionAvailable = (x: number, y: number, board: Array<Tile>): boolean
 };
 
 const _doPositionsOverlap = (x1: number, y1: number, x2: number, y2: number): boolean => {
-  const xOverlap = inRange(x1, x2, x2 + metrics.TILE_SIZE) ||
-    inRange(x2, x1, x1 + metrics.TILE_SIZE);
-  const yOverlap = inRange(y1, y2, y2 + metrics.TILE_SIZE) ||
-    inRange(y2, y1, y1 + metrics.TILE_SIZE);
+  const tileSize = metrics.TILE_SIZE + metrics.TILE_SHADOW_DEPTH;
+  const xOverlap = inRange(x1, x2, x2 + tileSize) || inRange(x2, x1, x1 + tileSize);
+  const yOverlap = inRange(y1, y2, y2 + tileSize) || inRange(y2, y1, y1 + tileSize);
   return xOverlap && yOverlap;
 };
 

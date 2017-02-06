@@ -15,11 +15,6 @@ export default StyleSheet.create({
     fontWeight: 'bold',
     fontFamily: 'Permanent Marker',
     fontSize: 39,
-    textShadowColor: 'rgba(0, 0, 0, 0.2)',
-    textShadowRadius: 0,
-    textShadowOffset: {
-      height: 4,
-      width: 4,
-    },
+    padding: 4, // Fixes cutted off text
   },
 });

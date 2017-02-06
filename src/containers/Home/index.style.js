@@ -37,7 +37,7 @@ export default StyleSheet.create({
   },
   button: {
     paddingHorizontal: 24,
-    paddingVertical: 18,
+    paddingVertical: 8,
   },
   buttonText: {
     color: 'white',

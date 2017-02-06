@@ -84,7 +84,7 @@ export default class BoardTile extends Component<DefaultProps, Props, State> {
         onResponderRelease={this._handleRelease}
       >
         <View style={[styles.tile, tileStyle, style]}>
-          <CustomText style={[styles.text, textStyle]}>
+          <CustomText style={[styles.text, textStyle]} withShadow={true}>
             {text}
           </CustomText>
         </View>

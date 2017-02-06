@@ -1,4 +1,4 @@
 /* @flow */
 export default {
-  TIME_LIMIT: 45,
+  TIME_LIMIT: 35,
 };

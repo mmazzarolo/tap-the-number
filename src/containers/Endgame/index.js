@@ -4,6 +4,7 @@ import { View } from 'react-native-animatable';
 import { inject, observer } from 'mobx-react/native';
 import metrics from 'src/config/metrics';
 import Tile from 'src/components/Tile';
+import CustomText from 'src/components/CustomText';
 import styles from './index.style';
 
 type DefaultProps = {
@@ -65,13 +66,17 @@ export default class Endgame extends Component<DefaultProps, Props, void> {
             animation={'bounceInUp'}
             delay={500}
           >
-            <View />
+            <View style={styles.header}>
+              <CustomText style={styles.headerText} withShadow={true}>
+                {'Your score:'}
+              </CustomText>
+              <CustomText style={styles.score} withShadow={true}>
+                {this.props.score}
+              </CustomText>
+            </View>
             <Tile
-              width={metrics.DEVICE_WIDTH / 2}
-              height={50}
               depth={metrics.TILE_SHADOW_DEPTH}
               backgroundColor={'#4C5154'}
-              borderRadius={metrics.TILE_SIZE * 0.1}
               text={'RESTART'}
               onRelease={() => this._handleRestartPress()}
               style={styles.button}

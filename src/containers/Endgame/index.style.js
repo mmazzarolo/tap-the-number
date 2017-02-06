@@ -28,15 +28,25 @@ export default StyleSheet.create({
     alignItems: 'center',
     padding: 20,
   },
+  header: {
+    flex: 1,
+    justifyContent: 'center',
+    alignItems: 'center',
+  },
+  headerText: {
+    fontSize: 42,
+    color: '#4C5154',
+  },
+  score: {
+    fontSize: 54,
+    color: '#4C5154',
+  },
+  button: {
+    paddingHorizontal: 24,
+    paddingVertical: 8,
+  },
   buttonText: {
-    fontSize: 24,
-    fontWeight: 'bold',
-    fontFamily: 'Permanent Marker',
-    textShadowColor: 'rgba(0, 0, 0, 0.2)',
-    textShadowRadius: 0,
-    textShadowOffset: {
-      height: 0,
-      width: 0,
-    },
+    fontSize: 26,
+    paddingHorizontal: 4,
   },
 });

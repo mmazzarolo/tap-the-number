@@ -91,7 +91,7 @@ export default class App extends Component<DefaultProps, Props, State> {
               text={'Start Game'}
               style={styles.button}
               textStyle={styles.buttonText}
-              onRelease={this.props.navigateToPlayground}
+              onRelease={this.props.navigateToEndgame}
             />
           </View>}
       </View>
