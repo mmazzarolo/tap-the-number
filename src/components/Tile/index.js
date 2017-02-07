@@ -5,6 +5,7 @@ import { observer } from 'mobx-react/native';
 import CustomText from 'src/components/CustomText';
 import colorUtils from 'src/utils/colorUtils';
 import metrics from 'src/config/metrics';
+import audioService from 'src/services/audio';
 import styles from './index.style';
 
 type DefaultProps = {
@@ -47,6 +48,7 @@ export default class BoardTile extends Component<DefaultProps, Props, State> {
     if (this.props.onPress) {
       this.props.onPress();
     }
+    audioService.playSuccessSound();
     this.setState({ isTouched: true });
     return true;
   };

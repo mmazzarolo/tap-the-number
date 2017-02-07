@@ -59,7 +59,6 @@ export default class GameStore {
     if (pressedTile.number === sortedActiveTiles[0].number) {
       pressedTile.isVisible = false;
       this.score++;
-      audioService.playSuccessSound();
     } else {
       this.mistakes++;
       audioService.playFailureSound();
