@@ -11,10 +11,12 @@ import styles from './index.style';
 type DefaultProps = {
   depth: number,
   borderRadius: number,
+  isEnabled: boolean,
 };
 
 type Props = {
   depth?: number,
+  isEnabled?: boolean,
   backgroundColor: string,
   borderRadius?: number,
   text: string | number,
@@ -34,6 +36,7 @@ export default class BoardTile extends Component<DefaultProps, Props, State> {
   static defaultProps = {
     depth: metrics.TILE_SHADOW_DEPTH,
     borderRadius: metrics.TILE_BORDER_RADIUS,
+    isEnabled: true,
   };
 
   state = {
@@ -45,6 +48,7 @@ export default class BoardTile extends Component<DefaultProps, Props, State> {
   getContainerRef = () => this._containerRef;
 
   _handlePress = () => {
+    if (!this.props.isEnabled) return;
     if (this.props.onPress) {
       this.props.onPress();
     }
@@ -54,6 +58,7 @@ export default class BoardTile extends Component<DefaultProps, Props, State> {
   };
 
   _handleRelease = () => {
+    if (!this.props.isEnabled) return;
     if (this.props.onRelease) {
       this.props.onRelease();
     }

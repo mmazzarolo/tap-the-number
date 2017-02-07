@@ -12,6 +12,7 @@ type Props = {
   navigateToEndgame: Function,
   board: Array<Tile>,
   isRunning: boolean,
+  isBoardValid: boolean,
   score: number,
   timeLeft: number,
   isBoardEmpty: boolean,
@@ -25,6 +26,7 @@ type Props = {
   navigateToEndgame: allStores.router.navigateToEndgame,
   board: allStores.game.board,
   isRunning: allStores.game.isRunning,
+  isBoardValid: allStores.game.isBoardValid,
   score: allStores.game.score,
   timeLeft: allStores.game.timeLeft,
   isBoardEmpty: allStores.game.board.length === 0,
@@ -58,15 +60,17 @@ export default class Playground extends Component<void, Props, void> {
   };
 
   render() {
+    const { isBoardValid, timeLeft, score, board } = this.props;
     return (
       <View style={styles.container} animation={'fadeIn'}>
-        <Scoreboard score={this.props.score} timeLeft={this.props.timeLeft} />
+        <Scoreboard score={score} timeLeft={timeLeft} />
         <Board
           ref={ref => {
             this._boardRef = ref;
           }}
-          tiles={this.props.board}
+          tiles={board}
           onTilePress={this._handleTilePress}
+          isEnabled={isBoardValid}
         />
       </View>
     );

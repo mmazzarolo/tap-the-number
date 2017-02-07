@@ -12,6 +12,7 @@ type Props = {
   backgroundColor: string,
   text: string | number,
   onTilePress: Function,
+  isEnabled: boolean,
 };
 
 type State = {
@@ -33,17 +34,17 @@ export default class BoardTile extends Component<void, Props, State> {
 
   animateFailure = async () => {
     this.setState({ isAnimatingFailure: true });
-    if (this._tileRef) {
+    if (this._tileRef && this._tileRef.getContainerRef()) {
       await this._tileRef.getContainerRef().swing(400);
     }
-    if (this._tileRef) {
+    if (this._tileRef && this._tileRef.getContainerRef()) {
       await this._tileRef.getContainerRef().bounceOut(450);
     }
     this.setState({ isAnimatingFailure: false });
   };
 
   render() {
-    const { left, bottom, backgroundColor, text } = this.props;
+    const { left, bottom, backgroundColor, text, isEnabled } = this.props;
     const { isAnimatingFailure } = this.state;
     const containerStyle = {
       position: 'absolute',
@@ -65,6 +66,7 @@ export default class BoardTile extends Component<void, Props, State> {
           backgroundColor={backgroundColor}
           text={text}
           onRelease={isAnimatingFailure ? noop : this._handleRelease}
+          isEnabled={isEnabled}
         />
       </View>
     );

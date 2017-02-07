@@ -11,6 +11,7 @@ import styles from './index.style';
 type Props = {
   tiles: Array<Tile>,
   onTilePress: (tileId: number) => any,
+  isEnabled: boolean,
 };
 
 @observer
@@ -38,6 +39,7 @@ export default class TilesCarousel extends Component<void, Props, void> {
             backgroundColor={tile.color}
             text={tile.number}
             onTilePress={() => this.props.onTilePress(tile.id)}
+            isEnabled={this.props.isEnabled}
           />
         ))}
       </View>

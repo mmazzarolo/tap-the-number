@@ -12,6 +12,7 @@ export default class GameStore {
   @observable tiles: Array<Tile> = [];
   @observable isRunning: boolean = false;
   @observable isEndgame: boolean = false;
+  @observable isBoardValid: boolean = false;
   @observable level: number = 0;
   @observable score: number = 0;
   @observable timeLeft: number = 0;
@@ -19,6 +20,7 @@ export default class GameStore {
 
   @action buildBoard = () => {
     this.tiles = [];
+    this.isBoardValid = true;
     const numberOfTiles = boardUtils.getNumberOfTiles(this.level);
     const alreadyPickedNumbers = [];
     times(numberOfTiles, n => {
@@ -61,6 +63,7 @@ export default class GameStore {
       this.score++;
     } else {
       this.mistakes++;
+      this.isBoardValid = false;
       audioService.playFailureSound();
       await timeUtils.delay(1000); // Wait for the "failure" animation
       this.buildBoard();
