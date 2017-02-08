@@ -15,7 +15,6 @@ export default class GameStore {
   @observable isBoardValid: boolean = false;
   @observable level: number = 0;
   @observable score: number = 0;
-  @observable timeLeft: number = 0;
   @observable mistakes: number = 0;
 
   @action buildBoard = () => {
@@ -35,7 +34,6 @@ export default class GameStore {
   };
 
   @action startGame = () => {
-    this.timeLeft = timings.TIME_LIMIT;
     this.level = 1;
     this.isRunning = true;
     this.buildBoard();
@@ -48,10 +46,8 @@ export default class GameStore {
   };
 
   @action startTimer = async () => {
-    while (this.isRunning && this.timeLeft > 0) {
-      await timeUtils.delay(1000);
-      this.timeLeft--;
-    }
+    await timeUtils.delay(timings.TIME_LIMIT_MS);
+    this.isRunning = false;
   };
 
   @action handleTilePress = async (tileId: string) => {

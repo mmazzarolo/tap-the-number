@@ -1,5 +1,6 @@
 /* @flow */
 import { Dimensions, Platform } from 'react-native';
+import timings from 'src/config/timings';
 
 const IS_ANDROID = Platform.OS === 'android';
 const { height, width } = Dimensions.get('window');
@@ -16,6 +17,8 @@ const BOARD_MARGIN = 20;
 const BOARD_HEIGHT = DEVICE_HEIGHT * 0.80;
 const BOARD_WIDTH = DEVICE_WIDTH;
 
+const TIME_BALL_SIZE = DEVICE_WIDTH / timings.TIME_LIMIT;
+
 export default {
   DEVICE_HEIGHT,
   DEVICE_WIDTH,
@@ -25,4 +28,5 @@ export default {
   BOARD_MARGIN,
   BOARD_HEIGHT,
   BOARD_WIDTH,
+  TIME_BALL_SIZE,
 };

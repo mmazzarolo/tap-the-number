@@ -2,8 +2,8 @@
 import React, { Component } from 'react';
 import { View } from 'react-native-animatable';
 import { inject, observer } from 'mobx-react/native';
-import Board from 'src/containers/Playground/Board';
-import Scoreboard from 'src/containers/Playground/Scoreboard';
+import Board from './Board';
+import TimeBar from './TimeBar';
 import type { Tile } from 'src/types';
 
 import styles from './index.style';
@@ -44,7 +44,7 @@ export default class Playground extends Component<void, Props, void> {
   }
 
   componentDidUpdate(prevProps: Props) {
-    if (this.props.isRunning && this.props.timeLeft === 0) {
+    if (prevProps.isRunning && !this.props.isRunning) {
       this.props.navigateToEndgame();
     } else if (this.props.isBoardEmpty) {
       this.props.goToNextLevel();
@@ -60,10 +60,10 @@ export default class Playground extends Component<void, Props, void> {
   };
 
   render() {
-    const { isBoardValid, timeLeft, score, board } = this.props;
+    const { isBoardValid, timeLeft, board } = this.props;
     return (
       <View style={styles.container} animation={'fadeIn'}>
-        <Scoreboard score={score} timeLeft={timeLeft} />
+        <TimeBar timeLeft={timeLeft} />
         <Board
           ref={ref => {
             this._boardRef = ref;
