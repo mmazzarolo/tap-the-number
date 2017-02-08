@@ -31,7 +31,7 @@ export default StyleSheet.create({
   },
   header: {
     flex: 1,
-    justifyContent: 'center',
+    justifyContent: 'space-between',
     alignItems: 'center',
   },
   headerText: {

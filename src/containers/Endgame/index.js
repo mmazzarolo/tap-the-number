@@ -6,6 +6,11 @@ import metrics from 'src/config/metrics';
 import Tile from 'src/components/Tile';
 import CustomText from 'src/components/CustomText';
 import styles from './index.style';
+import { times } from 'lodash';
+import colors from 'src/config/colors';
+import colorUtils from 'src/utils/colorUtils';
+import boardUtils from 'src/utils/boardUtils';
+import MiniTilesCarousel from './MiniTilesCarousel';
 
 type DefaultProps = {
   navigateToPlayground: () => any,
@@ -49,6 +54,10 @@ export default class Endgame extends Component<DefaultProps, Props, void> {
       justifyContent: 'center',
       alignItems: 'center',
     };
+    const tiles = times(10, () => ({
+      color: boardUtils.getRandomTileColor(),
+      number: boardUtils.getRandomNumber(1, []),
+    }));
     return (
       <View
         ref={ref => {
@@ -57,6 +66,7 @@ export default class Endgame extends Component<DefaultProps, Props, void> {
         style={[styles.container, containerStyle]}
         pointerEvents={'box-none'}
         animation={'zoomIn'}
+        duration={500}
       >
         <View
           ref={ref => {
@@ -64,9 +74,11 @@ export default class Endgame extends Component<DefaultProps, Props, void> {
           }}
           style={styles.content}
           animation={'bounceInUp'}
+          duration={500}
           delay={500}
         >
           <View style={styles.header}>
+            <MiniTilesCarousel tiles={tiles} />
             <CustomText style={styles.headerText} withShadow={true}>
               {'Your score:'}
             </CustomText>
