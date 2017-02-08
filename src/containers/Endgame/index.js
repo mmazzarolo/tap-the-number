@@ -45,44 +45,43 @@ export default class Endgame extends Component<DefaultProps, Props, void> {
       left: metrics.DEVICE_WIDTH / 2 - size / 2,
       height: size,
       width: size,
-      backgroundColor: '#57B7CE',
       borderRadius: size / 2,
+      justifyContent: 'center',
+      alignItems: 'center',
     };
     return (
       <View
         ref={ref => {
           this._containerRef = ref;
         }}
-        style={containerStyle}
+        style={[styles.container, containerStyle]}
         pointerEvents={'box-none'}
         animation={'zoomIn'}
       >
-        <View style={styles.container}>
-          <View
-            ref={ref => {
-              this._contentRef = ref;
-            }}
-            style={styles.content}
-            animation={'bounceInUp'}
-            delay={500}
-          >
-            <View style={styles.header}>
-              <CustomText style={styles.headerText} withShadow={true}>
-                {'Your score:'}
-              </CustomText>
-              <CustomText style={styles.score} withShadow={true}>
-                {this.props.score}
-              </CustomText>
-            </View>
-            <Tile
-              depth={metrics.TILE_SHADOW_DEPTH}
-              backgroundColor={'#4C5154'}
-              text={'RESTART'}
-              onRelease={() => this._handleRestartPress()}
-              style={styles.button}
-              textStyle={styles.buttonText}
-            />
+        <View
+          ref={ref => {
+            this._contentRef = ref;
+          }}
+          style={styles.content}
+          animation={'bounceInUp'}
+          delay={500}
+        >
+          <View style={styles.header}>
+            <CustomText style={styles.headerText} withShadow={true}>
+              {'Your score:'}
+            </CustomText>
+            <CustomText style={styles.score} withShadow={true}>
+              {this.props.score}
+            </CustomText>
           </View>
+          <Tile
+            depth={metrics.TILE_SHADOW_DEPTH}
+            backgroundColor={'#4C5154'}
+            text={'RESTART'}
+            onRelease={() => this._handleRestartPress()}
+            style={styles.button}
+            textStyle={styles.buttonText}
+          />
         </View>
       </View>
     );

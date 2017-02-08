@@ -5,7 +5,6 @@ import { Image, View } from 'react-native-animatable';
 import { inject, observer } from 'mobx-react/native';
 import Tile from 'src/components/Tile';
 import LogoImage from 'src/images/logo.png';
-import backgroundImg from 'src/images/background.jpg';
 import boardUtils from 'src/utils/boardUtils';
 import styles from './index.style';
 
@@ -65,7 +64,7 @@ export default class App extends Component<DefaultProps, Props, State> {
   render() {
     const { tileNumber, tileColor, hasHeaderAppeared } = this.state;
     return (
-      <Image source={backgroundImg} style={styles.container} animation={'fadeIn'}>
+      <View style={styles.container}>
         <View
           style={styles.header}
           ref={ref => {
@@ -95,7 +94,7 @@ export default class App extends Component<DefaultProps, Props, State> {
               onRelease={this.props.navigateToEndgame}
             />
           </View>}
-      </Image>
+      </View>
     );
   }
 }
