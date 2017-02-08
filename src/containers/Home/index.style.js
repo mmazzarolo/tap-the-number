@@ -22,7 +22,7 @@ export default StyleSheet.create({
     height: tileSize,
   },
   tileText: {
-    fontSize: 32,
+    fontSize: 40,
   },
   logo: {
     flex: 1,
