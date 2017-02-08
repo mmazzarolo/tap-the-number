@@ -1,5 +1,6 @@
 /* @flow */
 import React, { Component } from 'react';
+import { StatusBar } from 'react-native';
 import { Image, View } from 'react-native-animatable';
 import { inject, observer } from 'mobx-react/native';
 import backgroundImg from 'src/images/background.jpg';
@@ -43,6 +44,7 @@ export default class App extends Component<DefaultProps, Props, void> {
     }
     return (
       <Image source={backgroundImg} style={styles.container} animation={'fadeIn'}>
+        <StatusBar hidden={true} />
         {content}
       </Image>
     );
