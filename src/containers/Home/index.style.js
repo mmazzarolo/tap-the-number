@@ -8,8 +8,12 @@ const logoWidth = metrics.DEVICE_WIDTH * 0.50;
 export default StyleSheet.create({
   container: {
     flex: 1,
+    width: undefined,
+    height: undefined,
     flexDirection: 'column',
     justifyContent: 'space-between',
+    backgroundColor: 'transparent'
+    // tintColor: 'rgba(0,0,0,0.1)',,
   },
   header: {
     flex: 1,

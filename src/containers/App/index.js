@@ -1,11 +1,12 @@
 /* @flow */
 import React, { Component } from 'react';
-import { View } from 'react-native-animatable';
+import { Image, View } from 'react-native-animatable';
 import { inject, observer } from 'mobx-react/native';
-
+import backgroundImg from 'src/images/background.jpg';
 import Playground from 'src/containers/Playground';
 import Home from 'src/containers/Home';
 import Endgame from 'src/containers/Endgame';
+import styles from './index.style';
 
 type DefaultProps = {
   currentScreen: string,
@@ -25,15 +26,25 @@ export default class App extends Component<DefaultProps, Props, void> {
   };
 
   render() {
+    let content;
     switch (this.props.currentScreen) {
       case 'HOME':
-        return <Home />;
+        content = <Home />;
+        break;
       case 'PLAYGROUND':
-        return <Playground />;
+        content = <Playground />;
+        break;
       case 'ENDGAME':
-        return <Endgame />;
+        content = <Endgame />;
+        break;
       default:
-        return <View />;
+        content = <View />;
+        break;
     }
+    return (
+      <Image source={backgroundImg} style={styles.container} animation={'fadeIn'}>
+        {content}
+      </Image>
+    );
   }
 }
