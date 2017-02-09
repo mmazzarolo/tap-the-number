@@ -35,8 +35,8 @@ export default class Endgame extends Component<DefaultProps, Props, void> {
   _contentRef: any;
 
   _handleRestartPress = async () => {
-    await this._contentRef.bounceOut();
-    await this._containerRef.fadeOut(300);
+    await this._contentRef.fadeOut(300);
+    await this._containerRef.zoomOut();
     this.props.navigateToPlayground();
   };
 

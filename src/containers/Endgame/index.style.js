@@ -25,10 +25,12 @@ export default StyleSheet.create({
   headerText: {
     fontSize: 42,
     color: 'white',
+    textShadowColor: 'rgba(0, 0, 0, 0.6)',
   },
   scoreText: {
     fontSize: 54,
     color: 'white',
+    textShadowColor: 'rgba(0, 0, 0, 0.6)',
   },
   button: {
     marginTop: 60,

@@ -1,6 +1,7 @@
 /* @flow */
 import { StyleSheet } from 'react-native';
 import colors from 'src/config/colors';
+import metrics from 'src/config/metrics';
 
 export default StyleSheet.create({
   container: {
@@ -8,8 +9,8 @@ export default StyleSheet.create({
   },
   content: {
     backgroundColor: 'rgba(0,0,0,0.3)',
-    height: 12,
-    borderBottomColor: colors.TRANSPARENT_DARK,
-    borderBottomWidth: 1,
+    height: metrics.TIME_BAR_HEIGHT,
+    borderColor: colors.TRANSPARENT_DARK,
+    borderWidth: 1,
   },
 });
