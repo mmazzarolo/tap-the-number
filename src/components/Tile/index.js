@@ -15,7 +15,6 @@ type DefaultProps = {
 };
 
 type Props = {
-  depth?: number,
   isEnabled?: boolean,
   backgroundColor: string,
   borderRadius?: number,
@@ -23,7 +22,7 @@ type Props = {
   textStyle?: any,
   onPress?: () => any,
   onRelease?: () => any,
-  animation?: string,
+  delay?: number,
   style?: any,
 };
 
@@ -37,6 +36,7 @@ export default class BoardTile extends Component<DefaultProps, Props, State> {
     depth: metrics.TILE_SHADOW_DEPTH,
     borderRadius: metrics.TILE_BORDER_RADIUS,
     isEnabled: true,
+    delay: 0,
   };
 
   state = {
@@ -66,7 +66,15 @@ export default class BoardTile extends Component<DefaultProps, Props, State> {
   };
 
   render() {
-    const { animation, depth, borderRadius, backgroundColor, text, textStyle, style } = this.props;
+    const {
+      depth,
+      borderRadius,
+      backgroundColor,
+      text,
+      textStyle,
+      style,
+      ...otherProps
+    } = this.props;
     const { isTouched } = this.state;
     const halfDepth = depth / 2;
     const tileStyle = {
@@ -86,9 +94,9 @@ export default class BoardTile extends Component<DefaultProps, Props, State> {
         ref={ref => {
           this._containerRef = ref;
         }}
-        animation={animation}
         onStartShouldSetResponder={this._handlePress}
         onResponderRelease={this._handleRelease}
+        {...otherProps}
       >
         <View style={[styles.tile, tileStyle, style]}>
           <CustomText style={[styles.text, textStyle]} withShadow={true}>

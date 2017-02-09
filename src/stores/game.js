@@ -10,6 +10,7 @@ import uuid from 'uuid';
 
 export default class GameStore {
   @observable tiles: Array<Tile> = [];
+  @observable pressedTiles: Array<Tile> = [];
   @observable isRunning: boolean = false;
   @observable isEndgame: boolean = false;
   @observable isBoardValid: boolean = false;
@@ -35,6 +36,7 @@ export default class GameStore {
 
   @action startGame = () => {
     this.level = 1;
+    this.pressedTiles = [];
     this.isRunning = true;
     this.buildBoard();
     this.startTimer();
@@ -56,6 +58,7 @@ export default class GameStore {
     const sortedActiveTiles = orderBy(activeTiles, 'number');
     if (pressedTile.number === sortedActiveTiles[0].number) {
       pressedTile.isVisible = false;
+      this.pressedTiles.push(pressedTile);
       this.score++;
     } else {
       this.mistakes++;

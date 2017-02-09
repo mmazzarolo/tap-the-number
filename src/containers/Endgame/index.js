@@ -5,12 +5,8 @@ import { inject, observer } from 'mobx-react/native';
 import metrics from 'src/config/metrics';
 import Tile from 'src/components/Tile';
 import CustomText from 'src/components/CustomText';
-import styles from './index.style';
-import { times } from 'lodash';
-import colors from 'src/config/colors';
-import colorUtils from 'src/utils/colorUtils';
 import boardUtils from 'src/utils/boardUtils';
-import MiniTilesCarousel from './MiniTilesCarousel';
+import styles from './index.style';
 
 type DefaultProps = {
   navigateToPlayground: () => any,
@@ -24,11 +20,13 @@ type Props = {
 
 @inject(allStores => ({
   navigateToPlayground: allStores.router.navigateToPlayground,
+  pressedTiles: allStores.game.pressedTiles,
   score: allStores.game.score,
 }))
 @observer
 export default class Endgame extends Component<DefaultProps, Props, void> {
   static defaultProps = {
+    pressedTiles: [],
     navigateToPlayground: () => null,
     score: 0,
   };
@@ -37,8 +35,8 @@ export default class Endgame extends Component<DefaultProps, Props, void> {
   _contentRef: any;
 
   _handleRestartPress = async () => {
-    await this._contentRef.bounceOutDown();
-    await this._containerRef.zoomOut();
+    await this._contentRef.bounceOut();
+    await this._containerRef.fadeOut(300);
     this.props.navigateToPlayground();
   };
 
@@ -54,10 +52,6 @@ export default class Endgame extends Component<DefaultProps, Props, void> {
       justifyContent: 'center',
       alignItems: 'center',
     };
-    const tiles = times(10, () => ({
-      color: boardUtils.getRandomTileColor(),
-      number: boardUtils.getRandomNumber(1, []),
-    }));
     return (
       <View
         ref={ref => {
@@ -73,22 +67,30 @@ export default class Endgame extends Component<DefaultProps, Props, void> {
             this._contentRef = ref;
           }}
           style={styles.content}
-          animation={'bounceInUp'}
-          duration={500}
-          delay={500}
         >
           <View style={styles.header}>
-            <MiniTilesCarousel tiles={tiles} />
-            <CustomText style={styles.headerText} withShadow={true}>
+            <CustomText
+              style={styles.headerText}
+              withShadow={true}
+              animation={'bounceIn'}
+              delay={500}
+            >
               {'Your score:'}
             </CustomText>
-            <CustomText style={styles.score} withShadow={true}>
+            <CustomText
+              style={styles.scoreText}
+              withShadow={true}
+              animation={'bounceIn'}
+              delay={700}
+            >
               {this.props.score}
             </CustomText>
           </View>
           <Tile
+            animation={'bounceIn'}
+            delay={900}
             depth={metrics.TILE_SHADOW_DEPTH}
-            backgroundColor={'#4C5154'}
+            backgroundColor={boardUtils.getRandomTileColor()}
             text={'RESTART'}
             onRelease={() => this._handleRestartPress()}
             style={styles.button}
