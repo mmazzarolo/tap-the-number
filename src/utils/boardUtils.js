@@ -4,13 +4,12 @@ import type { Tile } from 'src/types';
 import metrics from 'src/config/metrics';
 import colors from 'src/config/colors';
 
-const getRandomTileColor = (): string => {
+const getRandomTileColor = (blacklist: Array<string> = []): string => {
   const randomIndex = random(0, colors.TILES.length - 1);
-  return colors.TILES[randomIndex];
+  const randomColor = colors.TILES[randomIndex];
+  return blacklist.includes(randomColor) ? getRandomTileColor(blacklist) : randomColor;
 };
 
-// More suggestions:
-// http://stackoverflow.com/questions/6224571/positioning-multiple-random-sized-absolutely-positioned-elements-so-they-dont
 const getRandomTilePosition = (board: Array<Tile>): { x: number, y: number } => {
   const position = {};
   const boardOriginX = metrics.BOARD_MARGIN;
@@ -45,7 +44,7 @@ const _doPositionsOverlap = (x1: number, y1: number, x2: number, y2: number): bo
   return xOverlap && yOverlap;
 };
 
-const getRandomNumber = (level: number, blacklist: Array<number>): number => {
+const getRandomNumber = (level: number, blacklist: Array<number> = []): number => {
   let randomNumber;
   if (level === 1) {
     randomNumber = random(0, 9);
@@ -58,15 +57,15 @@ const getRandomNumber = (level: number, blacklist: Array<number>): number => {
   } else {
     randomNumber = random(-99, 99);
   }
-  return Array.isArray(blacklist) && blacklist.includes(randomNumber)
-    ? getRandomNumber(level, blacklist)
-    : randomNumber;
+  return blacklist.includes(randomNumber) ? getRandomNumber(level, blacklist) : randomNumber;
 };
 
 const getNumberOfTiles = (level: number): number => {
   const minimNumberOfTiles = 3;
+  const maximumNumberOfTiles = 7;
   const incrementFactor = level * 0.2;
-  return Math.floor(minimNumberOfTiles + incrementFactor);
+  const numberOfTiles = Math.floor(minimNumberOfTiles + incrementFactor);
+  return numberOfTiles < maximumNumberOfTiles ? numberOfTiles : maximumNumberOfTiles;
 };
 
 export default {

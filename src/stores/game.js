@@ -10,7 +10,6 @@ import uuid from 'uuid';
 
 export default class GameStore {
   @observable tiles: Array<Tile> = [];
-  @observable pressedTiles: Array<Tile> = [];
   @observable isRunning: boolean = false;
   @observable isEndgame: boolean = false;
   @observable isBoardValid: boolean = false;
@@ -23,20 +22,21 @@ export default class GameStore {
     this.isBoardValid = true;
     const numberOfTiles = boardUtils.getNumberOfTiles(this.level);
     const alreadyPickedNumbers = [];
+    const alreadyPickedColors = [];
     times(numberOfTiles, n => {
       const id = uuid.v4();
       const { x, y } = boardUtils.getRandomTilePosition(this.tiles);
       const number = boardUtils.getRandomNumber(this.level, alreadyPickedNumbers);
-      const color = boardUtils.getRandomTileColor();
+      const color = boardUtils.getRandomTileColor(alreadyPickedColors);
       const isVisible = true;
       alreadyPickedNumbers.push(number);
+      alreadyPickedColors.push(color);
       this.tiles.push({ id, x, y, number, color, isVisible });
     });
   };
 
   @action startGame = () => {
     this.level = 1;
-    this.pressedTiles = [];
     this.isRunning = true;
     this.buildBoard();
     this.startTimer();
@@ -58,7 +58,6 @@ export default class GameStore {
     const sortedActiveTiles = orderBy(activeTiles, 'number');
     if (pressedTile.number === sortedActiveTiles[0].number) {
       pressedTile.isVisible = false;
-      this.pressedTiles.push(pressedTile);
       this.score++;
     } else {
       this.mistakes++;

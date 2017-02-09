@@ -5,14 +5,14 @@ const getContrastYIQ = (hc: string) => {
 };
 
 const getDifferentLuminance = (hexColor: string, luminance: number): string => {
-  // validate hex string
+  // Validate hex string
   let hex = String(hexColor).replace(/[^0-9a-f]/gi, '');
   if (hex.length < 6) {
     hex = `${hex[0]}${hex[0]}${hex[1]}${hex[1]}${hex[2]}${hex[2]}`;
   }
   const lum = luminance || 0;
 
-  // convert to decimal and change luminosity
+  // Convert to decimal and change luminosity
   let rgb = '#';
   let c;
   let i;

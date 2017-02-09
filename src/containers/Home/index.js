@@ -57,7 +57,7 @@ export default class App extends Component<DefaultProps, Props, State> {
     LayoutAnimation.spring();
     this.setState({
       tileNumber: this.state.tileNumber + 1,
-      tileColor: boardUtils.getRandomTileColor(),
+      tileColor: boardUtils.getRandomTileColor([this.state.tileColor]),
     });
   };
 
