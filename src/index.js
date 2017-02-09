@@ -9,7 +9,7 @@ import RouterStore from 'src/stores/router';
 const gameStore = new GameStore();
 const routerStore = new RouterStore();
 
-export class Numberz extends Component {
+export class TapTheNumber extends Component {
   render() {
     return (
       <Provider game={gameStore} router={routerStore}>
@@ -19,4 +19,4 @@ export class Numberz extends Component {
   }
 }
 
-export default Numberz;
+export default TapTheNumber;
