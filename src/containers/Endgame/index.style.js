@@ -23,12 +23,13 @@ export default StyleSheet.create({
     alignItems: 'center',
   },
   headerText: {
-    fontSize: 42,
+    textAlign: 'center',
+    fontSize: 52,
     color: 'white',
     textShadowColor: 'rgba(0, 0, 0, 0.6)',
   },
   scoreText: {
-    fontSize: 54,
+    fontSize: 66,
     color: 'white',
     textShadowColor: 'rgba(0, 0, 0, 0.6)',
   },
@@ -38,7 +39,6 @@ export default StyleSheet.create({
     paddingVertical: 8,
   },
   buttonText: {
-    fontSize: 26,
-    paddingHorizontal: 4,
+    fontSize: 36,
   },
 });

@@ -1,5 +1,5 @@
 /* @flow */
-const TILES = ['#BC0437', '#420BDF', '#1840CE', '#7D103F', '#137F7B'];
+const TILES = ['#BC0437', '#7F53E3', '#1840CE', '#16374B', '#137F7B', '#DC9E35', '#F66935'];
 
 export default {
   TILES,

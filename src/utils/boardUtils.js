@@ -62,7 +62,7 @@ const getRandomNumber = (level: number, blacklist: Array<number> = []): number =
 
 const getNumberOfTiles = (level: number): number => {
   const minimNumberOfTiles = 3;
-  const maximumNumberOfTiles = 7;
+  const maximumNumberOfTiles = 6;
   const incrementFactor = level * 0.2;
   const numberOfTiles = Math.floor(minimNumberOfTiles + incrementFactor);
   return numberOfTiles < maximumNumberOfTiles ? numberOfTiles : maximumNumberOfTiles;

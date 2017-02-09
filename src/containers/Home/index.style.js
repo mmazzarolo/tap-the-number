@@ -40,6 +40,6 @@ export default StyleSheet.create({
     paddingVertical: 8,
   },
   buttonText: {
-    color: 'white',
+    fontSize: 36,
   },
 });
