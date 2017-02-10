@@ -2,6 +2,7 @@
 import React, { Component } from 'react';
 import { View } from 'react-native-animatable';
 import { observer } from 'mobx-react/native';
+import { LayoutAnimation } from 'react-native';
 import { TouchableWithoutFeedback } from 'react-native';
 import CustomText from 'src/components/CustomText';
 import colorUtils from 'src/utils/colorUtils';
@@ -52,6 +53,7 @@ export default class BoardTile extends Component<DefaultProps, Props, State> {
   _handlePress = () => {
     if (!this.props.isEnabled) return;
     audioService.playSuccessSound();
+    LayoutAnimation.spring();
     this.setState({ isTouched: true });
     if (this.props.onPress) {
       this.props.onPress();
