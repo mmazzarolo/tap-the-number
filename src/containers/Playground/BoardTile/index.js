@@ -18,6 +18,8 @@ type Props = {
 
 type State = {
   isAnimatingFailure: boolean,
+  isTouched: boolean,
+  isVisible: boolean,
 };
 
 @observer
@@ -31,13 +33,15 @@ export default class BoardTile extends Component<void, Props, State> {
   _tileRef = null;
 
   _handlePress = () => {
+    this.setState({ isTouched: true });
     this.props.onTilePress();
   };
 
-  _handleRelease = () => {
-    this._tileRef.getContainerRef().bounceOut(200).then(() => {
-      this.setState({ isVisible: false });
-    });
+  _handleRelease = async () => {
+    if (this._tileRef && this._tileRef.getContainerRef()) {
+      await this._tileRef.getContainerRef().bounceOut(200);
+    }
+    this.setState({ isVisible: false });
   };
 
   animateFailure = async () => {
@@ -53,7 +57,7 @@ export default class BoardTile extends Component<void, Props, State> {
 
   render() {
     const { left, bottom, backgroundColor, text, isEnabled } = this.props;
-    const { isAnimatingFailure, isVisible } = this.state;
+    const { isAnimatingFailure, isVisible, isTouched } = this.state;
     const containerStyle = {
       position: 'absolute',
       left,
@@ -76,7 +80,7 @@ export default class BoardTile extends Component<void, Props, State> {
           text={text}
           onPress={isAnimatingFailure ? noop : this._handlePress}
           onRelease={isAnimatingFailure ? noop : this._handleRelease}
-          isEnabled={isEnabled}
+          isEnabled={isEnabled && !isTouched}
         />
       </View>
     );

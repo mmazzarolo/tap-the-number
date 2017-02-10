@@ -58,7 +58,7 @@ export default class BoardTile extends Component<DefaultProps, Props, State> {
   };
 
   _handleRelease = () => {
-    if (!this.props.isEnabled) return;
+    // if (!this.props.isEnabled) return;
     if (this.props.onRelease) {
       this.props.onRelease();
     }
