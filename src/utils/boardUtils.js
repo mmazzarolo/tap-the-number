@@ -4,18 +4,31 @@ import type { Tile } from 'src/types';
 import metrics from 'src/config/metrics';
 import colors from 'src/config/colors';
 
+/**
+ * Gets randomly one of the available tile colors.
+ * @param {Array<string>} blacklist - An array with the already picked colors.
+ * @return {string} A random color.
+ */
 const getRandomTileColor = (blacklist: Array<string> = []): string => {
   const randomIndex = random(0, colors.TILES.length - 1);
   const randomColor = colors.TILES[randomIndex];
   return blacklist.includes(randomColor) ? getRandomTileColor(blacklist) : randomColor;
 };
 
+/**
+ * Gets a random tile position (making sure that it does not overlap another tile).
+ * @param {Array<Tile>} blacklist - An array the already placed tiles.
+ * @return {Object} An object with the x and y coordinates of the tile.
+ */
 const getRandomTilePosition = (board: Array<Tile>): { x: number, y: number } => {
   const position = {};
   const boardOriginX = metrics.BOARD_MARGIN;
   const boardOriginY = metrics.BOARD_MARGIN;
   const boardWidth = metrics.BOARD_WIDTH - metrics.BOARD_MARGIN;
   const boardHeight = metrics.BOARD_HEIGHT - metrics.BOARD_MARGIN;
+  // Gets random tile positions until it finds a position that does not overlap another tile.
+  // The while loop is a bit scary but we don't have to worry because we're using relative metrics
+  // and we're limit the number.
   while (true) {
     const randomX = random(boardOriginX, boardWidth - metrics.TILE_SIZE);
     const randomY = random(boardOriginY, boardHeight - metrics.TILE_SIZE);
@@ -44,6 +57,12 @@ const _doPositionsOverlap = (x1: number, y1: number, x2: number, y2: number): bo
   return xOverlap && yOverlap;
 };
 
+/**
+ * Gets a random tile number for a given level.
+ * @param {number} level - The current game level.
+ * @param {Array<number>} blacklist - An array the already picked numbers.
+ * @return {number} A random number.
+ */
 const getRandomNumber = (level: number, blacklist: Array<number> = []): number => {
   let randomNumber;
   if (level === 1) {
@@ -60,6 +79,11 @@ const getRandomNumber = (level: number, blacklist: Array<number> = []): number =
   return blacklist.includes(randomNumber) ? getRandomNumber(level, blacklist) : randomNumber;
 };
 
+/**
+ * Gets a the number of tiles that must be created for a specific level.
+ * @param {number} level - The current game level.
+ * @return {number} The number of tile to create.
+ */
 const getNumberOfTiles = (level: number): number => {
   const minimNumberOfTiles = 3;
   const maximumNumberOfTiles = 6;

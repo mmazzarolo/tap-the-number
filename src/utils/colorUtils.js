@@ -1,9 +1,11 @@
 /* @flow */
-const getContrastYIQ = (hc: string) => {
-  const [r, g, b] = [1, 3, 5].map(p => parseInt(hc.substr(p, 2), 16));
-  return (r * 299 + g * 587 + b * 114) / 1000 >= 128 ? 'black' : 'white';
-};
 
+/**
+ * Given a color returns a different luminance.
+ * @param {string} hexColor - The color.
+ * @param {number} luminance - The color luminance to apply (in e.g. -0.2 for a darker luminance).
+ * @return {string} The color with the applied luminance.
+ */
 const getDifferentLuminance = (hexColor: string, luminance: number): string => {
   // Validate hex string
   let hex = String(hexColor).replace(/[^0-9a-f]/gi, '');
@@ -26,6 +28,5 @@ const getDifferentLuminance = (hexColor: string, luminance: number): string => {
 };
 
 export default {
-  getContrastYIQ,
   getDifferentLuminance,
 };
