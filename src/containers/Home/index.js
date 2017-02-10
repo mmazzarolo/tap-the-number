@@ -8,11 +8,6 @@ import LogoImage from 'src/images/logo.png';
 import boardUtils from 'src/utils/boardUtils';
 import styles from './index.style';
 
-type DefaultProps = {
-  navigateToPlayground: () => any,
-  navigateToEndgame: () => any,
-};
-
 type Props = {
   navigateToPlayground: () => any,
   navigateToEndgame: () => any,
@@ -29,7 +24,7 @@ type State = {
   navigateToEndgame: allStores.router.navigateToEndgame,
 }))
 @observer
-export default class App extends Component<DefaultProps, Props, State> {
+export default class App extends Component<Props, Props, State> {
   static defaultProps = {
     navigateToPlayground: () => null,
     navigateToEndgame: () => null,

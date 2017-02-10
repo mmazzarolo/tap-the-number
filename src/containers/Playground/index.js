@@ -14,11 +14,7 @@ type Props = {
   isGameRunning: boolean,
   isBoardValid: boolean,
   score: number,
-  timeLeft: number,
-  isBoardEmpty: boolean,
-  mistakes: number,
   startGame: () => any,
-  goToNextLevel: () => any,
   handleTilePress: (tileId: number) => any,
 };
 
@@ -27,16 +23,24 @@ type Props = {
   board: allStores.game.board,
   isGameRunning: allStores.game.isGameRunning,
   isBoardValid: allStores.game.isBoardValid,
-  isBoardEmpty: allStores.game.isBoardEmpty,
   score: allStores.game.score,
-  timeLeft: allStores.game.timeLeft,
   startGame: allStores.game.startGame,
-  goToNextLevel: allStores.game.goToNextLevel,
   handleTilePress: allStores.game.handleTilePress,
 }))
 @observer
-export default class Playground extends Component<void, Props, void> {
+export default class Playground extends Component<Props, Props, void> {
   _boardRef = null;
+
+  static defaultProps = {
+    navigateToEndgame: () => null,
+    board: [],
+    isGameRunning: false,
+    isBoardValid: false,
+    score: 0,
+    timeLeft: 0,
+    startGame: () => null,
+    handleTilePress: () => null,
+  };
 
   componentDidMount() {
     this.props.startGame();
@@ -45,8 +49,6 @@ export default class Playground extends Component<void, Props, void> {
   componentDidUpdate(prevProps: Props) {
     if (prevProps.isGameRunning && !this.props.isGameRunning) {
       this.props.navigateToEndgame();
-    } else if (this.props.isBoardEmpty) {
-      this.props.goToNextLevel();
     } else if (prevProps.isBoardValid && !this.props.isBoardValid) {
       if (this._boardRef) {
         this._boardRef.animateFailure();
@@ -59,10 +61,10 @@ export default class Playground extends Component<void, Props, void> {
   };
 
   render() {
-    const { isBoardValid, timeLeft, board } = this.props;
+    const { isBoardValid, isGameRunning, board } = this.props;
     return (
       <View style={styles.container} animation={'fadeIn'}>
-        <TimeBar timeLeft={timeLeft} />
+        {isGameRunning && <TimeBar />}
         <Board
           ref={ref => {
             this._boardRef = ref;

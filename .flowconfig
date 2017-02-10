@@ -43,5 +43,7 @@ unsafe.enable_getters_and_setters=true
 ; Mapping absolute paths starting from 'src'
 module.name_mapper='^src\/\(.*\)$' -> '<PROJECT_ROOT>/src/\1'
 
+esproposal.decorators=ignore
+
 [version]
 ^0.37.0

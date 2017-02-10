@@ -8,11 +8,6 @@ import CustomText from 'src/components/CustomText';
 import boardUtils from 'src/utils/boardUtils';
 import styles from './index.style';
 
-type DefaultProps = {
-  navigateToPlayground: () => any,
-  score: number,
-};
-
 type Props = {
   navigateToPlayground: () => any,
   score: number,
@@ -24,7 +19,7 @@ type Props = {
   score: allStores.game.score,
 }))
 @observer
-export default class Endgame extends Component<DefaultProps, Props, void> {
+export default class Endgame extends Component<Props, Props, void> {
   static defaultProps = {
     pressedTiles: [],
     navigateToPlayground: () => null,

@@ -10,7 +10,7 @@ type State = {
   animateValue: any,
 };
 
-export default class TimeBar extends Component<void, Props, State> {
+export default class TimeBar extends Component<void, {}, State> {
   state = {
     animateValue: new Animated.Value(timings.TIME_LIMIT_MS),
   };

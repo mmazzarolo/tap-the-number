@@ -15,9 +15,10 @@ type DefaultProps = {
 };
 
 type Props = {
+  depth: number,
   isEnabled?: boolean,
   backgroundColor: string,
-  borderRadius?: number,
+  borderRadius: number,
   text: string | number,
   textStyle?: any,
   onPress?: () => any,
@@ -58,7 +59,6 @@ export default class BoardTile extends Component<DefaultProps, Props, State> {
   };
 
   _handleRelease = () => {
-    // if (!this.props.isEnabled) return;
     if (this.props.onRelease) {
       this.props.onRelease();
     }

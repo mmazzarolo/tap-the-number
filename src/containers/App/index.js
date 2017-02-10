@@ -9,10 +9,6 @@ import Home from 'src/containers/Home';
 import Endgame from 'src/containers/Endgame';
 import styles from './index.style';
 
-type DefaultProps = {
-  currentScreen: string,
-};
-
 type Props = {
   currentScreen: string,
 };
@@ -21,7 +17,7 @@ type Props = {
   currentScreen: allStores.router.currentScreen,
 }))
 @observer
-export default class App extends Component<DefaultProps, Props, void> {
+export default class App extends Component<Props, Props, void> {
   static defaultProps = {
     currentScreen: 'HOME',
   };
