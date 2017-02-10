@@ -11,7 +11,7 @@ import styles from './index.style';
 type Props = {
   navigateToEndgame: Function,
   board: Array<Tile>,
-  isRunning: boolean,
+  isGameRunning: boolean,
   isBoardValid: boolean,
   score: number,
   timeLeft: number,
@@ -25,15 +25,14 @@ type Props = {
 @inject(allStores => ({
   navigateToEndgame: allStores.router.navigateToEndgame,
   board: allStores.game.board,
-  isRunning: allStores.game.isRunning,
+  isGameRunning: allStores.game.isGameRunning,
   isBoardValid: allStores.game.isBoardValid,
+  isBoardEmpty: allStores.game.isBoardEmpty,
   score: allStores.game.score,
   timeLeft: allStores.game.timeLeft,
-  isBoardEmpty: allStores.game.board.length === 0,
   startGame: allStores.game.startGame,
   goToNextLevel: allStores.game.goToNextLevel,
   handleTilePress: allStores.game.handleTilePress,
-  mistakes: allStores.game.mistakes,
 }))
 @observer
 export default class Playground extends Component<void, Props, void> {
@@ -44,11 +43,11 @@ export default class Playground extends Component<void, Props, void> {
   }
 
   componentDidUpdate(prevProps: Props) {
-    if (prevProps.isRunning && !this.props.isRunning) {
+    if (prevProps.isGameRunning && !this.props.isGameRunning) {
       this.props.navigateToEndgame();
     } else if (this.props.isBoardEmpty) {
       this.props.goToNextLevel();
-    } else if (prevProps.mistakes < this.props.mistakes) {
+    } else if (prevProps.isBoardValid && !this.props.isBoardValid) {
       if (this._boardRef) {
         this._boardRef.animateFailure();
       }

@@ -10,12 +10,23 @@ import uuid from 'uuid';
 
 export default class GameStore {
   @observable tiles: Array<Tile> = [];
-  @observable isRunning: boolean = false;
+  @observable isGameRunning: boolean = false;
   @observable isEndgame: boolean = false;
   @observable isBoardValid: boolean = false;
   @observable level: number = 0;
   @observable score: number = 0;
-  @observable mistakes: number = 0;
+
+  @action startGame = () => {
+    this.level = 1;
+    this.isGameRunning = true;
+    this.buildBoard();
+    this.startTimer();
+  };
+
+  @action goToNextLevel = () => {
+    this.level++;
+    this.buildBoard();
+  };
 
   @action buildBoard = () => {
     this.tiles = [];
@@ -35,21 +46,9 @@ export default class GameStore {
     });
   };
 
-  @action startGame = () => {
-    this.level = 1;
-    this.isRunning = true;
-    this.buildBoard();
-    this.startTimer();
-  };
-
-  @action goToNextLevel = () => {
-    this.level++;
-    this.buildBoard();
-  };
-
   @action startTimer = async () => {
     await timeUtils.delay(timings.TIME_LIMIT_MS);
-    this.isRunning = false;
+    this.isGameRunning = false;
   };
 
   @action handleTilePress = async (tileId: string) => {
@@ -60,7 +59,6 @@ export default class GameStore {
       pressedTile.isVisible = false;
       this.score++;
     } else {
-      this.mistakes++;
       this.isBoardValid = false;
       audioService.playFailureSound();
       await timeUtils.delay(1000); // Wait for the "failure" animation
@@ -69,6 +67,10 @@ export default class GameStore {
   };
 
   @computed get board(): Array<Tile> {
-    return this.tiles.slice().filter(t => t.isVisible === true);
+    return this.tiles.slice();
+  }
+
+  @computed get isBoardEmpty(): boolean {
+    return this.tiles.slice().filter(t => t.isVisible === true).length === 0;
   }
 }

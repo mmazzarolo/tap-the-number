@@ -49,11 +49,11 @@ export default class BoardTile extends Component<DefaultProps, Props, State> {
 
   _handlePress = () => {
     if (!this.props.isEnabled) return;
+    audioService.playSuccessSound();
+    this.setState({ isTouched: true });
     if (this.props.onPress) {
       this.props.onPress();
     }
-    audioService.playSuccessSound();
-    this.setState({ isTouched: true });
     return true;
   };
 

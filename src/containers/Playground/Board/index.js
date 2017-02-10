@@ -40,6 +40,7 @@ export default class TilesCarousel extends Component<void, Props, void> {
             text={tile.number}
             onTilePress={() => this.props.onTilePress(tile.id)}
             isEnabled={this.props.isEnabled}
+            isVisible={tile.isVisible}
           />
         ))}
       </View>

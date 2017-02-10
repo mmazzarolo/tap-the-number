@@ -13,6 +13,7 @@ type Props = {
   text: string | number,
   onTilePress: Function,
   isEnabled: boolean,
+  isVisible: boolean,
 };
 
 type State = {
@@ -22,14 +23,21 @@ type State = {
 @observer
 export default class BoardTile extends Component<void, Props, State> {
   state = {
+    isVisible: this.props.isVisible,
     isTouched: false,
     isAnimatingFailure: false,
   };
 
   _tileRef = null;
 
-  _handleRelease = () => {
+  _handlePress = () => {
     this.props.onTilePress();
+  };
+
+  _handleRelease = () => {
+    this._tileRef.getContainerRef().bounceOut(200).then(() => {
+      this.setState({ isVisible: false });
+    });
   };
 
   animateFailure = async () => {
@@ -40,12 +48,12 @@ export default class BoardTile extends Component<void, Props, State> {
     if (this._tileRef && this._tileRef.getContainerRef()) {
       await this._tileRef.getContainerRef().bounceOut(450);
     }
-    this.setState({ isAnimatingFailure: false });
+    this.setState({ isVisible: false, isAnimatingFailure: false });
   };
 
   render() {
     const { left, bottom, backgroundColor, text, isEnabled } = this.props;
-    const { isAnimatingFailure } = this.state;
+    const { isAnimatingFailure, isVisible } = this.state;
     const containerStyle = {
       position: 'absolute',
       left,
@@ -55,6 +63,7 @@ export default class BoardTile extends Component<void, Props, State> {
       width: metrics.TILE_SIZE,
       height: metrics.TILE_SIZE,
     };
+    if (!isVisible) return null;
     return (
       <View style={containerStyle}>
         <Tile
@@ -65,6 +74,7 @@ export default class BoardTile extends Component<void, Props, State> {
           }}
           backgroundColor={backgroundColor}
           text={text}
+          onPress={isAnimatingFailure ? noop : this._handlePress}
           onRelease={isAnimatingFailure ? noop : this._handleRelease}
           isEnabled={isEnabled}
         />
