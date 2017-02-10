@@ -34,10 +34,11 @@ export default class BoardTile extends Component<void, Props, State> {
 
   _handlePress = () => {
     this.setState({ isTouched: true });
-    this.props.onTilePress();
+    // this.props.onTilePress();
   };
 
   _handleRelease = async () => {
+    this.props.onTilePress();
     if (this._tileRef && this._tileRef.getContainerRef()) {
       await this._tileRef.getContainerRef().bounceOut(200);
     }
@@ -71,7 +72,6 @@ export default class BoardTile extends Component<void, Props, State> {
     return (
       <View style={containerStyle}>
         <Tile
-          animation={'bounceIn'}
           style={tileSize}
           ref={ref => {
             this._tileRef = ref;

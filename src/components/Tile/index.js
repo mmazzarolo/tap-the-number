@@ -2,6 +2,7 @@
 import React, { Component } from 'react';
 import { View } from 'react-native-animatable';
 import { observer } from 'mobx-react/native';
+import { TouchableWithoutFeedback } from 'react-native';
 import CustomText from 'src/components/CustomText';
 import colorUtils from 'src/utils/colorUtils';
 import metrics from 'src/config/metrics';
@@ -90,21 +91,25 @@ export default class BoardTile extends Component<DefaultProps, Props, State> {
       borderBottomRightRadius: borderRadius,
     };
     return (
-      <View
-        ref={ref => {
-          this._containerRef = ref;
-        }}
-        onStartShouldSetResponder={this._handlePress}
-        onResponderRelease={this._handleRelease}
-        {...otherProps}
+      <TouchableWithoutFeedback
+        onPressIn={this._handlePress}
+        onPressOut={this._handleRelease}
+        delayPressIn={0}
       >
-        <View style={[styles.tile, tileStyle, style]}>
-          <CustomText style={[styles.text, textStyle]} withShadow={true}>
-            {text}
-          </CustomText>
+        <View
+          ref={ref => {
+            this._containerRef = ref;
+          }}
+          {...otherProps}
+        >
+          <View style={[styles.tile, tileStyle, style]}>
+            <CustomText style={[styles.text, textStyle]} withShadow={true}>
+              {text}
+            </CustomText>
+          </View>
+          <View style={[styles.depth, depthStyle]} />
         </View>
-        <View style={[styles.depth, depthStyle]} />
-      </View>
+      </TouchableWithoutFeedback>
     );
   }
 }

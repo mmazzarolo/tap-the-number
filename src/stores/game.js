@@ -18,6 +18,7 @@ export default class GameStore {
 
   @action startGame = () => {
     this.level = 1;
+    this.score = 0;
     this.isGameRunning = true;
     this.buildBoard();
     this.startTimer();
