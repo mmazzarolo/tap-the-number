@@ -54,10 +54,11 @@ export default class App extends Component<DefaultProps, Props, State> {
   }
 
   _handleTilePress = () => {
+    const { tileNumber, tileColor } = this.state;
     LayoutAnimation.spring();
     this.setState({
-      tileNumber: this.state.tileNumber + 1,
-      tileColor: boardUtils.getRandomTileColor([this.state.tileColor]),
+      tileNumber: tileNumber === 99 ? 1 : tileNumber + 1,
+      tileColor: boardUtils.getRandomTileColor([tileColor]),
     });
   };
 
