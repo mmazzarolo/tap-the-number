@@ -100,7 +100,7 @@ export default class Endgame extends Component<Props, Props, State> {
               depth={metrics.TILE_SHADOW_DEPTH}
               backgroundColor={buttonColor}
               text={'RESTART'}
-              onRelease={() => this._handleRestartPress()}
+              onPressOut={() => this._handleRestartPress()}
               style={styles.button}
               textStyle={styles.buttonText}
               isEnabled={!hasPressedButton}

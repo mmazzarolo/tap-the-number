@@ -80,7 +80,7 @@ export default class App extends Component<Props, Props, State> {
             <Tile
               backgroundColor={tileColor}
               text={tileNumber}
-              onRelease={this._handleTilePress}
+              onPressOut={this._handleTilePress}
               style={styles.tile}
               textStyle={styles.tileText}
             />
@@ -101,7 +101,7 @@ export default class App extends Component<Props, Props, State> {
               text={'Start Game'}
               style={styles.button}
               textStyle={styles.buttonText}
-              onRelease={this._handleButtonPress}
+              onPressOut={this._handleButtonPress}
               isEnabled={!hasPressedButton}
             />
           </View>}

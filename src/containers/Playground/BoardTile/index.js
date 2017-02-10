@@ -37,7 +37,7 @@ export default class BoardTile extends Component<void, Props, State> {
     // this.props.onTilePress();
   };
 
-  _handleRelease = async () => {
+  _handlePressOut = async () => {
     this.props.onTilePress();
     if (this._tileRef && this._tileRef.getContainerRef()) {
       await this._tileRef.getContainerRef().bounceOut(200);
@@ -78,8 +78,8 @@ export default class BoardTile extends Component<void, Props, State> {
           }}
           backgroundColor={backgroundColor}
           text={text}
-          onPress={isAnimatingFailure ? noop : this._handlePress}
-          onRelease={isAnimatingFailure ? noop : this._handleRelease}
+          onPressIn={isAnimatingFailure ? noop : this._handlePress}
+          onPressOut={isAnimatingFailure ? noop : this._handlePressOut}
           isEnabled={isEnabled && !isTouched}
         />
       </View>

@@ -23,8 +23,8 @@ type Props = {
   borderRadius: number,
   text: string | number,
   textStyle?: any,
-  onPress?: () => any,
-  onRelease?: () => any,
+  onPressIn?: () => any,
+  onPressOut?: () => any,
   delay?: number,
   style?: any,
 };
@@ -50,20 +50,20 @@ export default class BoardTile extends Component<DefaultProps, Props, State> {
 
   getContainerRef = () => this._containerRef;
 
-  _handlePress = () => {
+  _handlePressIn = () => {
     if (!this.props.isEnabled) return;
     audioService.playSuccessSound();
     LayoutAnimation.spring();
     this.setState({ isTouched: true });
-    if (this.props.onPress) {
-      this.props.onPress();
+    if (this.props.onPressIn) {
+      this.props.onPressIn();
     }
     return true;
   };
 
-  _handleRelease = () => {
-    if (this.props.onRelease) {
-      this.props.onRelease();
+  _handlePressOut = () => {
+    if (this.props.onPressOut) {
+      this.props.onPressOut();
     }
     this.setState({ isTouched: false });
   };
@@ -94,8 +94,8 @@ export default class BoardTile extends Component<DefaultProps, Props, State> {
     };
     return (
       <TouchableWithoutFeedback
-        onPressIn={this._handlePress}
-        onPressOut={this._handleRelease}
+        onPressIn={this._handlePressIn}
+        onPressOut={this._handlePressOut}
         delayPressIn={0}
       >
         <View
