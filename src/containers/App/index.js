@@ -3,7 +3,7 @@ import React, { Component } from 'react';
 import { StatusBar } from 'react-native';
 import { Image, View } from 'react-native-animatable';
 import { inject, observer } from 'mobx-react/native';
-import backgroundImg from 'src/images/background.jpg';
+import backgroundImg from 'src/images/bg.jpg';
 import Playground from 'src/containers/Playground';
 import Home from 'src/containers/Home';
 import Endgame from 'src/containers/Endgame';
@@ -43,7 +43,7 @@ export default class App extends Component<DefaultProps, Props, void> {
         break;
     }
     return (
-      <Image source={backgroundImg} style={styles.container} animation={'fadeIn'}>
+      <Image source={backgroundImg} style={styles.container}>
         <StatusBar hidden={true} />
         {content}
       </Image>
