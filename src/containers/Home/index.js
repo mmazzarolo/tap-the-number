@@ -17,6 +17,7 @@ type State = {
   tileNumber: number,
   tileColor: string,
   hasHeaderAppeared: boolean,
+  hasPressedButton: boolean,
 };
 
 @inject(allStores => ({
@@ -37,6 +38,7 @@ export default class App extends Component<Props, Props, State> {
     tileNumber: 3,
     tileColor: boardUtils.getRandomTileColor(),
     hasHeaderAppeared: false,
+    hasPressedButton: false,
   };
 
   componentDidMount() {
@@ -57,8 +59,16 @@ export default class App extends Component<Props, Props, State> {
     });
   };
 
+  _handleButtonPress = async () => {
+    this.setState({ hasPressedButton: true });
+    if (this._headerRef && this._bodyRef) {
+      await Promise.all([this._headerRef.fadeOutLeft(400), this._bodyRef.fadeOutRight(400)]);
+    }
+    this.props.navigateToPlayground();
+  };
+
   render() {
-    const { tileNumber, tileColor, hasHeaderAppeared } = this.state;
+    const { tileNumber, tileColor, hasHeaderAppeared, hasPressedButton } = this.state;
     return (
       <View style={styles.container}>
         <View
@@ -81,13 +91,19 @@ export default class App extends Component<Props, Props, State> {
           </View>
         </View>
         {hasHeaderAppeared &&
-          <View style={styles.body}>
+          <View
+            style={styles.body}
+            ref={ref => {
+              this._bodyRef = ref;
+            }}
+          >
             <Tile
               backgroundColor={tileColor}
               text={'Start Game'}
               style={styles.button}
               textStyle={styles.buttonText}
-              onRelease={this.props.navigateToPlayground}
+              onRelease={this._handleButtonPress}
+              isEnabled={!hasPressedButton}
             />
           </View>}
       </View>

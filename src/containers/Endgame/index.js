@@ -13,13 +13,18 @@ type Props = {
   score: number,
 };
 
+type State = {
+  buttonColor: string,
+  hasPressedButton: boolean,
+};
+
 @inject(allStores => ({
   navigateToPlayground: allStores.router.navigateToPlayground,
   pressedTiles: allStores.game.pressedTiles,
   score: allStores.game.score,
 }))
 @observer
-export default class Endgame extends Component<Props, Props, void> {
+export default class Endgame extends Component<Props, Props, State> {
   static defaultProps = {
     pressedTiles: [],
     navigateToPlayground: () => null,
@@ -29,13 +34,20 @@ export default class Endgame extends Component<Props, Props, void> {
   _containerRef: any;
   _contentRef: any;
 
+  state = {
+    buttonColor: boardUtils.getRandomTileColor(),
+    hasPressedButton: false,
+  };
+
   _handleRestartPress = async () => {
+    this.setState({ hasPressedButton: true });
     await this._contentRef.fadeOut(300);
     await this._containerRef.zoomOut();
     this.props.navigateToPlayground();
   };
 
   render() {
+    const { buttonColor, hasPressedButton } = this.state;
     const size = metrics.DEVICE_HEIGHT * 1.3;
     const containerStyle = {
       position: 'absolute',
@@ -81,16 +93,19 @@ export default class Endgame extends Component<Props, Props, void> {
               {this.props.score}
             </CustomText>
           </View>
-          <Tile
-            animation={'bounceIn'}
-            delay={900}
-            depth={metrics.TILE_SHADOW_DEPTH}
-            backgroundColor={boardUtils.getRandomTileColor()}
-            text={'RESTART'}
-            onRelease={() => this._handleRestartPress()}
-            style={styles.button}
-            textStyle={styles.buttonText}
-          />
+          <View style={styles.body}>
+            <Tile
+              animation={'bounceIn'}
+              delay={900}
+              depth={metrics.TILE_SHADOW_DEPTH}
+              backgroundColor={buttonColor}
+              text={'RESTART'}
+              onRelease={() => this._handleRestartPress()}
+              style={styles.button}
+              textStyle={styles.buttonText}
+              isEnabled={!hasPressedButton}
+            />
+          </View>
         </View>
       </View>
     );

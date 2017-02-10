@@ -1,7 +1,6 @@
 /* @flow */
 import { StyleSheet } from 'react-native';
 import metrics from 'src/config/metrics';
-import colors from 'src/config/colors';
 
 export default StyleSheet.create({
   container: {
@@ -13,13 +12,10 @@ export default StyleSheet.create({
   content: {
     width: metrics.DEVICE_WIDTH,
     height: metrics.DEVICE_HEIGHT,
-    flexDirection: 'column',
-    justifyContent: 'center',
-    alignItems: 'center',
-    padding: 20,
   },
   header: {
-    justifyContent: 'center',
+    flex: 3,
+    justifyContent: 'flex-end',
     alignItems: 'center',
   },
   headerText: {
@@ -33,8 +29,11 @@ export default StyleSheet.create({
     color: 'white',
     textShadowColor: 'rgba(0, 0, 0, 0.6)',
   },
+  body: {
+    flex: 2,
+    alignItems: 'center',
+  },
   button: {
-    marginTop: 60,
     paddingHorizontal: 24,
     paddingVertical: 8,
   },
