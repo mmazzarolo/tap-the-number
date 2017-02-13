@@ -2,7 +2,6 @@
 import React, { Component } from 'react';
 import { View } from 'react-native';
 import Tile from 'src/components/Tile';
-import { noop } from 'lodash';
 import { observer } from 'mobx-react/native';
 import metrics from 'src/config/metrics';
 
@@ -17,8 +16,6 @@ type Props = {
 };
 
 type State = {
-  isAnimatingFailure: boolean,
-  isTouched: boolean,
   isVisible: boolean,
 };
 
@@ -26,16 +23,9 @@ type State = {
 export default class BoardTile extends Component<void, Props, State> {
   state = {
     isVisible: this.props.isVisible,
-    isTouched: false,
-    isAnimatingFailure: false,
   };
 
   _tileRef = null;
-
-  _handlePress = () => {
-    this.setState({ isTouched: true });
-    // this.props.onTilePress();
-  };
 
   _handlePressOut = async () => {
     this.props.onTilePress();
@@ -46,19 +36,18 @@ export default class BoardTile extends Component<void, Props, State> {
   };
 
   animateFailure = async () => {
-    this.setState({ isAnimatingFailure: true });
     if (this._tileRef && this._tileRef.getContainerRef()) {
       await this._tileRef.getContainerRef().swing(400);
     }
     if (this._tileRef && this._tileRef.getContainerRef()) {
       await this._tileRef.getContainerRef().bounceOut(450);
     }
-    this.setState({ isVisible: false, isAnimatingFailure: false });
+    this.setState({ isVisible: false });
   };
 
   render() {
     const { left, bottom, backgroundColor, text, isEnabled } = this.props;
-    const { isAnimatingFailure, isVisible, isTouched } = this.state;
+    const { isVisible } = this.state;
     const containerStyle = {
       position: 'absolute',
       left,
@@ -79,9 +68,8 @@ export default class BoardTile extends Component<void, Props, State> {
           animation={'bounceIn'}
           backgroundColor={backgroundColor}
           text={text}
-          onPressIn={isAnimatingFailure ? noop : this._handlePress}
-          onPressOut={isAnimatingFailure ? noop : this._handlePressOut}
-          isEnabled={isEnabled && !isTouched}
+          onPressOut={this._handlePressOut}
+          isEnabled={isEnabled}
         />
       </View>
     );

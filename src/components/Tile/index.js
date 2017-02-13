@@ -23,14 +23,15 @@ type Props = {
   borderRadius: number,
   text: string | number,
   textStyle?: any,
+  singlePressOnly?: boolean,
   onPressIn?: () => any,
   onPressOut?: () => any,
-  delay?: number,
   style?: any,
 };
 
 type State = {
   isTouched: boolean,
+  hasBeenPressed: boolean,
 };
 
 @observer
@@ -39,11 +40,12 @@ export default class BoardTile extends Component<DefaultProps, Props, State> {
     depth: metrics.TILE_SHADOW_DEPTH,
     borderRadius: metrics.TILE_BORDER_RADIUS,
     isEnabled: true,
-    delay: 0,
+    singlePressOnly: true,
   };
 
   state = {
     isTouched: false,
+    hasBeenPressed: false,
   };
 
   _containerRef = null;
@@ -51,21 +53,26 @@ export default class BoardTile extends Component<DefaultProps, Props, State> {
   getContainerRef = () => this._containerRef;
 
   _handlePressIn = () => {
-    if (!this.props.isEnabled) return;
+    const { isEnabled, singlePressOnly, onPressIn } = this.props;
+    if (!isEnabled) return;
+    if (singlePressOnly && this.state.hasBeenPressed) return;
     audioService.playSuccessSound();
     LayoutAnimation.spring();
     this.setState({ isTouched: true });
-    if (this.props.onPressIn) {
-      this.props.onPressIn();
+    if (onPressIn) {
+      onPressIn();
     }
     return true;
   };
 
   _handlePressOut = () => {
-    if (this.props.onPressOut) {
-      this.props.onPressOut();
+    const { isEnabled, singlePressOnly, onPressOut } = this.props;
+    if (!isEnabled) return;
+    if (singlePressOnly && this.state.hasBeenPressed) return;
+    if (onPressOut) {
+      onPressOut();
     }
-    this.setState({ isTouched: false });
+    this.setState({ isTouched: false, hasBeenPressed: true });
   };
 
   render() {

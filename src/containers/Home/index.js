@@ -83,6 +83,7 @@ export default class App extends Component<Props, Props, State> {
               onPressOut={this._handleTilePress}
               style={styles.tile}
               textStyle={styles.tileText}
+              singlePressOnly={false}
             />
           </View>
           <View style={styles.headerRight}>
