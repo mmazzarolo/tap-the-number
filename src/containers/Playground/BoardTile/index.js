@@ -76,6 +76,7 @@ export default class BoardTile extends Component<void, Props, State> {
           ref={ref => {
             this._tileRef = ref;
           }}
+          animation={'bounceIn'}
           backgroundColor={backgroundColor}
           text={text}
           onPressIn={isAnimatingFailure ? noop : this._handlePress}
