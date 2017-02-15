@@ -6,6 +6,7 @@ import { inject, observer } from 'mobx-react/native';
 import Tile from 'src/components/Tile';
 import LogoImage from 'src/images/logo.png';
 import boardUtils from 'src/utils/boardUtils';
+import audioService from 'src/services/audio';
 import styles from './index.style';
 
 type Props = {
@@ -104,6 +105,7 @@ export default class App extends Component<Props, Props, State> {
               textStyle={styles.buttonText}
               onPressOut={this._handleButtonPress}
               isEnabled={!hasPressedButton}
+              playSound={audioService.playButtonSound}
             />
           </View>}
       </View>

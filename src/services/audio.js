@@ -21,9 +21,11 @@ const playSound = sound => {
 };
 
 const successSound = initializeSound('success.wav');
+const buttonSound = initializeSound('button.wav');
 const failureSound = initializeSound('failure.wav');
 
 export default {
   playSuccessSound: () => playSound(successSound),
+  playButtonSound: () => playSound(buttonSound),
   playFailureSound: () => playSound(failureSound),
 };

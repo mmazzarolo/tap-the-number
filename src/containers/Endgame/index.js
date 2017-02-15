@@ -6,6 +6,7 @@ import metrics from 'src/config/metrics';
 import Tile from 'src/components/Tile';
 import CustomText from 'src/components/CustomText';
 import boardUtils from 'src/utils/boardUtils';
+import audioService from 'src/services/audio';
 import styles from './index.style';
 
 type Props = {
@@ -104,6 +105,7 @@ export default class Endgame extends Component<Props, Props, State> {
               style={styles.button}
               textStyle={styles.buttonText}
               isEnabled={!hasPressedButton}
+              playSound={audioService.playButtonSound}
             />
           </View>
         </View>

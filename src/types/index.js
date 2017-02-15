@@ -1,6 +1,6 @@
 /* @flow */
 export type Tile = {
-  id: number,
+  id: string,
   x: number,
   y: number,
   color: string,

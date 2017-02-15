@@ -10,7 +10,7 @@ import styles from './index.style';
 
 type Props = {
   tiles: Array<Tile>,
-  onTilePress: (tileId: number) => any,
+  onTilePress: (tileId: any) => any,
   isEnabled: boolean,
 };
 

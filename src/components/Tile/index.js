@@ -10,18 +10,13 @@ import metrics from 'src/config/metrics';
 import audioService from 'src/services/audio';
 import styles from './index.style';
 
-type DefaultProps = {
-  depth: number,
-  borderRadius: number,
-  isEnabled: boolean,
-};
-
 type Props = {
   depth: number,
   isEnabled?: boolean,
   backgroundColor: string,
   borderRadius: number,
   text: string | number,
+  playSound: () => any,
   textStyle?: any,
   singlePressOnly?: boolean,
   onPressIn?: () => any,
@@ -35,12 +30,15 @@ type State = {
 };
 
 @observer
-export default class BoardTile extends Component<DefaultProps, Props, State> {
+export default class BoardTile extends Component<Props, Props, State> {
   static defaultProps = {
     depth: metrics.TILE_SHADOW_DEPTH,
     borderRadius: metrics.TILE_BORDER_RADIUS,
+    backgroundColor: 'red',
+    text: '1',
     isEnabled: true,
     singlePressOnly: true,
+    playSound: audioService.playSuccessSound,
   };
 
   state = {
@@ -53,10 +51,10 @@ export default class BoardTile extends Component<DefaultProps, Props, State> {
   getContainerRef = () => this._containerRef;
 
   _handlePressIn = () => {
-    const { isEnabled, singlePressOnly, onPressIn } = this.props;
+    const { isEnabled, singlePressOnly, onPressIn, playSound } = this.props;
     if (!isEnabled) return;
     if (singlePressOnly && this.state.hasBeenPressed) return;
-    audioService.playSuccessSound();
+    playSound();
     LayoutAnimation.spring();
     this.setState({ isTouched: true });
     if (onPressIn) {

@@ -37,6 +37,7 @@
 		5E9157361DD0AC6A00FF2AA8 /* libRCTAnimation.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 5E9157331DD0AC6500FF2AA8 /* libRCTAnimation.a */; };
 		832341BD1AAA6AB300B99B32 /* libRCTText.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 832341B51AAA6A8300B99B32 /* libRCTText.a */; };
 		907AFD58C6F048899AE8D079 /* PermanentMarker.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 68B30C7D0F8D477B85E67066 /* PermanentMarker.ttf */; };
+		955E89811E54F1A500D7D465 /* button.wav in Resources */ = {isa = PBXBuildFile; fileRef = 955E89801E54F1A500D7D465 /* button.wav */; };
 		958EC8581E4D04140072A400 /* failure.wav in Resources */ = {isa = PBXBuildFile; fileRef = 958EC8561E4D04140072A400 /* failure.wav */; };
 		958EC8591E4D04140072A400 /* success.wav in Resources */ = {isa = PBXBuildFile; fileRef = 958EC8571E4D04140072A400 /* success.wav */; };
 		E1DA8A69CA854C679A0F5718 /* libRNSound.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 42B5E10B01CB492AB3030690 /* libRNSound.a */; };
@@ -268,6 +269,7 @@
 		68B30C7D0F8D477B85E67066 /* PermanentMarker.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = PermanentMarker.ttf; path = ../src/assets/fonts/PermanentMarker.ttf; sourceTree = "<group>"; };
 		78C398B01ACF4ADC00677621 /* RCTLinking.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = RCTLinking.xcodeproj; path = "../node_modules/react-native/Libraries/LinkingIOS/RCTLinking.xcodeproj"; sourceTree = "<group>"; };
 		832341B01AAA6A8300B99B32 /* RCTText.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = RCTText.xcodeproj; path = "../node_modules/react-native/Libraries/Text/RCTText.xcodeproj"; sourceTree = "<group>"; };
+		955E89801E54F1A500D7D465 /* button.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; name = button.wav; path = ../src/assets/audio/button.wav; sourceTree = "<group>"; };
 		958EC8561E4D04140072A400 /* failure.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; name = failure.wav; path = ../src/assets/audio/failure.wav; sourceTree = "<group>"; };
 		958EC8571E4D04140072A400 /* success.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; name = success.wav; path = ../src/assets/audio/success.wav; sourceTree = "<group>"; };
 		B93153E7377F4481AACDED4E /* RNSound.xcodeproj */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = "wrapper.pb-project"; name = RNSound.xcodeproj; path = "../node_modules/react-native-sound/RNSound.xcodeproj"; sourceTree = "<group>"; };
@@ -438,6 +440,7 @@
 				958EC8561E4D04140072A400 /* failure.wav */,
 				958EC8571E4D04140072A400 /* success.wav */,
 				68B30C7D0F8D477B85E67066 /* PermanentMarker.ttf */,
+				955E89801E54F1A500D7D465 /* button.wav */,
 			);
 			name = Resources;
 			sourceTree = "<group>";
@@ -609,7 +612,7 @@
 						TestTargetID = 13B07F861A680F5B00A75B9A;
 					};
 					13B07F861A680F5B00A75B9A = {
-						DevelopmentTeam = CGDYRUWZ8J;
+						DevelopmentTeam = 3H7GV7V947;
 					};
 					2D02E47A1E0B4A5D006451C7 = {
 						CreatedOnToolsVersion = 8.2.1;
@@ -892,6 +895,7 @@
 			files = (
 				958EC8591E4D04140072A400 /* success.wav in Resources */,
 				13B07FBF1A68108700A75B9A /* Images.xcassets in Resources */,
+				955E89811E54F1A500D7D465 /* button.wav in Resources */,
 				13B07FBD1A68108700A75B9A /* LaunchScreen.xib in Resources */,
 				907AFD58C6F048899AE8D079 /* PermanentMarker.ttf in Resources */,
 				958EC8581E4D04140072A400 /* failure.wav in Resources */,
@@ -1061,7 +1065,7 @@
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				CURRENT_PROJECT_VERSION = 1;
 				DEAD_CODE_STRIPPING = NO;
-				DEVELOPMENT_TEAM = CGDYRUWZ8J;
+				DEVELOPMENT_TEAM = 3H7GV7V947;
 				INFOPLIST_FILE = TapTheNumber/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				OTHER_LDFLAGS = (
@@ -1069,7 +1073,7 @@
 					"-ObjC",
 					"-lc++",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = com.mmazzarolo.TapTheNumber;
+				PRODUCT_BUNDLE_IDENTIFIER = "com.mmazzarolo.tap-the-number";
 				PRODUCT_NAME = TapTheNumber;
 				VERSIONING_SYSTEM = "apple-generic";
 			};
@@ -1081,7 +1085,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_TEAM = CGDYRUWZ8J;
+				DEVELOPMENT_TEAM = 3H7GV7V947;
 				INFOPLIST_FILE = TapTheNumber/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				OTHER_LDFLAGS = (
@@ -1089,7 +1093,7 @@
 					"-ObjC",
 					"-lc++",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = com.mmazzarolo.TapTheNumber;
+				PRODUCT_BUNDLE_IDENTIFIER = "com.mmazzarolo.tap-the-number";
 				PRODUCT_NAME = TapTheNumber;
 				VERSIONING_SYSTEM = "apple-generic";
 			};
