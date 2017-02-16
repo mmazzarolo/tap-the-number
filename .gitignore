@@ -54,6 +54,7 @@ fastlane/Preview.html
 fastlane/screenshots
 
 # VSCode
+.vscode
 
 # JSconfig
 jsconfig.json
