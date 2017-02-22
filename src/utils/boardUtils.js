@@ -28,7 +28,7 @@ const getRandomTilePosition = (board: Array<Tile>): { x: number, y: number } => 
   const boardHeight = metrics.BOARD_HEIGHT - metrics.BOARD_MARGIN;
   // Gets random tile positions until it finds a position that does not overlap another tile.
   // The while loop is a bit scary but we don't have to worry: we're using relative metrics
-  // and we're limiting the number.
+  // and we're limiting the number of tiles.
   while (true) {
     const randomX = random(boardOriginX, boardWidth - metrics.TILE_SIZE);
     const randomY = random(boardOriginY, boardHeight - metrics.TILE_SIZE);
