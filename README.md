@@ -95,30 +95,48 @@ Related dependencies:
 "react-native-animatable": "1.1.0",
 ```
 
-
 ## Project structure 
-TO-DO
-The structure of the application is the following:
+The structure of the application and all its files are the following:
 ```javascript
 src
- ├── app.js // The app entry point (for sake of simplicity I handle here the routing and the state)
+ ├── index.js // The app entry point
+ │
+ ├── assets // audio & fonts that must be linked in the app
  │
  ├── components
- │   ├── CustomButton.js // The button used in the app
- │   ├── CustomTextInput.js // The text input used in the app
+ │   ├── CustomText.js // A wrapper on the text used in the entire app (responsive + custom font)
+ │   ├── Tile.js // The tile component used in the home screen and in the playground
  │   └── TouchableView.js // A cross-platform helper view with a touchable behavior
  │
  ├── config
- │   └── metrics.js // App metrics like device width/height, statusbar height, etc...
+ │   ├── colors.js // Colors (the available tiles colors, etc...)
+ │   ├── env.js // Platform specific variables (IS_ENV_DEVELOPMENT, IS_ANDROID, etc...)
+ │   ├── metrics.js // App metrics (DEVICE_WIDTH, TILE_SIZE, etc...)
+ │   └── timings.js // Timing specific variables (TIME_LIMIT_MS, etc...)
  │
  ├── containers
- │   ├── AuthScreen
- │   │   ├── index.js // The signup/login screen
- │   │   ├── LoginForm.js // The login form
- │   │   ├── Opening.js // The initial buttons (that redirect to login/signup)
- │   │   └── SignupForm.js // The signup form
- │   └── HomeScreen.js
- │       └── index.js // The post-authentication screen (for this example I simply show a logout button)
+ │   ├── App // The root app screen, routing is handled here
+ │   ├── Endgame // The post-game screen (with the score and restart button)
+ │   ├── Home // The home screen (with the start game button)
+ │   └── Playground // The screen where the game runs
+ │       ├── Board // The board game, renders the tiles
+ │       ├── BoardTile // A Tile with Board-specific behaviors
+ │       └── TimeBar // The top-bar with that shows the remaining time
  │
- └── images // The app images
+ ├── images // The app images
+ │
+ ├── services
+ │   └── audio.js // Simple wrapper over react-native-sound 
+ │
+ ├── stores // MobX stores
+ │   ├── game.js // All the app logic is handled here (Board setup, scoring, etc...)
+ │   └── router.js // A super simple router 
+ │
+ ├── types // Flowtype types
+ │
+ └── utils
+     ├── boardUtils.js // Board setup utils (getRandomTilePosition, getRandomNumber, etc...)
+     ├── colorUtils.js // Color utils (getDifferentLuminance, etc...)
+     └── timeUtils.js // Simple timing helpers (mostly wrappers over setTimeout)
 ```
+
