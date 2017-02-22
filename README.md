@@ -21,7 +21,7 @@ basis at my current workplace.
 React-Native comes with [**Jest**](https://facebook.github.io/jest/), a test framework that shines 
 when coupled with React.  
 Related dependencies: 
-```
+```json
 "babel-jest": "18.0.0",
 "babel-preset-react-native": "1.9.1",
 "react": "~15.4.0-rc.4",
