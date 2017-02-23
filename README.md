@@ -139,12 +139,20 @@ src
      ├── colorUtils.js // Color utils (getDifferentLuminance, etc...)
      └── timeUtils.js // Simple timing helpers (mostly wrappers over setTimeout)
 ```
-The project structure I used here may seems over-engineered at first, but this setup paid off almost 
+The project structure I used here may seem over-engineered at first, but this setup paid off almost 
 instantly (continue below).
 
-
 ## A bit of history
-To-Do
+I started working on this game with a totally different idea in my mind: I wanted to play a bit with 
+[React-Native ART](https://github.com/facebook/react-native/tree/master/Libraries/ART), and 
+[if you take a closer look at the commit history](https://github.com/mmazzarolo/tap-the-number/commit/9ab03803babecd38d4e320782a0c826623241c4b) 
+you'll see that at some point I even implemented an [animation similiar to the Twitter's heart one](http://browniefed.com/blog/react-native-how-to-create-twitter-exploding-hearts/) 
+when tapping on a Tile.  
+Unfortunately I had to drop the idea because React-Native suffers from small lags when you run 
+multiple animations (in my case when tapping on tiles rapidly), but it seems that something is 
+changing thanks to [Native Driver](https://facebook.github.io/react-native/blog/2017/02/14/using-native-driver-for-animated.html).  
+At the time I had already created the game engine and some components, so, instead of throwing 
+away the project, I decided to turn it into this game.
 
 ## Interesting stuff
 #### Config files are your friends
@@ -254,4 +262,12 @@ TO-DO
 1. Using utils for small functions instead of writing them in the MobX stores makes the stores super
 easy to read and reason about.  
 2. 
-2. PURE utils nooooo
+2. PURE utils nooooo  
+
+#### Animations
+
+#### Android support
+
+#### Thanks to  
+Thanks to (list to do)
+I'm not a creative guy at all, I just stole all the following stuff:
