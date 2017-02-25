@@ -257,12 +257,23 @@ const scaledFontSize = Math.round(fontSize * metrics.DEVICE_WIDTH / 375);
 (Thanks to Facebook F8 app for the trick).  
 
 
-#### MobX tips
-TO-DO
-1. Using utils for small functions instead of writing them in the MobX stores makes the stores super
-easy to read and reason about.  
-2. 
-2. PURE utils nooooo  
+#### MobX (and src/utils) tips
+Let's be honest here: I love Redux and I use it daily, but for simple applications like this MobX is 
+more then enough.  
+If you're not interested in middlewares or in having a centralized pattern for dispatching action, 
+in my opinion MobX might be a better choice than Redux.  
+One thing I just recently started using with MobX is the `provider` + `inject` combo, which provides 
+a nice abstraction on connecting components to the store (in a similiar way to the Redux's 
+`mapStateToProps`).  
+Another thing I've found really useful has been using abusing the `src/utils` and `src/services` folders: 
+from my experience the MobX actions tend to get cluttered, so I prefer to keep them easy to read 
+by minimizing the verbosity of the code.  
+Talking about my utils functions... I'm a bit sad beacuse they are not super pure -- they use the 
+`src/config` files internally -- but if your application is bigger than mine I'd advise you to make 
+them accepts those configs as parameters to make them testable.  
+
+P.S.: use `@computed` values whenever possibile if you need to compute an observable value 
+ (similiarly to Redux's selectors).  
 
 #### Animations
 
