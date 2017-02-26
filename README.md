@@ -276,8 +276,89 @@ P.S.: use `@computed` values whenever possibile if you need to compute an observ
  (similiarly to Redux's selectors).  
 
 #### Animations
+Handling animations on React and React-Native may be worth its own blog-post.  
+In Tap The Number I animated the components in three different ways.  
+##### React-Native-Animatable
+`react-native-animatable` is a wrapper of React-Native Animated API which exposes many simple 
+simple animations and allows you to use them both programmatically and in a declarative way, 
+embracing React's philosophy.  
+If you don't need complex animations, intepolations or timings `react-native-animatable` is a solid 
+choice.  
+```javascript
+
+```
+
+
+##### React-Native Animated API
+I used the Animated API for the TimeBar animation in `src/containers/Playground/TimeBar`, because I
+wanted to achieve an effect that required some manual tweaking, and the Animated API is the most 
+flexible one of the lot.  
+Specifically, I wanted to animate the TimeBar width and the TimeBar color from grey to red.  
+```javascript
+type State = {
+  animateValue: any,
+};
+
+export default class TimeBar extends Component<void, {}, State> {
+  state = {
+    animateValue: new Animated.Value(timings.TIME_LIMIT_MS),
+  };
+
+  componentDidMount() {
+    Animated.timing(this.state.animateValue, {
+      duration: timings.TIME_LIMIT_MS,
+      easing: Easing.linear, // No easing
+      toValue: 0,
+    }).start();
+  }
+
+  render() {
+    // Animate the TimeBar color from grey to red, starting when there are left only 12 seconds
+    const backgroundColor = this.state.animateValue.interpolate({
+      inputRange: [0, timings.TIME_LIMIT_MS * 0.4, timings.TIME_LIMIT_MS],
+      outputRange: ['rgba(255,0,0, 1)', 'rgba(0,0,0, 0.3)', 'rgba(0,0,0, 0.3)'],
+    });
+    // Animate the TimeBar width from DEVICE_WIDTH to 0 in TIME_LIMIT_MS (which currently is 30 seconds)
+    const width = this.state.animateValue.interpolate({
+      inputRange: [0, timings.TIME_LIMIT_MS],
+      outputRange: [0, metrics.DEVICE_WIDTH],
+    });
+    return (
+      <View style={styles.container}>
+        <View style={[styles.content, { width, backgroundColor }]} />
+      </View>
+    );
+  }
+}
+```  
+
+##### React-Native LayoutAnimation  
+LayoutAnimation is a powerfull way to animate component values without the need to specify the 
+animation behaviour.  
+It just 
+
+USED IN TILE
+
+- Using React-Native Animated API for the complex animations which needed specific 
+- Using React-Native LayoutAnimation
+- Using [react-native-animatable](https://github.com/oblador/react-native-animatable)
+
+
+Currently for React-Native you can animate components in a few ways: 
+- Using [Lottie](https://github.com/airbnb/lottie-react-native)  
+In Tap The Number I used a mix of the first three, because they all have they strenght and weakness: 
 
 #### Android support
+I was planning to release this game on Android too at first, but I had some issue that I've been not 
+able to solve easily.  
+The most important one was my inability to use custom fonts on Android: I tried linking the assets 
+folder using `react-native link` (which works perfectly on iOS) and adding the fonts manually, but 
+it seems that [some fonts don't link correctly at all](https://github.com/facebook/react-native/issues/7301), while other works perfectly even with the 
+first method.  
+The other issue I faced was a sluggish responsiveness in the animations (specifically when using 
+LayoutAnimationon), but I guess that I could have easily fixed them by investigating the issue a bit 
+more.
+  
 
 #### Thanks to  
 Thanks to (list to do)

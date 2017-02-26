@@ -18,16 +18,18 @@ export default class TimeBar extends Component<void, {}, State> {
   componentDidMount() {
     Animated.timing(this.state.animateValue, {
       duration: timings.TIME_LIMIT_MS,
-      easing: Easing.linear,
+      easing: Easing.linear, // No easing
       toValue: 0,
     }).start();
   }
 
   render() {
+    // Animate the TimeBar color from grey to red, starting when there are left only 12 seconds
     const backgroundColor = this.state.animateValue.interpolate({
       inputRange: [0, timings.TIME_LIMIT_MS * 0.4, timings.TIME_LIMIT_MS],
       outputRange: ['rgba(255,0,0, 1)', 'rgba(0,0,0, 0.3)', 'rgba(0,0,0, 0.3)'],
     });
+    // Animate the TimeBar width from DEVICE_WIDTH to 0 in TIME_LIMIT_MS (which currently is 30 seconds)
     const width = this.state.animateValue.interpolate({
       inputRange: [0, timings.TIME_LIMIT_MS],
       outputRange: [0, metrics.DEVICE_WIDTH],
