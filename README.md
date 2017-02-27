@@ -275,24 +275,20 @@ them accepts those configs as parameters to make them testable.
 P.S.: use `@computed` values whenever possibile if you need to compute an observable value 
  (similiarly to Redux's selectors).  
 
-#### Animations
-Handling animations on React and React-Native may be worth its own blog-post.  
-In Tap The Number I animated the components in three different ways.  
+#### Animations, part 1: The animations library I used  
+In Tap The Number I animated the components in three different ways:
+
 ##### React-Native-Animatable
 `react-native-animatable` is a wrapper of React-Native Animated API which exposes many simple 
 simple animations and allows you to use them both programmatically and in a declarative way, 
 embracing React's philosophy.  
 If you don't need complex animations, intepolations or timings `react-native-animatable` is a solid 
 choice.  
-```javascript
-
-```
-
 
 ##### React-Native Animated API
-I used the Animated API for the TimeBar animation in `src/containers/Playground/TimeBar`, because I
-wanted to achieve an effect that required some manual tweaking, and the Animated API is the most 
-flexible one of the lot.  
+I used the Animated API for the TimeBar animation in `src/containers/Playground/TimeBar`: I wanted 
+to achieve an effect that required some manual tweaking, and the Animated API is the most flexible 
+one of the lot.  
 Specifically, I wanted to animate the TimeBar width and the TimeBar color from grey to red.  
 ```javascript
 type State = {
@@ -333,20 +329,42 @@ export default class TimeBar extends Component<void, {}, State> {
 ```  
 
 ##### React-Native LayoutAnimation  
-LayoutAnimation is a powerfull way to animate component values without the need to specify the 
-animation behaviour.  
-It just 
+LayoutAnimation is a powerfull way to animate the transitions between layout changes without the 
+need to specify the animation behaviour.  
+You just call `LayoutAnimation.spring()` (or [one of the other available configurations](https://facebook.github.io/react-native/docs/layoutanimation.html)) before calling `setState` and 
+React-Native will animate the component that has been subjected to a layout change.  
+You can see an example of it in `src/components/Tile.js`, where I animated the tile depth by calling 
+`LayoutAnimation.spring()` just before `this.setState({ isTouched: true });`.   
+The drawback of LayoutAnimation is, as you may have already guessed, that it provides much less 
+control than the other animation alternatives.  
 
-USED IN TILE
+#### Animations, part 2: React and animations  
+I'll go straight to the point: In my opinion animations don't get along nicely with React (and 
+React-Native), and they never will.  
+I know that it might be a controversial opinion, but having tried many different libraries both on 
+React-Native and React (like React-Motion), I still think that animations move against the 
+declarative React pattern.  
+Don't get me wrong here, you can still achieve a clean code while using small animations, but when 
+you'll start linking animations one after another you'll end up doing it programmatically:  
+```javascript
+_handleButtonPress = async () => {
+  this.setState({ disableAllButton: true }); // Prevent pressing buttons while animating
+  if (this._headerRef && this._bodyRef) { // Animates out header and body
+    await Promise.all([
+      this._headerRef.fadeOutLeft(400), 
+      this._bodyRef.fadeOutRight(400)
+    ]);
+  }
+  this.props.navigateToNextScreen(); // Animations are ended: move to the next screen
+};
+```
+Otherwise you'll have to keep track of the animations state in your component's state (e.g: 
+`this.setState({ isContainerFadingOut: true })` which adds a nice amount of unneeded complexity 
+to your component's lifecycle.  
 
-- Using React-Native Animated API for the complex animations which needed specific 
-- Using React-Native LayoutAnimation
-- Using [react-native-animatable](https://github.com/oblador/react-native-animatable)
-
-
-Currently for React-Native you can animate components in a few ways: 
-- Using [Lottie](https://github.com/airbnb/lottie-react-native)  
-In Tap The Number I used a mix of the first three, because they all have they strenght and weakness: 
+However, I don't think the issue of the programmatic nature of animations vs the React 
+declarativeness can be solved easily (I'll be super happy to be proved wrong though): after all, 
+animating IS hard.  
 
 #### Android support
 I was planning to release this game on Android too at first, but I had some issue that I've been not 
