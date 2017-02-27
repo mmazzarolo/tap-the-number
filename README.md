@@ -151,11 +151,11 @@ when tapping on a Tile.
 Unfortunately I had to drop the idea because React-Native suffers from small lags when you run 
 multiple animations (in my case when tapping on tiles rapidly), but it seems that something is 
 changing thanks to [Native Driver](https://facebook.github.io/react-native/blog/2017/02/14/using-native-driver-for-animated.html).  
-At the time I had already created the game engine and some components, so, instead of throwing 
+At the time, I had already created the game engine and some components, so, instead of throwing 
 away the project, I decided to turn it into this game.
 
 ## Interesting stuff
-#### Config files are your friends
+### Config files are your friends
 I tried to gather all the variables that describe the app behaviour in the `config` directory.  
 The `config/metrics.js` for example exposes all the application dimensions:  
 ```javascript
@@ -189,26 +189,26 @@ export default {
   TIME_BAR_HEIGHT: DEVICE_HEIGHT * 0.02,
 };
 ``` 
-This setup, coupled with the hot-reloading, came in super handy even for a simple game like this, 
+This setup, coupled with hot-reloading, came in super handy even for a simple game like this, 
 because I've been able to concentrate most of the variables I needed to change in a single 
 directory.  
 
-#### Relative dimensions  
-React-Native is not a game-development framework, so one of the things you'll miss most is a proper 
-way to handle the camera/viewport.  
-Tap The Number is a simple game though, so using relative dimensions is more than enough for this 
+### Relative dimensions  
+React-Native is not a game-development framework and one of the things you'll miss a lot, if you'll 
+ever try to build a game with it, is a proper way to handle the camera/viewport.  
+Tap The Number is a simple game though, so using relative dimensions is more than enough for its 
 use case.  
 Using relative dimensions means that instead of defining the dimensions of the views using the 
 logical pixel units (which is the default unit of React-Native) you should define the dimensions 
 relative to the device size (or to their parents).  
 Following this approach will make your game resize automatically on bigger/smaller devices (even 
-on tablets!) but has many drawbacks in my opinion:
-- The more the app grows, the more dimensions you'll have to define and keep track of  
-- Handling screen rotation might become difficult (Tap The Game works only in portrait mode)  
-- If you're using some native components you'll might not be able to resize them  
+on tablets!) but it also has many drawbacks in my opinion:
+- The more the app grows, the more dimensions you'll have to define and keep track of; 
+- Handling screen rotation might become difficult (Tap The Game works only in portrait mode)  ;
+- If you're using some native components you'll might not be able to resize them  ;
 
-In Tap The Number I also did something that I'm bit ashamed of: I tied the game engine to the 
-device size, as you can see in `getRandomTilePosition` of `utils/boardUtils.js`:
+Speacking of dimensions, In Tap The Number I did something that I'm bit ashamed of: I tied the game 
+engine to the device size, as you can see in `getRandomTilePosition` of `utils/boardUtils.js`:
 ```javascript
 /**
  * Gets a random tile position (making sure that it does not overlap another tile).
@@ -239,16 +239,15 @@ const getRandomTilePosition = (board: Array<Tile>): { x: number, y: number } => 
 When the app initializes the game board the above function searches for available tiles positions 
 using a while-loop.  
 I'm aware that this function [can be optimized in many different ways](http://jsfiddle.net/fZtdt/13/), 
-and that it can break if the device has a weird width / height ratio, but considering that:
-1. I'm targeting only iOS (>= iPhone 5)
-2. The maxmum number of tiles on the board is 6
-3. The tile size is 28% of the device width  
+and that it can break if the device has a weird width / height ratio, but considering that:  
+1. I'm targeting only iOS (>= iPhone 5);  
+2. The maxmum number of tiles on the board is 6;  
+3. The tile size is 28% of the device width;     
 
-...I decided to opt for this solution for the sake of semplicity (and for keeping the code readable).  
-
+...I decided to opt for this solution for the sake of semplicity (and for keeping the code readable, but feel free to correct me if it seems too unreasonable).    
 One last thing, keep in mind that the React-Native `<Text />` component does not scale the text 
 based on the device size.  
-This is on of the reasons I always use a custom wrapper over the build in `<Text />` component, 
+This is one of the reasons I always use a custom wrapper over the build in `<Text />` component, 
 so that I can change its default behaviour / font / color easily.  
 To get the scaled font size you should do the following: 
 ```javascript
@@ -257,11 +256,11 @@ const scaledFontSize = Math.round(fontSize * metrics.DEVICE_WIDTH / 375);
 (Thanks to Facebook F8 app for the trick).  
 
 
-#### MobX (and src/utils) tips
-Let's be honest here: I love Redux and I use it daily, but for simple applications like this MobX is 
+### MobX (and src/utils) tips
+Let's be honest here: I love Redux and I use it daily, but for simple applications like this, MobX is 
 more then enough.  
-If you're not interested in middlewares or in having a centralized pattern for dispatching action, 
-in my opinion MobX might be a better choice than Redux.  
+In fact, if you're not interested in middlewares or in having a centralized pattern for dispatching 
+action, in my opinion MobX might be a better choice than Redux.  
 One thing I just recently started using with MobX is the `provider` + `inject` combo, which provides 
 a nice abstraction on connecting components to the store (in a similiar way to the Redux's 
 `mapStateToProps`).  
@@ -275,14 +274,14 @@ them accepts those configs as parameters to make them testable.
 P.S.: use `@computed` values whenever possibile if you need to compute an observable value 
  (similiarly to Redux's selectors).  
 
-#### Animations, part 1: The animations library I used  
+### Animations, part 1: The animations library I used  
 In Tap The Number I animated the components in three different ways:
 
 ##### React-Native-Animatable
 `react-native-animatable` is a wrapper of React-Native Animated API which exposes many simple 
-simple animations and allows you to use them both programmatically and in a declarative way, 
-embracing React's philosophy.  
-If you don't need complex animations, intepolations or timings `react-native-animatable` is a solid 
+animations and allows you to use them both programmatically and in a declarative way, embracing 
+React's philosophy.  
+If you don't need complex animations, intepolations or timings, `react-native-animatable` is a solid 
 choice.  
 
 ##### React-Native Animated API
@@ -338,9 +337,9 @@ You can see an example of it in `src/components/Tile.js`, where I animated the t
 The drawback of LayoutAnimation is, as you may have already guessed, that it provides much less 
 control than the other animation alternatives.  
 
-#### Animations, part 2: React and animations  
-I'll go straight to the point: In my opinion animations don't get along nicely with React (and 
-React-Native), and they never will.  
+### Animations, part 2: React and animations  
+I'll go straight to the point: **In my opinion animations don't get along nicely with React (and 
+React-Native), and they never will**.  
 I know that it might be a controversial opinion, but having tried many different libraries both on 
 React-Native and React (like React-Motion), I still think that animations move against the 
 declarative React pattern.  
@@ -362,23 +361,22 @@ Otherwise you'll have to keep track of the animations state in your component's 
 `this.setState({ isContainerFadingOut: true })` which adds a nice amount of unneeded complexity 
 to your component's lifecycle.  
 
-However, I don't think the issue of the programmatic nature of animations vs the React 
+However, I don't think the issue of the imperative nature of animations vs the React 
 declarativeness can be solved easily (I'll be super happy to be proved wrong though): after all, 
-animating IS hard.  
+animating **IS** hard.  
 
-#### Android support
-I was planning to release this game on Android too at first, but I had some issue that I've been not 
+### Android support
+I was planning to release this game on Android too at first, but I had some issue that I've not been 
 able to solve easily.  
 The most important one was my inability to use custom fonts on Android: I tried linking the assets 
 folder using `react-native link` (which works perfectly on iOS) and adding the fonts manually, but 
-it seems that [some fonts don't link correctly at all](https://github.com/facebook/react-native/issues/7301), while other works perfectly even with the 
-first method.  
+it seems that [some fonts don't link correctly at all](https://github.com/facebook/react-native/issues/7301), while other works perfectly even when using the first method.  
 The other issue I faced was a sluggish responsiveness in the animations (specifically when using 
-LayoutAnimationon), but I guess that I could have easily fixed them by investigating the issue a bit 
+LayoutAnimation), but I guess that I could have easily fixed them by investigating the issue a bit 
 more.
   
 
-#### Thanks to  
+### Thanks to...
 I'm not a creative guy at all: every single thing I used in this application is just a re-iteration 
 of stuff I've aldready seen before.  
 So, without further ado, here are all the sources I can think of that I used to build this simple 
@@ -389,4 +387,6 @@ for the iOS assets
 that I've found on Google Images (sorry, I don't know who's the creator)
 - [freesound.org](https://freesound.org/browse/tags/sound-effects/) for the sound effects
 - [This Slack image](https://raw.githubusercontent.com/mmazzarolo/tap-the-number/master/extra/slack-tiles.png) that inspired the design of the tiles
-- And all the libraries I already linked and talked about in this post
+- And all the libraries I already linked and talked about in this post  
+Hope this app example might be helpful :)
+
