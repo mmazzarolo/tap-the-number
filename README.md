@@ -191,7 +191,7 @@ export default {
 ``` 
 This setup, coupled with the hot-reloading, came in super handy even for a simple game like this, 
 because I've been able to concentrate most of the variables I needed to change in a single 
-directory.
+directory.  
 
 #### Relative dimensions  
 React-Native is not a game-development framework, so one of the things you'll miss most is a proper 

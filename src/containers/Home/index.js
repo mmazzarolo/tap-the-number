@@ -1,4 +1,8 @@
 /* @flow */
+/**
+ * The Home screen.
+ * It's a simple screen, but it might seem complex in some part only because of animations.
+ */
 import React, { Component } from 'react';
 import { LayoutAnimation } from 'react-native';
 import { Image, View } from 'react-native-animatable';
@@ -60,7 +64,7 @@ export default class App extends Component<Props, Props, State> {
   };
 
   _handleButtonPress = async () => {
-    this.setState({ hasPressedButton: true });
+    this.setState({ hasPressedButton: true }); // Prevents button presses while animating to the new screen
     if (this._headerRef && this._bodyRef) {
       await Promise.all([this._headerRef.fadeOutLeft(400), this._bodyRef.fadeOutRight(400)]);
     }

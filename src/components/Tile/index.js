@@ -1,4 +1,9 @@
 /* @flow */
+/** 
+ * The Tile base component (used in HomeScreen and in Playground).  
+ * It renders a square (the depth), and of top of it another square (the Tile itself) with a bit of 
+ * space on bottom that get's halved when pressed.  
+ */
 import React, { Component } from 'react';
 import { View } from 'react-native-animatable';
 import { observer } from 'mobx-react/native';
@@ -53,9 +58,9 @@ export default class BoardTile extends Component<Props, Props, State> {
   _handlePressIn = () => {
     const { isEnabled, singlePressOnly, onPressIn, playSound } = this.props;
     if (!isEnabled) return;
-    if (singlePressOnly && this.state.hasBeenPressed) return;
+    if (singlePressOnly && this.state.hasBeenPressed) return; // Prevent double presses
     playSound();
-    LayoutAnimation.spring();
+    LayoutAnimation.spring(); // Animate the tile Press
     this.setState({ isTouched: true });
     if (onPressIn) {
       onPressIn();
@@ -66,7 +71,7 @@ export default class BoardTile extends Component<Props, Props, State> {
   _handlePressOut = () => {
     const { isEnabled, singlePressOnly, onPressOut } = this.props;
     if (!isEnabled) return;
-    if (singlePressOnly && this.state.hasBeenPressed) return;
+    if (singlePressOnly && this.state.hasBeenPressed) return; // Prevent double presses
     if (onPressOut) {
       onPressOut();
     }
@@ -84,7 +89,7 @@ export default class BoardTile extends Component<Props, Props, State> {
       ...otherProps
     } = this.props;
     const { isTouched } = this.state;
-    const halfDepth = depth / 2;
+    const halfDepth = depth / 2; // The bottom gap, needed to shop the the depth
     const tileStyle = {
       marginTop: isTouched ? depth : halfDepth,
       backgroundColor,
@@ -93,7 +98,7 @@ export default class BoardTile extends Component<Props, Props, State> {
     const depthStyle = {
       marginTop: -borderRadius,
       height: isTouched ? halfDepth + borderRadius : depth + borderRadius,
-      backgroundColor: colorUtils.getDifferentLuminance(backgroundColor, -0.2),
+      backgroundColor: colorUtils.getDifferentLuminance(backgroundColor, -0.2), // Darker color for the depth
       borderBottomLeftRadius: borderRadius,
       borderBottomRightRadius: borderRadius,
     };

@@ -1,4 +1,7 @@
 /* @flow */
+/** 
+ * A simple cross platform component that handles the default touchable feedback.
+ */
 import React, { Element } from 'react';
 import { View, TouchableNativeFeedback, TouchableOpacity } from 'react-native';
 import env from 'src/config/env';

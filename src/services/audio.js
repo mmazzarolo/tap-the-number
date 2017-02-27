@@ -1,4 +1,7 @@
 /* @flow */
+/**
+ * Simple wrapper on react-native-sound that exposes the sound effects used in the game.
+ */
 import ReactNativeSound from 'react-native-sound';
 
 const initializeSound = (name: string) => {

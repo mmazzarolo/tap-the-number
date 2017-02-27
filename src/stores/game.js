@@ -1,4 +1,7 @@
 /* @flow */
+/**
+ * Here you can find the entire logic of the game.  
+ */
 import { action, computed, observable } from 'mobx';
 import { filter, find, orderBy, times } from 'lodash';
 import timings from 'src/config/timings';
@@ -30,6 +33,7 @@ export default class GameStore {
   };
 
   @action buildBoard = () => {
+    // Called on every round start (round, not game): it builds the board's tiles
     this.tiles = [];
     this.isBoardValid = true;
     const numberOfTiles = boardUtils.getNumberOfTiles(this.level);
@@ -56,12 +60,14 @@ export default class GameStore {
     const pressedTile = find(this.tiles, { id: tileId });
     const activeTiles = filter(this.tiles, 'isVisible');
     const sortedActiveTiles = orderBy(activeTiles, 'number');
+    // If the pressed tile was the one with the lowest number..
     if (pressedTile.number === sortedActiveTiles[0].number) {
       pressedTile.isVisible = false;
       this.score++;
       if (this.isBoardEmpty) {
         this.goToNextLevel();
       }
+      // ...otherwise
     } else {
       this.isBoardValid = false;
       audioService.playFailureSound();

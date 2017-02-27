@@ -1,4 +1,8 @@
 /* @flow */
+/**
+ * The core of the game.
+ * It links the Board to the MobX store and navigates to the Endgame screen when needed. 
+ */
 import React, { Component } from 'react';
 import { View } from 'react-native-animatable';
 import { inject, observer } from 'mobx-react/native';

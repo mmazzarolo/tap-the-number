@@ -1,4 +1,7 @@
 /* @flow */
+/**
+ * The time left bar at the top of the Playground screen.
+ */
 import React, { Component } from 'react';
 import { View } from 'react-native-animatable';
 import { Animated, Easing } from 'react-native';

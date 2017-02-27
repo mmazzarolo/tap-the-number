@@ -1,4 +1,7 @@
 /* @flow */
+/**
+ * A super-simple MobX routing solution.
+ */
 import { observable } from 'mobx';
 
 export type Screen = 'HOME' | 'PLAYGROUND' | 'ENDGAME';

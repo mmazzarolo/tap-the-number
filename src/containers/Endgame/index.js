@@ -1,4 +1,8 @@
 /* @flow */
+/**
+ * The ending score screen.
+ * It's a simple screen, but it might seem complex in some part only because of animations.
+ */
 import React, { Component } from 'react';
 import { View } from 'react-native-animatable';
 import { inject, observer } from 'mobx-react/native';
@@ -41,7 +45,7 @@ export default class Endgame extends Component<Props, Props, State> {
   };
 
   _handleRestartPress = async () => {
-    this.setState({ hasPressedButton: true });
+    this.setState({ hasPressedButton: true }); // Prevents button presses while animating to the new screen
     await this._contentRef.fadeOut(300);
     await this._containerRef.zoomOut();
     this.props.navigateToPlayground();
@@ -50,6 +54,7 @@ export default class Endgame extends Component<Props, Props, State> {
   render() {
     const { buttonColor, hasPressedButton } = this.state;
     const size = metrics.DEVICE_HEIGHT * 1.3;
+    // ContainerStyle handles the first 'expanding circle' animation
     const containerStyle = {
       position: 'absolute',
       bottom: metrics.DEVICE_HEIGHT / 2 - size / 2,

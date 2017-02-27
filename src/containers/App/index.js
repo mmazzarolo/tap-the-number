@@ -1,4 +1,7 @@
 /* @flow */
+/**
+ * Main application component, handles the routing.  
+ */
 import React, { Component } from 'react';
 import { StatusBar } from 'react-native';
 import { Image, View } from 'react-native-animatable';

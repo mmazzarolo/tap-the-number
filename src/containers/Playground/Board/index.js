@@ -1,5 +1,7 @@
 /* @flow */
-/* eslint-disable react/prop-types */
+/**
+ * This components just renders the tiles in their correct positions.
+ */
 import React, { Component } from 'react';
 import { View } from 'react-native-animatable';
 import type { Tile } from 'src/types';
