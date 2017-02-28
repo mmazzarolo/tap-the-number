@@ -1,6 +1,6 @@
 <p align="center">
-<img src="https://raw.githubusercontent.com/mmazzarolo/tap-the-number/master/extra/tap_the_number_title.png" width="420"></img>  
-<a href="https://itunes.apple.com/us/app/tap-the-number/id1206517840?l=it&ls=1&mt=8"><img src="https://raw.githubusercontent.com/mmazzarolo/tap-the-number/master/extra/badge-download-on-the-app-store.svg"></img></a>  
+<img src="https://raw.githubusercontent.com/mmazzarolo/tap-the-number/master/extra/tap_the_number_title.png" width="420"></img><br />  <br /> 
+<a href="https://itunes.apple.com/us/app/tap-the-number/id1206517840?l=it&ls=1&mt=8"><img src="https://upload.wikimedia.org/wikipedia/commons/thumb/3/3c/Download_on_the_App_Store_Badge.svg/800px-Download_on_the_App_Store_Badge.svg.png" width="120"></img></a>    <br />   <br /> 
 </p>
 
 Tap The Number is a simple React-Native game where you have to tap the tiles that appear on the screen in a specific order.  
@@ -389,5 +389,7 @@ that I've found on Google Images (sorry, I don't know who's the creator)
 - [freesound.org](https://freesound.org/browse/tags/sound-effects/) for the sound effects
 - [This Slack image](https://raw.githubusercontent.com/mmazzarolo/tap-the-number/master/extra/slack-tiles.png) that inspired the design of the tiles
 - And all the libraries I already linked and talked about in this post  
+
+
 Hope this app example might be helpful :)
 
