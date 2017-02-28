@@ -7,11 +7,12 @@ Tap The Number is a simple React-Native game where you have to tap the tiles tha
 Even if developing this game didn't take too much time (I should have put in it ~20 hours I guess) it has been a fun ride and I'd like to share some tips and some info on the complexities I found during its development.   
 But first...  
 
-## Screenshots!
+## Screenshots and video preview
 <p align="center">
 <img src="https://raw.githubusercontent.com/mmazzarolo/tap-the-number/master/extra/screenshot-iphone6plus-1.png" width="240"></img>
 <img src="https://raw.githubusercontent.com/mmazzarolo/tap-the-number/master/extra/screenshot-iphone6plus-2.png" width="240"></img>    
-<img src="https://raw.githubusercontent.com/mmazzarolo/tap-the-number/master/extra/screenshot-iphone6plus-3.png" width="240"></img>    
+<img src="https://raw.githubusercontent.com/mmazzarolo/tap-the-number/master/extra/screenshot-iphone6plus-3.png" width="240"></img>
+<br /><br /><b><a href="https://www.youtube.com/watch?v=bz7Id_HcEmw">I also published a small game preview on Youtube</a></b><br />
 </p>  
 
 ## The stack and the dependencies
