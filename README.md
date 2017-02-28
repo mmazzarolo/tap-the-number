@@ -1,6 +1,6 @@
 <p align="center">
 <img src="https://raw.githubusercontent.com/mmazzarolo/tap-the-number/master/extra/tap_the_number_title.png" width="420"></img>  
-<a href=""><img src="https://raw.githubusercontent.com/mmazzarolo/tap-the-number/master/extra/badge-download-on-the-app-store.svg"></img></a>  
+<a href="https://itunes.apple.com/us/app/tap-the-number/id1206517840?l=it&ls=1&mt=8"><img src="https://raw.githubusercontent.com/mmazzarolo/tap-the-number/master/extra/badge-download-on-the-app-store.svg"></img></a>  
 </p>
 
 Tap The Number is a simple React-Native game where you have to tap the tiles that appear on the screen in a specific order.  
