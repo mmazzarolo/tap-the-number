@@ -4,7 +4,7 @@
 </p>
 
 Tap The Number is a simple React-Native game where you have to tap the tiles that appear on the screen in a specific order.  
-Even if developing this game didn't take too much time (I should have put in it ~20 hours I guess) it has been a fun ride and I'd like to share some tips and some info on the complexities I found in its development.   
+Even if developing this game didn't take too much time (I should have put in it ~20 hours I guess) it has been a fun ride and I'd like to share some tips and some info on the complexities I found during its development.   
 But first...  
 
 ## Screenshots!
@@ -31,9 +31,7 @@ Related dependencies:
 ```
 
 #### State management: MobX
-I started this project with [**Redux**](http://redux.js.org/docs/introduction/), but after a while I 
-noticed it was slowing me down for a simple project like this, so I seized the opportunity and 
-implemented [**MobX**](https://github.com/mobxjs/mobx).  
+I started this project using [**Redux**](http://redux.js.org/docs/introduction/) for handling the state management, but after a while I noticed that, being a simple project, it was slowing me down, so I seized the opportunity and implemented [**MobX**](https://github.com/mobxjs/mobx).  
 [This is not the first time I used MobX](https://github.com/GPMDP/google-play-music-desktop-remote), 
 but this time I tried using its `provider` and its `inject` a là Redux, and I really liked 
 it!   
@@ -47,7 +45,7 @@ Related dependencies:
 #### Static type checking: Flowtype 
 [**Flowtype**](https://flowtype.org/) is a static type checker.  
 I've been using it for a while now and it saved me A LOT of time. I can't praise it enough.  
-Give it a try, or better still stick with it for some days for seeing its real benefits.  
+I strongly suggest you to give it a try, or better still stick with it for some days for seeing its real benefits.
 Related dependencies: 
 ```json
 "flow-bin": "0.37.4",
@@ -56,7 +54,7 @@ Related dependencies:
 
 #### Linting: ESlint and Prettier
 I wasted way too much time in the past tweaking my ESlint configuration.  
-Now I'm super happy with a minimal ESlint config and with 
+Now I'm super happy with [a minimal ESlint config](https://github.com/mmazzarolo/eslint-plugin-react-app) and with 
 [**Prettier**](https://github.com/prettier/prettier), which takes care of all the code styling of 
 my application.  
 Related dependencies: 
@@ -79,7 +77,7 @@ Related dependencies:
 #### Playing audio files: react-native-sound
 If you need to play an audio file in a React-Native application you must use some kind of external 
 library at the moment because it is not (yet) implement in React-Native out of the box.  
-To me [**react-native-sound**](https://github.com/zmxv/react-native-sound) is currently the most 
+To me [**react-native-sound**](https://github.com/zmxv/react-native-sound) is the most 
 complete library at the moment and it worked fine on this application.  
 P.S.: I'm pulling the library directly from its Github Master branch because the latest version
 available on NPM does not support React-Native 0.40 yet.  
@@ -147,8 +145,8 @@ instantly (continue below).
 I started working on this game with a totally different idea in my mind: I wanted to play a bit with 
 [React-Native ART](https://github.com/facebook/react-native/tree/master/Libraries/ART), and 
 [if you take a closer look at the commit history](https://github.com/mmazzarolo/tap-the-number/commit/9ab03803babecd38d4e320782a0c826623241c4b) 
-you'll see that at some point I even implemented an [animation similiar to the Twitter's heart one](http://browniefed.com/blog/react-native-how-to-create-twitter-exploding-hearts/) 
-when tapping on a Tile.  
+you'll see that at some point I even implemented an [animation similar to the Twitter's heart one](http://browniefed.com/blog/react-native-how-to-create-twitter-exploding-hearts/) 
+when tapping a Tile.  
 Unfortunately I had to drop the idea because React-Native suffers from small lags when you run 
 multiple animations (in my case when tapping on tiles rapidly), but it seems that something is 
 changing thanks to [Native Driver](https://facebook.github.io/react-native/blog/2017/02/14/using-native-driver-for-animated.html).  
@@ -261,19 +259,18 @@ const scaledFontSize = Math.round(fontSize * metrics.DEVICE_WIDTH / 375);
 Let's be honest here: I love Redux and I use it daily, but for simple applications like this, MobX is 
 more then enough.  
 In fact, if you're not interested in middlewares or in having a centralized pattern for dispatching 
-action, in my opinion MobX might be a better choice than Redux.  
+actions, in my opinion MobX might be a better choice than Redux.  
 One thing I just recently started using with MobX is the `provider` + `inject` combo, which provides 
-a nice abstraction on connecting components to the store (in a similiar way to the Redux's 
-`mapStateToProps`).  
+a nice abstraction on connecting components to the store (in a similar way to the Redux `mapStateToProps`).  
 Another thing I've found really useful has been using abusing the `src/utils` and `src/services` folders: 
 from my experience the MobX actions tend to get cluttered, so I prefer to keep them easy to read 
 by minimizing the verbosity of the code.  
-Talking about my utils functions... I'm a bit sad beacuse they are not super pure -- they use the 
+Talking about my utils functions... I'm a bit sad because they are not super pure -- they use the 
 `src/config` files internally -- but if your application is bigger than mine I'd advise you to make 
 them accepts those configs as parameters to make them testable.  
 
-P.S.: use `@computed` values whenever possibile if you need to compute an observable value 
- (similiarly to Redux's selectors).  
+P.S.: use `@computed` values whenever possible if you need to compute an observable value 
+ (just like Redux's selectors).  
 
 ### Animations, part 1: The animations library I used  
 In Tap The Number I animated the components in three different ways:
@@ -282,7 +279,7 @@ In Tap The Number I animated the components in three different ways:
 `react-native-animatable` is a wrapper of React-Native Animated API which exposes many simple 
 animations and allows you to use them both programmatically and in a declarative way, embracing 
 React's philosophy.  
-If you don't need complex animations, intepolations or timings, `react-native-animatable` is a solid 
+If you don't need complex animations, interpolations or timings, `react-native-animatable` is a solid 
 choice.  
 
 ##### React-Native Animated API
@@ -369,7 +366,7 @@ animating **IS** hard.
 ### Android support
 I was planning to release this game on Android too at first, but I had some issue that I've not been 
 able to solve easily.  
-The most important one was my inability to use custom fonts on Android: I tried linking the assets 
+The most annoying one was my inability to use custom fonts on Android: I tried linking the assets 
 folder using `react-native link` (which works perfectly on iOS) and adding the fonts manually, but 
 it seems that [some fonts don't link correctly at all](https://github.com/facebook/react-native/issues/7301), while other works perfectly even when using the first method.  
 The other issue I faced was a sluggish responsiveness in the animations (specifically when using 
@@ -379,17 +376,17 @@ more.
 
 ### Thanks to...
 I'm not a creative guy at all: every single thing I used in this application is just a re-iteration 
-of stuff I've aldready seen before.  
+of stuff I had already seen before.  
 So, without further ado, here are all the sources I can think of that I used to build this simple 
 game:
 - [Asset Catalog Creator](https://itunes.apple.com/it/app/asset-catalog-creator-free/id866571115?mt=12) 
 for the iOS assets
 - [The game background image](https://freeios7.com/download/freeios7.com_apple_wallpaper_geometry-white_ipad_retina.jpg) 
-that I've found on Google Images (sorry, I don't know who's the creator)
+that I've found on Google Images (sorry, I don't know who the author is)
 - [freesound.org](https://freesound.org/browse/tags/sound-effects/) for the sound effects
 - [This Slack image](https://raw.githubusercontent.com/mmazzarolo/tap-the-number/master/extra/slack-tiles.png) that inspired the design of the tiles
 - And all the libraries I already linked and talked about in this post  
 
 
-Hope this app example might be helpful :)
+Forks, comments and critics are warmly welcomed, I just hope that this app example might be helpful to someone sooner or later! :)
 
