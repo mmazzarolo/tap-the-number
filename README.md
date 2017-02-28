@@ -206,7 +206,7 @@ on tablets!) but it also has many drawbacks in my opinion:
 - Handling screen rotation might become difficult (Tap The Game works only in portrait mode)  ;
 - If you're using some native components you'll might not be able to resize them  ;
 
-Speacking of dimensions, In Tap The Number I did something that I'm bit ashamed of: I tied the game 
+Speaking about dimensions, In Tap The Number I did something that I'm bit ashamed of: I tied the game 
 engine to the device size, as you can see in `getRandomTilePosition` of `utils/boardUtils.js`:
 ```javascript
 /**
@@ -239,15 +239,16 @@ When the app initializes the game board the above function searches for availabl
 using a while-loop.  
 I'm aware that this function [can be optimized in many different ways](http://jsfiddle.net/fZtdt/13/), 
 and that it can break if the device has a weird width / height ratio, but considering that:  
-1. I'm targeting only iOS (>= iPhone 5);  
-2. The maxmum number of tiles on the board is 6;  
-3. The tile size is 28% of the device width;     
+- I'm targeting only iOS (>= iPhone 5);  
+- The maximum number of tiles on the board is 6;  
+- The tile size is 28% of the device width;     
 
-...I decided to opt for this solution for the sake of semplicity (and for keeping the code readable, but feel free to correct me if it seems too unreasonable).    
-One last thing, keep in mind that the React-Native `<Text />` component does not scale the text 
+...I decided to opt for this solution for the sake of simplicity (and for keeping the code readable, but feel free to correct me if it seems too unreasonable).    
+
+Oh! One last thing: keep in mind that the React-Native `<Text />` component does not scale the text 
 based on the device size.  
-This is one of the reasons I always use a custom wrapper over the build in `<Text />` component, 
-so that I can change its default behaviour / font / color easily.  
+This is one of the reasons I always use a custom wrapper over the built-in `<Text />` component, 
+so that I can change its default behaviour/font/color easily.  
 To get the scaled font size you should do the following: 
 ```javascript
 const scaledFontSize = Math.round(fontSize * metrics.DEVICE_WIDTH / 375);
@@ -326,7 +327,7 @@ export default class TimeBar extends Component<void, {}, State> {
 ```  
 
 ##### React-Native LayoutAnimation  
-LayoutAnimation is a powerfull way to animate the transitions between layout changes without the 
+LayoutAnimation is a powerful way to animate the transitions between layout changes without the 
 need to specify the animation behaviour.  
 You just call `LayoutAnimation.spring()` (or [one of the other available configurations](https://facebook.github.io/react-native/docs/layoutanimation.html)) before calling `setState` and 
 React-Native will animate the component that has been subjected to a layout change.  
@@ -338,9 +339,7 @@ control than the other animation alternatives.
 ### Animations, part 2: React and animations  
 I'll go straight to the point: **In my opinion animations don't get along nicely with React (and 
 React-Native), and they never will**.  
-I know that it might be a controversial opinion, but having tried many different libraries both on 
-React-Native and React (like React-Motion), I still think that animations move against the 
-declarative React pattern.  
+I know that it might be a controversial opinion, but having tried many different libraries both on React-Native (and on React, for example React-Motion), I still think that animations move against the declarative React pattern.
 Don't get me wrong here, you can still achieve a clean code while using small animations, but when 
 you'll start linking animations one after another you'll end up doing it programmatically:  
 ```javascript
@@ -359,9 +358,7 @@ Otherwise you'll have to keep track of the animations state in your component's 
 `this.setState({ isContainerFadingOut: true })` which adds a nice amount of unneeded complexity 
 to your component's lifecycle.  
 
-However, I don't think the issue of the imperative nature of animations vs the React 
-declarativeness can be solved easily (I'll be super happy to be proved wrong though): after all, 
-animating **IS** hard.  
+…And last opinion: I don’t think that the clashing of the imperative nature of animations with  the React's "declarativeness" can be solved easily (I’ll be super happy to be proved wrong though): after all, animating **IS** hard.
 
 ### Android support
 I was planning to release this game on Android too at first, but I had some issue that I've not been 
@@ -380,12 +377,12 @@ of stuff I had already seen before.
 So, without further ado, here are all the sources I can think of that I used to build this simple 
 game:
 - [Asset Catalog Creator](https://itunes.apple.com/it/app/asset-catalog-creator-free/id866571115?mt=12) 
-for the iOS assets
+for the iOS assets;
 - [The game background image](https://freeios7.com/download/freeios7.com_apple_wallpaper_geometry-white_ipad_retina.jpg) 
-that I've found on Google Images (sorry, I don't know who the author is)
-- [freesound.org](https://freesound.org/browse/tags/sound-effects/) for the sound effects
-- [This Slack image](https://raw.githubusercontent.com/mmazzarolo/tap-the-number/master/extra/slack-tiles.png) that inspired the design of the tiles
-- And all the libraries I already linked and talked about in this post  
+that I've found on Google Images (sorry, I don't know who the author is);
+- [freesound.org](https://freesound.org/browse/tags/sound-effects/) for the sound effects;
+- [This Slack image](https://raw.githubusercontent.com/mmazzarolo/tap-the-number/master/extra/slack-tiles.png) that inspired the design of the tiles;
+- And all the libraries I already linked and talked about in this post  ;
 
 
 Forks, comments and critics are warmly welcomed, I just hope that this app example might be helpful to someone sooner or later! :)
