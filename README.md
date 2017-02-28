@@ -383,7 +383,8 @@ for the iOS assets;
 that I've found on Google Images (sorry, I don't know who the author is);
 - [freesound.org](https://freesound.org/browse/tags/sound-effects/) for the sound effects;
 - [This Slack image](https://raw.githubusercontent.com/mmazzarolo/tap-the-number/master/extra/slack-tiles.png) that inspired the design of the tiles;
-- And all the libraries I already linked and talked about in this post  ;
+- Mostaza, the startup where I work for all the support (and for the App Store account too!)
+- And all the libraries I already linked and talked about in this post;
 
 
 Forks, comments and critics are warmly welcomed, I just hope that this app example might be helpful to someone sooner or later! :)
