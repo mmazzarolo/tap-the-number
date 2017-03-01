@@ -203,9 +203,9 @@ logical pixel units (which is the default unit of React-Native) you should defin
 relative to the device size (or to their parents).  
 Following this approach will make your game resize automatically on bigger/smaller devices (even 
 on tablets!) but it also has many drawbacks in my opinion:
-- The more the app grows, the more dimensions you'll have to define and keep track of; 
-- Handling screen rotation might become difficult (Tap The Game works only in portrait mode)  ;
-- If you're using some native components you'll might not be able to resize them  ;
+- The more the app grows, the more dimensions you'll have to define and keep track of;  
+- Handling screen rotation might become difficult (Tap The Game works only in portrait mode);  
+- If you're using some native components you'll might not be able to resize them;  
 
 Speaking about dimensions, In Tap The Number I did something that I'm bit ashamed of: I tied the game 
 engine to the device size, as you can see in `getRandomTilePosition` of `utils/boardUtils.js`:
@@ -378,13 +378,13 @@ of stuff I had already seen before.
 So, without further ado, here are all the sources I can think of that I used to build this simple 
 game:
 - [Asset Catalog Creator](https://itunes.apple.com/it/app/asset-catalog-creator-free/id866571115?mt=12) 
-for the iOS assets;
+for the iOS assets;  
 - [The game background image](https://freeios7.com/download/freeios7.com_apple_wallpaper_geometry-white_ipad_retina.jpg) 
-that I've found on Google Images (sorry, I don't know who the author is);
-- [freesound.org](https://freesound.org/browse/tags/sound-effects/) for the sound effects;
-- [This Slack image](https://raw.githubusercontent.com/mmazzarolo/tap-the-number/master/extra/slack-tiles.png) that inspired the design of the tiles;
+that I've found on Google Images (sorry, I don't know who the author is);   
+- [freesound.org](https://freesound.org/browse/tags/sound-effects/) for the sound effects;  
+- [This Slack image](https://raw.githubusercontent.com/mmazzarolo/tap-the-number/master/extra/slack-tiles.png) that inspired the design of the tiles;  
 - Mostaza, the startup where I work for all the support (and for the App Store account too!)
-- And all the libraries I already linked and talked about in this post;
+- And all the libraries I already linked and talked about in this post;  
 
 
 Forks, comments and critics are warmly welcomed, I just hope that this app example might be helpful to someone sooner or later! :)
