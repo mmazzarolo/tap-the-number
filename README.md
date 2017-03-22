@@ -14,6 +14,8 @@ But first...
 <img src="https://raw.githubusercontent.com/mmazzarolo/tap-the-number/master/extra/screenshot-iphone6plus-1.png" width="240"></img>
 <img src="https://raw.githubusercontent.com/mmazzarolo/tap-the-number/master/extra/screenshot-iphone6plus-2.png" width="240"></img>    
 <img src="https://raw.githubusercontent.com/mmazzarolo/tap-the-number/master/extra/screenshot-iphone6plus-3.png" width="240"></img>
+</p>
+<p align="center">
 <a href="https://www.youtube.com/watch?v=bz7Id_HcEmw">I also published a small game preview on Youtube</a>
 </p>
 &nbsp;  
