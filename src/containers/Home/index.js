@@ -104,7 +104,7 @@ export default class App extends Component<Props, Props, State> {
           >
             <Tile
               backgroundColor={tileColor}
-              text={'Start Game'}
+              text={'Test the game using mobile center'}
               style={styles.button}
               textStyle={styles.buttonText}
               onPressOut={this._handleButtonPress}
