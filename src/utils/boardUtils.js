@@ -1,8 +1,8 @@
 /* @flow */
 import { inRange, random } from 'lodash';
 import type { Tile } from 'src/types';
-import metrics from 'src/config/metrics';
-import colors from 'src/config/colors';
+import metrics from '../config/metrics';
+import colors from '../config/colors';
 
 /**
  * Gets randomly one of the available tile colors.

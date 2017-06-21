@@ -6,8 +6,8 @@ import React, { Component } from 'react';
 import { View } from 'react-native-animatable';
 import { Animated, Easing } from 'react-native';
 import styles from './index.style';
-import metrics from 'src/config/metrics';
-import timings from 'src/config/timings';
+import metrics from '../../../config/metrics';
+import timings from '../../../config/timings';
 
 type State = {
   animateValue: any,

@@ -4,7 +4,7 @@
  */
 import React, { Element } from 'react';
 import { View, TouchableNativeFeedback, TouchableOpacity } from 'react-native';
-import env from 'src/config/env';
+import env from '../../config/env';
 
 type Props = {
   isRippleDisabled?: boolean,

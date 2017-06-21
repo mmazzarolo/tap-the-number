@@ -1,6 +1,6 @@
 /* @flow */
 import { StyleSheet } from 'react-native';
-import metrics from 'src/config/metrics';
+import metrics from '../../config/metrics';
 
 const tileSize = metrics.DEVICE_WIDTH * 0.26;
 const logoWidth = metrics.DEVICE_WIDTH * 0.50;

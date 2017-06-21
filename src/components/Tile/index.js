@@ -9,10 +9,10 @@ import { View } from 'react-native-animatable';
 import { observer } from 'mobx-react/native';
 import { LayoutAnimation } from 'react-native';
 import { TouchableWithoutFeedback } from 'react-native';
-import CustomText from 'src/components/CustomText';
-import colorUtils from 'src/utils/colorUtils';
-import metrics from 'src/config/metrics';
-import audioService from 'src/services/audio';
+import CustomText from '../CustomText';
+import colorUtils from '../../utils/colorUtils';
+import metrics from '../../config/metrics';
+import audioService from '../../services/audio';
 import styles from './index.style';
 
 type Props = {

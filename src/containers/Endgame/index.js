@@ -6,11 +6,11 @@
 import React, { Component } from 'react';
 import { View } from 'react-native-animatable';
 import { inject, observer } from 'mobx-react/native';
-import metrics from 'src/config/metrics';
-import Tile from 'src/components/Tile';
-import CustomText from 'src/components/CustomText';
-import boardUtils from 'src/utils/boardUtils';
-import audioService from 'src/services/audio';
+import metrics from '../../config/metrics';
+import Tile from '../../components/Tile';
+import CustomText from '../../components/CustomText';
+import boardUtils from '../../utils/boardUtils';
+import audioService from '../../services/audio';
 import styles from './index.style';
 
 type Props = {
