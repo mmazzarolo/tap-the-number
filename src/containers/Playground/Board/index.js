@@ -4,9 +4,9 @@
  */
 import React, { Component } from 'react';
 import { View } from 'react-native-animatable';
-import type { Tile } from 'src/types';
+import type, { Tile } from '../../../types';
 import { observer } from 'mobx-react/native';
-import BoardTile from 'src/containers/Playground/BoardTile';
+import BoardTile from '../BoardTile';
 
 import styles from './index.style';
 

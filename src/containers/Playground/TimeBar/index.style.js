@@ -1,7 +1,7 @@
 /* @flow */
 import { StyleSheet } from 'react-native';
-import colors from 'src/config/colors';
-import metrics from 'src/config/metrics';
+import colors from '../../../config/colors';
+import metrics from '../../../config/metrics';
 
 export default StyleSheet.create({
   container: {

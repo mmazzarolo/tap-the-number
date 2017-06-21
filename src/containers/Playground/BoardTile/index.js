@@ -5,9 +5,9 @@
  */
 import React, { Component } from 'react';
 import { View } from 'react-native';
-import Tile from 'src/components/Tile';
+import Tile from '../../../components/Tile';
 import { observer } from 'mobx-react/native';
-import metrics from 'src/config/metrics';
+import metrics from '../../../config/metrics';
 
 type Props = {
   left: number,

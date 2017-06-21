@@ -6,8 +6,8 @@
 import React, { Element } from 'react';
 import { StyleSheet } from 'react-native';
 import { Text } from 'react-native-animatable';
-import TouchableView from 'src/components/TouchableView';
-import metrics from 'src/config/metrics';
+import TouchableView from '../TouchableView';
+import metrics from '../../config/metrics';
 import styles from './index.style';
 
 type Props = {

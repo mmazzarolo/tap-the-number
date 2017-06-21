@@ -7,10 +7,10 @@ import React, { Component } from 'react';
 import { LayoutAnimation } from 'react-native';
 import { Image, View } from 'react-native-animatable';
 import { inject, observer } from 'mobx-react/native';
-import Tile from 'src/components/Tile';
-import LogoImage from 'src/images/logo.png';
-import boardUtils from 'src/utils/boardUtils';
-import audioService from 'src/services/audio';
+import Tile from '../../components/Tile';
+import LogoImage from '../../images/logo.png';
+import boardUtils from '../../utils/boardUtils';
+import audioService from '../../services/audio';
 import styles from './index.style';
 
 type Props = {

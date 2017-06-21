@@ -8,7 +8,7 @@ import { View } from 'react-native-animatable';
 import { inject, observer } from 'mobx-react/native';
 import Board from './Board';
 import TimeBar from './TimeBar';
-import type { Tile } from 'src/types';
+import type { Tile } from '../../types';
 
 import styles from './index.style';
 

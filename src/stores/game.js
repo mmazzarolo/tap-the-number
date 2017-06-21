@@ -4,11 +4,11 @@
  */
 import { action, computed, observable } from 'mobx';
 import { filter, find, orderBy, times } from 'lodash';
-import timings from 'src/config/timings';
-import boardUtils from 'src/utils/boardUtils';
-import timeUtils from 'src/utils/timeUtils';
-import audioService from 'src/services/audio';
-import type { Tile } from 'src/types';
+import timings from '../config/timings';
+import boardUtils from '../utils/boardUtils';
+import timeUtils from '../utils/timeUtils';
+import audioService from '../services/audio';
+import type { Tile } from '../types';
 import uuid from 'uuid';
 
 export default class GameStore {
